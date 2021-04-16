@@ -1,0 +1,83 @@
+'use strict'
+
+import {
+   StyleSheet
+} from 'react-native';
+
+const styles = StyleSheet.create({
+   container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },  
+   imagepeq: {
+     width: 214,
+     height: 120
+   },
+   imgIcon: {
+     width: 214,
+     height: 120
+   },
+   text: {
+     fontSize: 20,
+     textAlign: "center"
+   },
+   textinput: {
+      height: 40,
+      width: 250,
+      marginTop: 5,
+      marginBottom: 15,
+      borderRadius: 10,
+      backgroundColor: 'lightgray',
+      textAlign: 'center'
+   },
+   boton: {
+      width: 250,
+      height: 40,
+      backgroundColor: 'blue',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 20,
+      borderRadius: 10
+      // borderWidth: 1,
+   },
+   botonpeq: {
+      width: 100,
+      height: 40,
+      backgroundColor: 'blue',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 20,
+      marginHorizontal: 5,
+      borderRadius: 10
+      // borderWidth: 1,
+   },
+   textoboton: {
+      color:"white",
+      fontSize: 20
+   },
+   centeredView: {
+      flex: 1,
+      alignItems: "center"
+    },
+    modalView: {
+      marginTop: 225,
+      marginHorizontal: 5,
+      marginBottom: 5,
+      backgroundColor: "white",
+      paddingTop: 15,
+      paddingHorizontal: 15,
+      paddingBottom: 10,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      elevation: 5
+    }
+  });
+
+module.exports = styles;
