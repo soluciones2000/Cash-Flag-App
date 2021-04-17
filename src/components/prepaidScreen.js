@@ -14,7 +14,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 const styles = require('./styles');
 
-const prepaidCard = (params) => {
+const PrepaidCard = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -298,4 +298,4 @@ const prepaidCard = (params) => {
    )
 }
 
-module.exports = prepaidCard;
+module.exports = PrepaidCard;

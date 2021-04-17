@@ -14,7 +14,7 @@ import {
 
 const REQUEST_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 
-const loginScreen = ({navigation}) => {
+const LoginScreen = ({navigation}) => {
   const [txtUser, settxtUser] = useState('soluciones2000@gmail.com');
   const [txtPass, settxtPass] = useState('azul');
 
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
    }
 });
 
-module.exports = loginScreen;
+module.exports = LoginScreen;

@@ -1,6 +1,6 @@
 'use strict'
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
    View,
    StyleSheet,
@@ -9,15 +9,26 @@ import {
    Text,
    TextInput,
    Modal,
-   Alert
+   Alert,
+   Linking
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const styles = require('./styles');
 
-const prPremiumCard = (params) => {
+const onSuccess = e => {
+  Linking.openURL(e.data).catch(err =>
+    console.error('An error occured', err)
+  );
+};
+
+const PrPremiumCard = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);  
+  const [modalQRVisible, setModalQRVisible] = useState(false);  
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
 
   const imgprov = params.route.params.logo;
   const msjtipo = 'Tarjeta prepagada';
@@ -36,8 +47,70 @@ const prPremiumCard = (params) => {
   const colortext  = 'white';
   const colorborde = 'white';
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  };
+
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalQRVisible}
+        onRequestClose={() => {
+          setModalQRVisible(!modalQRVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalQRView}>
+            <View style={styles.lector}>
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={StyleSheet.absoluteFillObject}
+              />
+            </View>
+            <TouchableOpacity 
+              style={{
+                height: 30,
+                width: 135,
+                marginTop: 25,
+                backgroundColor: 'blue',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 10
+              }}
+              onPress={() => {
+                setModalQRVisible(!modalQRVisible);
+                }
+              }
+            >
+              <Text style={{
+                color:"white",
+                fontSize: 16
+              }}>
+                Cerrar Lector
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -288,7 +361,7 @@ const prPremiumCard = (params) => {
           }}
           onPress={() => {
             if(saldo>txtMonto && txtMonto>0) {
-              setModalVisible(true)
+              setModalQRVisible(true)
             } else {
               if(txtMonto<=0) {
                 Alert.alert(
@@ -313,4 +386,4 @@ const prPremiumCard = (params) => {
   )
 }
 
-module.exports = prPremiumCard;
+module.exports = PrPremiumCard;

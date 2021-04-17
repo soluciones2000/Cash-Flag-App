@@ -15,7 +15,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 const styles = require('./styles');
 
-const gift_Card = (params) => {
+const Gift_Card = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -306,4 +306,4 @@ const gift_Card = (params) => {
    )
 }
 
-module.exports = gift_Card;
+module.exports = Gift_Card;

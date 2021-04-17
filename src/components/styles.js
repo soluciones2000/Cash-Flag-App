@@ -77,6 +77,29 @@ const styles = StyleSheet.create({
       },
       shadowOpacity: 0.25,
       elevation: 5
+    },
+    modalQRView: {
+      alignItems: "center",
+      marginTop: 60,
+      marginHorizontal: 5,
+      marginBottom: 10,
+      height: '80%',
+      width: '80%',
+      backgroundColor: "white",
+      paddingTop: 15,
+      paddingHorizontal: 15,
+      paddingBottom: 10,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      elevation: 5
+    },
+    lector: {
+      height: '90%',
+      width: '100%'
     }
   });
 

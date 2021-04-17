@@ -16,7 +16,7 @@ import QRCode from 'react-native-qrcode-svg';
 
 const styles = require('./styles');
 
-const gcPremiumCard = (params) => {
+const GcPremiumCard = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -319,4 +319,4 @@ const gcPremiumCard = (params) => {
    )
 }
 
-module.exports = gcPremiumCard;
+module.exports = GcPremiumCard;

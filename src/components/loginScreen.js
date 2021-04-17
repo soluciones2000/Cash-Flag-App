@@ -12,7 +12,7 @@ import {
    Alert
 } from 'react-native';
 
-const loginScreen = (params) => {
+const LoginScreen = (params) => {
   const navigation = params.navigation;
   const [txtUser, settxtUser] = useState('');
   const [txtPass, settxtPass] = useState('');
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
    }
 });
 
-module.exports = loginScreen;
+module.exports = LoginScreen;
