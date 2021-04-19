@@ -1,23 +1,35 @@
 'use strict'
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import {
-   View,
-   Image,
-   TouchableOpacity,
-   Text,
-   TextInput,
-   Modal,
-   Alert
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  Modal,
+  Alert,
+  Linking
 } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import QRCode from 'react-native-qrcode-svg';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const styles = require('./styles');
+
+const onSuccess = e => {
+  Linking.openURL(e.data).catch(err =>
+    console.error('An error occured', err)
+  );
+};
 
 const Gift_Card = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalQRVisible, setModalQRVisible] = useState(false);  
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
 
   const imgprov = params.route.params.logo;
   const msjtipo = 'Tarjeta de regalo';
@@ -35,8 +47,77 @@ const Gift_Card = (params) => {
   const colortext  = 'black';
   const colorborde = 'black';
 
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const handleBarCodeScanned = ({ type, data }) => {
+    setScanned(true);
+    console.log(data)
+    Linking.openURL('https://app.cash-flag.com').catch(err =>
+      console.error('An error occured', err)
+    );
+    setScanned(false);
+    setModalQRVisible(!modalQRVisible);
+  };
+
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalQRVisible}
+        onRequestClose={() => {
+          setScanned(false);
+          setModalQRVisible(!modalQRVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalQRView}>
+            <View style={styles.lector}>
+              <BarCodeScanner
+                onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                style={StyleSheet.absoluteFillObject}
+              />
+            </View>
+            <TouchableOpacity 
+              style={{
+                height: 30,
+                width: 135,
+                marginTop: 25,
+                backgroundColor: 'blue',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 10
+              }}
+              onPress={() => {
+                setScanned(false);
+                setModalQRVisible(!modalQRVisible);
+                }
+              }
+            >
+              <Text style={{
+                color:"white",
+                fontSize: 16
+              }}>
+                Cerrar Lector
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -281,7 +362,7 @@ const Gift_Card = (params) => {
           }}
           onPress={() => {
             if(saldo>txtMonto && txtMonto>0) {
-              setModalVisible(true)
+              setModalQRVisible(true)
             } else {
               if(txtMonto<=0) {
                 Alert.alert(

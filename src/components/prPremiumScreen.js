@@ -56,7 +56,12 @@ const PrPremiumCard = (params) => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    console.log(data)
+    Linking.openURL('https://app.cash-flag.com').catch(err =>
+      console.error('An error occured', err)
+    );
+    setScanned(false);
+    setModalQRVisible(!modalQRVisible);
   };
 
   if (hasPermission === null) {
@@ -74,6 +79,7 @@ const PrPremiumCard = (params) => {
         transparent={true}
         visible={modalQRVisible}
         onRequestClose={() => {
+          setScanned(false);
           setModalQRVisible(!modalQRVisible);
         }}
       >
@@ -89,13 +95,14 @@ const PrPremiumCard = (params) => {
               style={{
                 height: 30,
                 width: 135,
-                marginTop: 25,
+                marginVertical: 15,
                 backgroundColor: 'blue',
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: 10
               }}
               onPress={() => {
+                setScanned(false);
                 setModalQRVisible(!modalQRVisible);
                 }
               }
