@@ -17,12 +17,6 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 
 const styles = require('./styles');
 
-const onSuccess = e => {
-  Linking.openURL(e.data).catch(err =>
-    console.error('An error occured', err)
-  );
-};
-
 const PrepaidCard = (params) => {
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
