@@ -18,11 +18,18 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 const styles = require('./styles');
 
 const PrPremiumCard = (params) => {
+  const actualizasaldo = params.route.params.actsaldo;
+  const indice = params.route.params.indice;
   const [txtMonto, settxtMonto] = useState(null);
+  const [txtSaldo, settxtSaldo] = useState(params.route.params.saldo)
   const [modalVisible, setModalVisible] = useState(false);  
   const [modalQRVisible, setModalQRVisible] = useState(false);  
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+
+  const idproveedor = params.route.params.idproveedor;
+  const origen = 'app';
+  const token = '';
 
   const imgprov = params.route.params.logo;
   const msjtipo = 'Tarjeta prepagada';
@@ -30,7 +37,6 @@ const PrPremiumCard = (params) => {
   const numcard = params.route.params.card.substr(0,4)+'-'+params.route.params.card.substr(4,4)+'-'+params.route.params.card.substr(8,4)+'-'+params.route.params.card.substr(12,4);
   const nombres = params.route.params.nombre;
   const validez = "Valida hasta: "+params.route.params.validez;
-  const saldo = params.route.params.saldo;
   const simbolo = params.route.params.simbolo;
 
   const code_qr      = 'https://app.cash-flag.com/card/premium.png';
@@ -48,22 +54,42 @@ const PrPremiumCard = (params) => {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ navigation, type, data }) => {
     setScanned(true);
-    console.log(data)
-    Linking.openURL('https://app.cash-flag.com').catch(err =>
-      console.error('An error occured', err)
-    );
+    let dataqr = JSON.parse(data);
+		let datos = new FormData();
+    datos.append("idproveedor", dataqr.idp);
+    datos.append("monto",       txtMonto);
+    datos.append("tarjeta",     card);
+    datos.append("origen",      origen);
+    datos.append("token",       token);
+
+    fetch('https://app.cash-flag.com/php/enviacobrocardapp.php', {
+      method: 'POST',
+      body: datos
+    })
+    .then((response) => response.json())
+    .then((responseData) => {
+      if(responseData.exito=="SI") {
+        Alert.alert(
+          "Éxito",
+          responseData.mensaje
+        );
+        settxtSaldo(responseData.nuevosaldo);
+        settxtMonto(0);
+        actualizasaldo(responseData.nuevosaldo,indice);
+      }
+    });
     setScanned(false);
     setModalQRVisible(!modalQRVisible);
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Solicitando permiso para acceder a la cámara</Text>;
   }
 
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>Debe dar permiso para acceder a la cámara</Text>;
   }
 
   return (
@@ -260,9 +286,11 @@ const PrPremiumCard = (params) => {
         marginTop: 10,
         fontSize: 24
       }}>
-        Saldo:
+        <Text style={{marginRight: 5}}>
+          Saldo:
+        </Text>
         <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
-          {saldo} {simbolo}
+          {txtSaldo} {simbolo}
         </Text>
       </Text>
       <View style={{
@@ -329,7 +357,7 @@ const PrPremiumCard = (params) => {
             borderRadius: 10
           }}
           onPress={() => {
-            if(saldo>txtMonto && txtMonto>0) {
+            if(txtSaldo>txtMonto && txtMonto>0) {
               setModalVisible(true)
             } else {
               if(txtMonto<=0) {
@@ -361,7 +389,7 @@ const PrPremiumCard = (params) => {
             borderRadius: 10
           }}
           onPress={() => {
-            if(saldo>txtMonto && txtMonto>0) {
+            if(txtSaldo>txtMonto && txtMonto>0) {
               setModalQRVisible(true)
             } else {
               if(txtMonto<=0) {
