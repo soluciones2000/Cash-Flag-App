@@ -51,6 +51,10 @@ const detallecupon = (params) => {
                <TouchableOpacity 
                   style={styles.boton}
                   onPress={() => {
+                     Alert.alert(
+                        "Sorry!",
+                        "Esta opción está momentaneamente inhabilitada en la versión movil, puedes transferirlo desde la versión WEB en app.cash-flag.com"
+                     );
                      params.navigation.navigate('Cupones');
                   }}
                >
