@@ -112,10 +112,14 @@ export default class CashFlag extends Component {
         options={{
           title: 'Login'
         }}
+        tabBarOptions={{
+          tabBarVisible: false
+        }}
       />
       <Stack.Screen 
         name="Dashboard"
         children={({route, navigation}) => {
+          console.log(route.state!=undefined && route.state.index)
           const {correo,passwd} = route.params;
           this.fetchUser(correo, passwd);
           if(this.state.isLogged){
@@ -164,12 +168,13 @@ export default class CashFlag extends Component {
                 <Tab.Screen
                   key="salir"
                   name="Salir"
-                  component={Login}
+                  component={scrLogin}
                   options={{
                     title: 'Salir',
                     tabBarIcon: ({ color, size }) => (
                       <Ionicons name='log-out' size={size} color={color}/>
-                    )
+                    ),
+                    tabBarVisible: false
                   }}
                 />
               </Tab.Navigator>
