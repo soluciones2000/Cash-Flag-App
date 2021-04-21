@@ -77,6 +77,11 @@ const PrepaidCard = (params) => {
         settxtSaldo(responseData.nuevosaldo);
         settxtMonto(0);
         actualizasaldo(responseData.nuevosaldo,indice);
+      } else {
+        Alert.alert(
+          "Ups, algo salió mal",
+          responseData.mensaje
+        );
       }
     });
     setScanned(false);
