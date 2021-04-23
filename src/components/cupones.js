@@ -13,16 +13,15 @@ const Cupones = (params) => {
   const email = params.email;
   const token = params.token;
   const [data, setData] = useState(params.cupones);
-  const [isRender, setIsrender] = useState(false);
 
   const actualizalista = (cuponlargo,index) => {
     let xaCupones = data;
     xaCupones.splice(index,1);
     setData(xaCupones);
-    setIsrender(!isRender)
   };
 
-  const renderItem = ({item, index}) => (
+  const renderItem = ({item, index}) => {    
+    return (
     <View style={
       index%2==0 ? {
         backgroundColor: 'lightblue',
@@ -93,7 +92,8 @@ const Cupones = (params) => {
         </View>
       </TouchableOpacity>
     </View>
-  );
+    )
+  };
   
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>

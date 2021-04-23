@@ -3,6 +3,7 @@
 import React, { Component, useState } from 'react';
 import {
   View,
+  ScrollView,
   Image,
   Text,
   TextInput,
@@ -29,7 +30,7 @@ const Detallecupon = (params) => {
    const barcode       = params.route.params.barcode;
    const qrcode        = params.route.params.qrcode;
    return (
-      <View style={{ 
+      <ScrollView style={{ 
         flex: 1, 
         justifyContent: "center", 
         alignItems: 'center'
@@ -148,7 +149,7 @@ const Detallecupon = (params) => {
                </TouchableOpacity>
             </View>
          </View>
-      </View>
+      </ScrollView>
    )
 }
 
