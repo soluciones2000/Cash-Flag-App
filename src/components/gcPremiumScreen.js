@@ -9,8 +9,7 @@ import {
   Text,
   TextInput,
   Modal,
-  Alert,
-  Linking
+  Alert
 } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from '@expo/vector-icons';

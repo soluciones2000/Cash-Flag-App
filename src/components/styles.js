@@ -78,6 +78,26 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       elevation: 5
     },
+    modalViewTransfCupon: {
+      marginTop: 225,
+      marginHorizontal: 5,
+      marginBottom: 5,
+      backgroundColor: "white",
+      borderColor: "black",
+      borderWidth: 1,
+      borderStyle: "solid",
+      paddingTop: 15,
+      paddingHorizontal: 15,
+      paddingBottom: 10,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      elevation: 5
+    },
     modalQRView: {
       alignItems: "center",
       marginTop: 60,

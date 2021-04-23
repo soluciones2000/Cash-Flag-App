@@ -25,14 +25,6 @@ const Prepagos = (params) => {
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{
-        textAlign: 'center',
-        fontSize: 25,
-        marginTop: 10,
-        marginBottom: 10
-      }}>
-        Tarjetas prepagadaas
-      </Text>
       <FlatList style={{width: '100%'}}
         data={data}
         renderItem={({ item, index }) => (  

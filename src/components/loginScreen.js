@@ -14,6 +14,7 @@ import {
 
 const LoginScreen = (params) => {
   const navigation = params.navigation;
+  const actualizastate = params.datos;
   const [txtUser, settxtUser] = useState('');
   const [txtPass, settxtPass] = useState('');
 
@@ -32,7 +33,7 @@ const LoginScreen = (params) => {
             value={txtUser}
             editable={true}
             maxLength={50}
-            placeholder='email'
+            placeholder='Correo electrónico'
          />
          <Text style={styles.text}>
             Password
@@ -48,10 +49,7 @@ const LoginScreen = (params) => {
          <TouchableOpacity 
             style={styles.boton}
             onPress={() => {
-              navigation.replace('Dashboard', {
-                correo: txtUser,
-                passwd: txtPass
-              });
+              actualizastate({navigation,txtUser,txtPass})
             }}
          >
             <Text style={styles.textoboton}>

@@ -9,8 +9,7 @@ import {
   Text,
   TextInput,
   Modal,
-  Alert,
-  Linking
+  Alert
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { BarCodeScanner } from 'expo-barcode-scanner';
