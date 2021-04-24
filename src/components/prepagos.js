@@ -2,10 +2,8 @@ import React, { Component, useState } from 'react';
 import { 
   View, 
   Text, 
-  TouchableHighlight, 
   TouchableOpacity, 
   FlatList, 
-  Alert, 
   Image } from 'react-native';
 
 const styles = require('./styles');
@@ -28,14 +26,8 @@ const Prepagos = (params) => {
       <FlatList style={{width: '100%'}}
         data={data}
         renderItem={({ item, index }) => (  
-          <View style={
-            index%2==0 ? {
+          <View style={{
               backgroundColor: 'lightblue',
-              height: 90,
-              paddingTop: 5,
-              paddingBottom: 5
-            } : { 
-              backgroundColor: 'none',
               height: 90,
               paddingTop: 5,
               paddingBottom: 5
@@ -126,7 +118,7 @@ const Prepagos = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
@@ -134,7 +126,7 @@ const Prepagos = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
@@ -142,10 +134,17 @@ const Prepagos = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
+        )}
+        ListEmptyComponent={() => (
+          <View style={styles.container}>
+            <Text style={styles.text}>
+              No tienes tarjetas prepagadas, puedes recargar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
+            </Text>
+          </View>
         )}
       />
     </View>

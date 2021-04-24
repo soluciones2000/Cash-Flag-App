@@ -22,14 +22,8 @@ const Cupones = (params) => {
 
   const renderItem = ({item, index}) => {    
     return (
-    <View style={
-      index%2==0 ? {
+    <View style={{
         backgroundColor: 'lightblue',
-        height: 90,
-        paddingTop: 5,
-        paddingBottom: 5
-      } : { 
-        backgroundColor: 'none',
         height: 90,
         paddingTop: 5,
         paddingBottom: 5
@@ -104,7 +98,7 @@ const Cupones = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
@@ -112,7 +106,7 @@ const Cupones = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
@@ -120,10 +114,17 @@ const Cupones = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'lightgray',
+              backgroundColor: 'black',
               height: 1,
             }}
           />
+        )}
+        ListEmptyComponent={() => (
+          <View style={styles.container}>
+            <Text style={styles.text}>
+              No tienes cupones para canjear, puedes obtner recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilzadndo alguna de nuestras tarjeta prepagadas o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
+            </Text>
+          </View>
         )}
       />
     </View>

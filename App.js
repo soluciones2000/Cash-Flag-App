@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -12,6 +12,8 @@ const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
 const styles = require('./src/components/styles');
 
 const Login         = require('./src/components/loginScreen');
+const NewUser       = require('./src/components/newUserScreen');
+const ResetPwd      = require('./src/components/resetPwdScreen');
 const Cupones       = require('./src/components/cupones');
 const Prepagos      = require('./src/components/prepagos');
 const Giftcards     = require('./src/components/giftcards');
@@ -21,7 +23,7 @@ const PrepaidCard   = require('./src/components/prepaidScreen');
 const GcPremiumCard = require('./src/components/gcPremiumScreen');
 const Gift_Card     = require('./src/components/giftcardScreen');
 
-const StackPrincipal = createStackNavigator();
+const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
 const StackPrepagos = createStackNavigator();
 const StackGiftcards = createStackNavigator();
@@ -31,8 +33,9 @@ export default class CashFlag extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTab: 'cupones',
       isLogged: false,
+      newUser: false,
+      resetPwd: false,
       oCupones: [],
       oPrepagos: [],
       oGiftcards: [],
@@ -42,17 +45,68 @@ export default class CashFlag extends Component {
     };
   }
 
+  txtEmail = '';
+  txtPregunta = '';
+
   actualizastate = (parametros) => {
-    this.fetchUser(parametros.navigation,parametros.txtUser,parametros.txtPass);
+    this.fetchUser(parametros.txtUser,parametros.txtPass);
   };
 
-  async fetchUser(n,u,p) {
+  resetPwd = (email,pregunta) => {
+    this.txtEmail = email;
+    this.txtPregunta = pregunta;
+    this.setState({
+      isLogged: false,
+      newUser: false,
+      resetPwd: true
+    });
+  };
+
+  volver = () => {
+    this.setState({
+      isLogged: false,
+      newUser: false,
+      resetPwd: false
+    });
+  };
+
+  successReset = () => {
+    this.setState({
+      isLogged: false,
+      newUser: false,
+      resetPwd: false
+    });
+  };
+
+  newUser = () => {
+      this.setState({
+        isLogged: false,
+        newUser: true,
+        resetPwd: false
+      });
+  };
+
+  recNewUser = (txtUser,
+    txtNombres,
+    txtApellidos,
+    txtTelefono,
+    txtPass,
+    txtDesafio,
+    txtRespuesta) => {
+    this.setState({
+      isLogged: false,
+      newUser: false,
+      resetPwd: false
+    });
+  };
+
+  async fetchUser(u,p) {
     if(this.state.isLogged==false) {
       await fetch(USER_URL+"email="+u+"&password="+p)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.exito=="SI") {
-          this.fetchData(n,u,responseData.token);
+          this.fetchData(u,responseData.token);
         } else {
           Alert.alert('Aviso', responseData.mensaje);
         }
@@ -60,12 +114,14 @@ export default class CashFlag extends Component {
     }
   }
  
-  async fetchData(n,u,t) {
+  async fetchData(u,t) {
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({
         isLogged: true,
+        newUser: false,
+        resetPwd: false,
         oCupones: responseData.cupones,
         oPrepagos: responseData.prepagos,
         oGiftcards: responseData.giftcards,
@@ -73,12 +129,10 @@ export default class CashFlag extends Component {
         email: u,
         token: t
       });
-      n.replace('Dashboard',{navigation:n});
     });
   }
 
-  tabPrincipal = ({route, navigation}) => {
-    const {correo,passwd} = route.params;
+  tabPrincipal = () => {
     return (
     <TabPrincipal.Navigator
       tabBarOptions={{
@@ -216,16 +270,11 @@ export default class CashFlag extends Component {
     </StackGiftcards.Navigator>
   )
 
-  scrLogin = ({navigation}) => (
-    <Login 
-      navigation={navigation}
-      datos={this.actualizastate}
-    />
-  )
-
-  scrLogout = ({route,navigation}) => {
+  scrLogout = ({navigation}) => {
     this.setState({
       isLogged: false,
+      newUser: false,
+      resetPwd: false,
       oCupones: [],
       oPrepagos: [],
       oGiftcards: [],
@@ -234,10 +283,9 @@ export default class CashFlag extends Component {
       token: ''
     });
     return (
-      <Login 
-        navigation={navigation}
-        datos={this.actualizastate}
-      />
+    <Login 
+      datos={this.actualizastate}
+    />
     )
   }
 
@@ -267,34 +315,46 @@ export default class CashFlag extends Component {
   )
 
   render() {
-    return (
-      <NavigationContainer>
-        <StackPrincipal.Navigator
-          headerMode='none'
-          headerShown={false}
-        >
-          <StackPrincipal.Screen
-            name="Login"
-            component={this.scrLogin}
-            options={{
-              title: 'Login'
-            }}
-            tabBarOptions={{
-              tabBarVisible: false
-            }}
-          />
-          <StackPrincipal.Screen 
-            name="Dashboard"
-            children={this.tabPrincipal}
-            options={{
-              title: 'Login'
-            }}
-            tabBarOptions={{
-              tabBarVisible: false
-            }}
-          />
-        </StackPrincipal.Navigator>
-      </NavigationContainer>
-    );
+    if(this.state.isLogged) {
+      return (
+        <NavigationContainer>
+          <this.tabPrincipal/>
+        </NavigationContainer>
+      );
+    } else {
+      if(this.state.newUser) {
+        return (
+          <View style={styles.container}>
+            <NewUser 
+              recNewUser={this.recNewUser}
+              volver={this.volver}
+            />
+          </View>
+        );
+      } else {
+        if(this.state.resetPwd) {
+          return (
+            <View style={styles.container}>
+              <ResetPwd 
+                email={this.txtEmail}
+                pregunta={this.txtPregunta}
+                successReset={this.successReset}
+                volver={this.volver}
+              />
+            </View>
+          );
+        } else {
+          return (
+            <View style={styles.container}>
+              <Login 
+                datos={this.actualizastate}
+                resetPwd={this.resetPwd}
+                newUser={this.newUser}
+              />
+            </View>
+          );
+        }
+      }
+    }
   }
 }
