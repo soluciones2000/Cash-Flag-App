@@ -152,7 +152,7 @@ const PrepaidCard = (params) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <QRCode
-              value={'{"t":"p","c":"'+card+'","m":'+txtMonto+'}'}
+              value={'{"t":"p","c":"'+card+'","m":'+txtMonto+',"f":"digital"}'}
               size={250}
               color='black'
               Background='white'
