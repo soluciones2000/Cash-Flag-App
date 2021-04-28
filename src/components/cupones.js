@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { 
   View, 
-  Text, 
+  Text,
   TouchableOpacity, 
   FlatList, 
   Image } from 'react-native';
@@ -13,11 +13,13 @@ const Cupones = (params) => {
   const email = params.email;
   const token = params.token;
   const [data, setData] = useState(params.cupones);
+  const [isAct, setAct] = useState(false);
 
-  const actualizalista = (cuponlargo,index) => {
+  const actualizalista = (index) => {
     let xaCupones = data;
     xaCupones.splice(index,1);
     setData(xaCupones);
+    setAct(!isAct);
   };
 
   const renderItem = ({item, index}) => {    
@@ -95,6 +97,7 @@ const Cupones = (params) => {
         data={data}
         renderItem={renderItem}
         keyExtractor={item => item.cuponlargo}
+        extraData={isAct}
         ItemSeparatorComponent={() => (
           <View
             style={{
@@ -122,7 +125,7 @@ const Cupones = (params) => {
         ListEmptyComponent={() => (
           <View style={styles.container}>
             <Text style={styles.text}>
-              No tienes cupones para canjear, puedes obtner recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilzadndo alguna de nuestras tarjeta prepagadas o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
+              No tienes cupones para canjear, puedes obtener recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilzando alguna de nuestras tarjetas prepagadas o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
             </Text>
           </View>
         )}

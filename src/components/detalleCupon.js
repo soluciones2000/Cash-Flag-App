@@ -84,7 +84,7 @@ const Detallecupon = (params) => {
                         responseData.mensaje
                       );
                       settxtEmail('');
-                      actualizalista(cuponlargo,indice);
+                      actualizalista(indice);
                       params.navigation.navigate('Cupones');
                     } else {
                       Alert.alert(
