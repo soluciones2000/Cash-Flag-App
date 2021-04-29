@@ -37,7 +37,7 @@ const ResetPwdScreen = (params) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalViewTransfCupon}>
-            <Text style={styles.text}>
+            <Text allowFontScaling={false} style={styles.text}>
                 Introduce tu nueva contraseña
             </Text>
             <TextInput style={styles.textinput}
@@ -48,7 +48,7 @@ const ResetPwdScreen = (params) => {
               secureTextEntry={ true}
               placeholder='****'
             />
-            <Text style={styles.text}>
+            <Text allowFontScaling={false} style={styles.text}>
                 Repite la nueva contraseÑa
             </Text>
             <TextInput style={styles.textinput}
@@ -95,7 +95,7 @@ const ResetPwdScreen = (params) => {
                 }
               }
             >
-              <Text style={{
+              <Text allowFontScaling={false} style={{
                 color:"white",
                 fontSize: 16
               }}>
@@ -110,10 +110,10 @@ const ResetPwdScreen = (params) => {
           source={{uri: 'https://app.cash-flag.com/img/logoclub.png'}}
         />
       </View>
-      <Text style={styles.textTitle}>
+      <Text allowFontScaling={false} style={styles.textTitle}>
         Generación de contraseña
       </Text>
-      <Text style={styles.text}>
+      <Text allowFontScaling={false} style={styles.text}>
         {pregunta}
       </Text>
       <TextInput style={styles.textinput}
@@ -154,7 +154,7 @@ const ResetPwdScreen = (params) => {
             });
           }}
         >
-          <Text style={styles.textoboton}>
+          <Text allowFontScaling={false} style={styles.textoboton}>
             Validar respuesta
           </Text>
         </TouchableOpacity>
@@ -162,7 +162,7 @@ const ResetPwdScreen = (params) => {
           style={styles.boton}
           onPress={volver}
         >
-          <Text style={styles.textoboton}>
+          <Text allowFontScaling={false} style={styles.textoboton}>
             Volver
           </Text>
         </TouchableOpacity>

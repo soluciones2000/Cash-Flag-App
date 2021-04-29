@@ -9,7 +9,9 @@ import {
    TextInput,
    TouchableOpacity,
    Alert,
-   Modal
+   Modal,
+   Dimensions,
+   PixelRatio
 } from 'react-native';
 
 const HINT_URL = 'https://app.cash-flag.com/apis/v1/socios/hint';
@@ -23,6 +25,8 @@ const LoginScreen = (params) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [txtEmail, settxtEmail] = useState('')
 
+  const ancho = Dimensions.get('window').width
+
   return (
     <View style={styles.container}>
       <Modal
@@ -35,7 +39,7 @@ const LoginScreen = (params) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalViewTransfCupon}>
-            <Text style={styles.text}>
+            <Text allowFontScaling={false} style={styles.text}>
                 Introduce tu email
             </Text>
             <TextInput style={styles.textinput}
@@ -79,7 +83,7 @@ const LoginScreen = (params) => {
                 }
               }
             >
-              <Text style={{
+              <Text allowFontScaling={false} style={{
                 color:"white",
                 fontSize: 16
               }}>
@@ -94,7 +98,7 @@ const LoginScreen = (params) => {
           source={{uri: 'https://app.cash-flag.com/img/logoclub.png'}}
         />
       </View>
-      <Text style={styles.text}>
+      <Text allowFontScaling={false} style={styles.text}>
         Usuario
       </Text>
       <TextInput style={styles.textinput}
@@ -104,7 +108,7 @@ const LoginScreen = (params) => {
         maxLength={50}
         placeholder='Correo electrónico'
       />
-        <Text style={styles.text}>
+        <Text allowFontScaling={false} style={styles.text}>
           Password
         </Text>
       <TextInput style={styles.textinput}
@@ -121,7 +125,7 @@ const LoginScreen = (params) => {
           actualizastate({txtUser,txtPass})
         }}
       >
-        <Text style={styles.textoboton}>
+        <Text allowFontScaling={false} style={styles.textoboton}>
           Acceder
         </Text>
       </TouchableOpacity>
@@ -131,7 +135,7 @@ const LoginScreen = (params) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <Text style={{margin: 10}}>
+        <Text allowFontScaling={false} style={{margin: 10}}>
           Olvidaste tu Password
         </Text>
       </TouchableOpacity>
@@ -140,7 +144,7 @@ const LoginScreen = (params) => {
           newUser()
         }}
       >
-        <Text style={{margin: 10}}>
+        <Text allowFontScaling={false} style={{margin: 10}}>
           Si eres usuario nuevo ingresa aquí
         </Text>
       </TouchableOpacity>

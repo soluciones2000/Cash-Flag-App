@@ -89,11 +89,11 @@ const NewUserScreen = (params) => {
             source={{uri: 'https://app.cash-flag.com/img/logoclub.png'}}
           />
         </View>
-        <Text style={styles.text}>
+        <Text allowFontScaling={false} style={styles.text}>
           Afiliación de nuevos usuarios
         </Text>
         <View style={{alignItems: 'center'}}>
-          <Text style={{textAlign: "center"}}>
+          <Text allowFontScaling={false} style={{textAlign: "center"}}>
             Correo electrónico
           </Text>
           <TextInput style={styles.textinput}
@@ -103,7 +103,7 @@ const NewUserScreen = (params) => {
             maxLength={50}
             placeholder='Correo electrónico'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Nombres
           </Text>
           <TextInput style={styles.textinput}
@@ -113,7 +113,7 @@ const NewUserScreen = (params) => {
             maxLength={50}
             placeholder='Nombres'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Apellidos
           </Text>
           <TextInput style={styles.textinput}
@@ -123,7 +123,7 @@ const NewUserScreen = (params) => {
             maxLength={50}
             placeholder='Apellidos'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Teléfono
           </Text>
           <TextInput style={styles.textinput}
@@ -133,7 +133,7 @@ const NewUserScreen = (params) => {
             maxLength={12}
             placeholder='584XXXXXXXXX'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Password
           </Text>
           <TextInput style={styles.textinput}
@@ -144,7 +144,7 @@ const NewUserScreen = (params) => {
             secureTextEntry={ true}
             placeholder='****'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Confirme su Password
           </Text>
           <TextInput style={styles.textinput}
@@ -155,7 +155,7 @@ const NewUserScreen = (params) => {
             secureTextEntry={ true}
             placeholder='****'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Pregunta de desafío (para cambiar password)
           </Text>
           <TextInput style={styles.textinput}
@@ -165,7 +165,7 @@ const NewUserScreen = (params) => {
             maxLength={50}
             placeholder='Pregunta de desafío'
           />
-          <Text>
+          <Text allowFontScaling={false}>
             Respuesta a la pregunta de desafío
           </Text>
           <TextInput style={styles.textinput}
@@ -190,7 +190,7 @@ const NewUserScreen = (params) => {
             style={styles.boton}
             onPress={registro}
           >
-            <Text style={styles.textoboton}>
+            <Text allowFontScaling={false} style={styles.textoboton}>
               Enviar
             </Text>
           </TouchableOpacity>
@@ -198,7 +198,7 @@ const NewUserScreen = (params) => {
             style={styles.boton}
             onPress={volver}
           >
-            <Text style={styles.textoboton}>
+            <Text allowFontScaling={false} style={styles.textoboton}>
               Volver
             </Text>
           </TouchableOpacity>

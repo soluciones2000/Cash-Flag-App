@@ -65,22 +65,22 @@ const Cupones = (params) => {
             textAlign: 'left'
           }}>
             <View style={{flexDirection: "row"}}>
-              <Text>Cupón:</Text>
-              <Text style={{ paddingLeft: 5, fontWeight: 'bold'}}>
+              <Text allowFontScaling={false}>Cupón:</Text>
+              <Text allowFontScaling={false} style={{ paddingLeft: 5, fontWeight: 'bold'}}>
                 {item.cuponlargo}
               </Text>
             </View>
             <Text>
-              <Text style={{ fontWeight: 'bold' }}>
+              <Text allowFontScaling={false} style={{ fontWeight: 'bold' }}>
                 {item.nombreproveedor}
               </Text>
             </Text>
-            <Text style={{ fontWeight: 'bold', color: 'red' }}>
+            <Text allowFontScaling={false} style={{ fontWeight: 'bold', color: 'red' }}>
               {item.premio}
             </Text>
             <View style={{flexDirection: "row"}}>
-              <Text>Vencimiento:</Text>
-              <Text style={{ marginLeft: 5, fontWeight: 'bold' }}>
+              <Text allowFontScaling={false}>Vencimiento:</Text>
+              <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
                 {item.fechavencimiento}
               </Text>
             </View>

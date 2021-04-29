@@ -85,26 +85,26 @@ const Prepagos = (params) => {
                   textAlign: 'left'
                 }}>
                   <View style={{flexDirection: "row"}}>
-                    <Text>Tarjeta:</Text>
-                    <Text style={{ marginLeft: 5, fontWeight: 'bold' }}>
+                    <Text allowFontScaling={false}>Tarjeta:</Text>
+                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
                       {item.tarjeta.substr(0,4)+'-'+item.tarjeta.substr(4,4)+'-'+item.tarjeta.substr(8,4)+'-'+item.tarjeta.substr(12,4)}
                     </Text>
                   </View>
                   <View style={{flexDirection: "row"}}>
-                    <Text>Tipo:</Text>
-                    <Text style={{ marginLeft: 5, fontWeight: 'bold' }}>
+                    <Text allowFontScaling={false}>Tipo:</Text>
+                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
                       {item.premium==1 ? 'PREMIUM' : 'Local'}
                     </Text>
                   </View>
                   <View style={{flexDirection: "row"}}>
-                    <Text>Comercio:</Text>
-                    <Text style={{ marginLeft: 5, fontWeight: 'bold', color: 'red' }}>
+                    <Text allowFontScaling={false}>Comercio:</Text>
+                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold', color: 'red' }}>
                       {item.premium==1 ? 'Todos' : item.nombre}
                     </Text>
                   </View>
                   <View style={{flexDirection: "row"}}>
-                    <Text>Saldo:</Text>
-                    <Text style={{ marginLeft: 5, fontWeight: 'bold' }}>
+                    <Text allowFontScaling={false}>Saldo:</Text>
+                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
                       {item.saldo} {item.simbolo}
                     </Text>
                   </View>

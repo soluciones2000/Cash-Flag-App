@@ -130,7 +130,7 @@ const PrepaidCard = (params) => {
                 }
               }
             >
-              <Text style={{
+              <Text allowFontScaling={false} style={{
                 color:"white",
                 fontSize: 16
               }}>
@@ -172,7 +172,7 @@ const PrepaidCard = (params) => {
                 }
               }
             >
-              <Text style={{
+              <Text allowFontScaling={false} style={{
                 color:"white",
                 fontSize: 16
               }}>
@@ -222,10 +222,10 @@ const PrepaidCard = (params) => {
             marginRight: 7.5,
             top: -10            
           }}>
-            <Text style={{color: colortext, fontSize: 13}}>{msjtipo}</Text>
-            <Text style={{color: colortext, fontWeight: 'bold', fontSize: 16}}>{numcard}</Text>
-            <Text style={{color: colortext, fontSize: 13}}>{nombres}</Text>
-            <Text style={{color: colortext, fontSize: 10}}>{validez}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{msjtipo}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontWeight: 'bold', fontSize: 16}}>{numcard}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{nombres}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 10}}>{validez}</Text>
           </View>
           <View style={{
             flex: 1,
@@ -266,20 +266,20 @@ const PrepaidCard = (params) => {
           </View>
         </View>
       </View>
-      <Text style={{
+      <Text allowFontScaling={false} style={{
         marginTop: 0.5,
         fontSize: 9
       }}>
         Tarjeta generada por SGC Consultores C.A. - www.sgc-consultores.com.ve
       </Text>
-      <Text style={{
+      <Text allowFontScaling={false} style={{
         marginTop: 10,
         fontSize: 24
       }}>
-        <Text style={{marginRight: 5}}>
+        <Text allowFontScaling={false} style={{marginRight: 5}}>
           Saldo:
         </Text>
-        <Text style={{marginLeft: 10, fontWeight: 'bold'}}>
+        <Text allowFontScaling={false} style={{marginLeft: 10, fontWeight: 'bold'}}>
           {txtSaldo} {simbolo}
         </Text>
       </Text>
@@ -289,7 +289,7 @@ const PrepaidCard = (params) => {
         justifyContent: 'center',
         alignContent: "space-between"
       }}>
-        <Text style={{
+        <Text allowFontScaling={false} style={{
           fontSize: 16,
           height: 40,
           marginTop: 18,
@@ -322,13 +322,13 @@ const PrepaidCard = (params) => {
         marginHorizontal: 10,
         marginBottom: 20
       }}>
-        <Text style={{fontSize: 13}}>
+        <Text allowFontScaling={false} style={{fontSize: 13}}>
           Opciones para enviar la transacción:
         </Text>
-        <Text style={{fontSize: 13}}>
+        <Text allowFontScaling={false} style={{fontSize: 13}}>
           1) Mostrar el código QR (el comerciante escanea)
         </Text>
-        <Text style={{fontSize: 13}}>
+        <Text allowFontScaling={false} style={{fontSize: 13}}>
           2) Escanear el código QR del comercio
         </Text>      
       </View>
@@ -364,7 +364,7 @@ const PrepaidCard = (params) => {
             }
           }}
         >
-          <Text style={styles.textoboton}>
+          <Text allowFontScaling={false} style={styles.textoboton}>
             Mostrar QR
           </Text>
         </TouchableOpacity>
@@ -396,7 +396,7 @@ const PrepaidCard = (params) => {
             }
           }}
         >
-          <Text style={styles.textoboton}>
+          <Text allowFontScaling={false} style={styles.textoboton}>
             Escanear QR
           </Text>
         </TouchableOpacity>

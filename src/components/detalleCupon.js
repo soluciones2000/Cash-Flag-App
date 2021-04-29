@@ -126,7 +126,7 @@ const Detallecupon = (params) => {
                />
             </View>
             <View style={{margintTop: 5, marginBottom: 30}}>
-               <Text style={{fontSize: 20, fontWeight: 'bold'}}>
+               <Text allowFontScaling={false} style={{fontSize: 20, fontWeight: 'bold'}}>
                   {cuponlargo}
                </Text>
             </View>
@@ -143,7 +143,7 @@ const Detallecupon = (params) => {
                     setModalVisible(!modalVisible);
                   }}
                >
-                  <Text style={styles.textoboton}>
+                  <Text allowFontScaling={false} style={styles.textoboton}>
                      Transferir a otro socio
                   </Text>
                </TouchableOpacity>
