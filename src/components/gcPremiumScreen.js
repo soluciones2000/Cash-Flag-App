@@ -61,8 +61,10 @@ const GcPremiumCard = (params) => {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     let dataqr = JSON.parse(data);
+    let datapdv = (dataqr.pdv==undefined) ? dataqr.idp : dataqr.pdv ;
 		let datos = new FormData();
     datos.append("idproveedor", dataqr.idp);
+    datos.append("idcomercio",  datapdv);
     datos.append("monto",       txtMonto);
     datos.append("tarjeta",     card);
     datos.append("origen",      origen);
