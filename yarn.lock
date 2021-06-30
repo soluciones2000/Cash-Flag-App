@@ -1748,6 +1748,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
 
+"@react-native-picker/picker@1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.9.2.tgz#c5e35f97d7982d2971ee3d74b1ba8ecf4b716627"
+  integrity sha512-eNMf5uF67CsiJ9SDzofSWKu9Gh2PDyPbCSXuUJ09tkRgcOefDx6DyQnXCOPCd+8vxC1DzJKVAgLy+s425jUIeA==
+
 "@react-navigation/bottom-tabs@^5.11.9":
   version "5.11.9"
   resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.11.9.tgz#380a97593290a8e278365c5e4d84813e19c8a9c9"
@@ -5448,6 +5453,11 @@ react-native-permissions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.0.1.tgz#7273f7d07701974ef50bf77bb052881846a3bb91"
   integrity sha512-loCoNEeBeLsrvITZmrkuCUEMFiuwhKuFvkWbC5Imco4bj2hUW7BVI29i8QyxkC53ydRfSR9OtbR3KQIyghWiNQ==
+
+react-native-popup-menu@^0.15.10:
+  version "0.15.10"
+  resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.15.10.tgz#49f2a67c8d1ea329f44e56288eca4a5c04835828"
+  integrity sha512-w7MaicsfpclK7g/omjMchNaXwhMi0apt/DC734AbHuJTWCfv5mF3JgL1UzRW19ncFMBRfQeYapPy/zUyJCGgEQ==
 
 react-native-qrcode-scanner@^1.5.4:
   version "1.5.4"

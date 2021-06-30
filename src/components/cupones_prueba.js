@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity, 
   FlatList, 
-  Image,
-  Alert } from 'react-native';
+  Image } from 'react-native';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
 
 const styles = require('./styles');
 
@@ -91,9 +91,37 @@ const Cupones = (params) => {
     </View>
     )
   };
-  
+
+  let _menu = null;
+
+  const setMenuRef = ref => {
+    console.log('set menu ref');
+    console.log(ref);
+    _menu = ref;
+  };
+
+  const hideMenu = () => {
+    console.log('menu off');
+    _menu.hide();
+  };
+
+  const showMenu = () => {
+    console.log('menu on');
+    _menu.show();
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Menu
+            ref={setMenuRef}
+            button={<Text onPress={showMenu}>Show menu</Text>}
+          >
+            <MenuItem onPress={hideMenu}>Menu item 1</MenuItem>
+            <MenuItem onPress={hideMenu}>Menu item 2</MenuItem>
+            <MenuItem onPress={hideMenu} disabled> Menu item 3</MenuItem>
+            <MenuDivider />
+            <MenuItem onPress={hideMenu}>Menu item 4</MenuItem>
+          </Menu>
       <FlatList style={{width: '100%'}}
         data={data}
         renderItem={renderItem}
@@ -131,19 +159,24 @@ const Cupones = (params) => {
           </View>
         )}
       />
-      <TouchableOpacity 
-        style={styles.btnContainer}
-        onPress={() => 
-          Alert.alert(
-            "Aviso",
-            "Se hizo clic"
-          )
-        }
-      >
-        <Text style={{fontWeight: 'bold', color: 'white'}}>GENERAR CUPON</Text>
-      </TouchableOpacity>
     </View>
   )
 }
 
 module.exports = Cupones;
+
+import { Icon } from 'react-native-elements';
+
+<Icon
+type="mterial-community"
+name="plus"
+color="#442484"
+reverse
+containerStyle={styles.btnContainer}
+onPress={() => 
+  Alert.alert(
+    "Aviso",
+    "Se hizo clic"
+  )
+}
+/>

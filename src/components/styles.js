@@ -120,6 +120,18 @@ const styles = StyleSheet.create({
     lector: {
       height: '90%',
       width: '100%'
+    },
+    btnContainer: {
+      margin: 5,
+      padding: 10,
+      borderRadius: 10,
+      position: "absolute",
+      backgroundColor: "blue",
+      bottom: 5,
+      right: 5,
+      shadowColor: "black",
+      shadowOffset: {width: 2, height: 2},
+      shadowOpacity: 0.5
     }
   });
 

@@ -4,24 +4,14 @@ import {
   Text, 
   TouchableOpacity, 
   FlatList, 
-  Image,
-  Alert, 
-  StyleSheet } from 'react-native';
-import {
-    Menu,
-    MenuProvider,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-    renderers
-  } from 'react-native-popup-menu';
-  
+  Image } from 'react-native';
+
 const styles = require('./styles');
 
-const Giftcards = (params) => {
+const Prepagos = (params) => {
   const navigation = params.navigation;
   const socio = params.socio;
-  const [data, setData] = useState(params.giftcards);
+  const [data, setData] = useState(params.prepagos);
   const [isRender, setIsrender] = useState(false);
 
   const actualizasaldo = (saldo,index) => {
@@ -35,7 +25,7 @@ const Giftcards = (params) => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <FlatList style={{width: '100%'}}
         data={data}
-        renderItem={({ item, index }) => (          
+        renderItem={({ item, index }) => (  
           <View style={{
               backgroundColor: 'lightblue',
               height: 90,
@@ -43,10 +33,11 @@ const Giftcards = (params) => {
               paddingBottom: 5
             }}
           >
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => {
                 if(item.premium) {
-                  navigation.navigate('GcPremium', {
+                  this.saldoant = item.saldo;
+                  navigation.navigate('PrPremium', {
                     logo: item.logotarjeta,
                     idproveedor: item.idproveedor,
                     card: item.tarjeta,
@@ -60,7 +51,7 @@ const Giftcards = (params) => {
                     indice: index
                   })
                 } else {
-                  navigation.navigate('Gift_Card', {
+                  navigation.navigate('Prepaids', {
                     logo: item.logotarjeta,
                     idproveedor: item.idproveedor,
                     card: item.tarjeta,
@@ -100,7 +91,7 @@ const Giftcards = (params) => {
                     </Text>
                   </View>
                   <View style={{flexDirection: "row"}}>
-                    <Text allowFontScaling={false}>Tipo:</Text> 
+                    <Text allowFontScaling={false}>Tipo:</Text>
                     <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
                       {item.premium==1 ? 'PREMIUM' : 'Local'}
                     </Text>
@@ -122,7 +113,8 @@ const Giftcards = (params) => {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={item => item.tarjeta}
+        keyExtractor={(item) => item.tarjeta}
+        extraData={data}
         ItemSeparatorComponent={() => (
           <View
             style={{
@@ -150,119 +142,24 @@ const Giftcards = (params) => {
         ListEmptyComponent={() => (
           <View style={styles.container}>
             <Text style={styles.text}>
-              No tienes tarjetas de regalo, puedes comprar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
+              No tienes tarjetas prepagadas, puedes recargar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
             </Text>
           </View>
         )}
       />
-      <View 
-        style={{
-          flex: 1,
-          height: '27%',
-          width: '45%',
-          alignSelf: 'flex-end',
-          bottom: 0,
-          position: 'absolute'
-        }}
+      <TouchableOpacity 
+        style={styles.btnContainer}
+        onPress={() => 
+          Alert.alert(
+            "Aviso",
+            "Se hizo clic"
+          )
+        }
       >
-        <MenuProvider style={{flexDirection: 'column-reverse'}}>
-          <Menu
-            renderer={renderers.SlideInMenu}
-          >
-            <MenuTrigger
-              customStyles={{
-                TriggerTouchableComponent: TouchableOpacity,
-                triggerText: {
-                  fontWeight: 'bold',
-                  color: 'white'
-                },
-                triggerWrapper: {
-                    margin: 5,
-                    padding: 10,
-                    borderRadius: 10,
-                    backgroundColor: "blue",
-                    bottom: 5,
-                    right: 5,
-                    shadowColor: "black",
-                    shadowOffset: {width: 2, height: 2},
-                    shadowOpacity: 0.5
-                }
-              }}
-              text='Comprar Tarjetas'
-            />
-            <MenuOptions customStyles={optionsStyles}>
-              <MenuOption
-                value={1}
-                text='Tarjeta Local'
-                onSelect={value => console.log(`Selected number: ${value}`)}
-              />
-              <MenuOption
-                value={2}
-                text='Tarjeta Premium'
-                onSelect={value => console.log(`Selected number: ${value}`)}
-              />
-              <MenuOption
-                style={{
-                  marginVertical: 5,
-                  marginRight: 5,
-                  padding: 10,
-                  backgroundColor: 'white',
-                  borderRadius: 10,
-                  shadowColor: "black",
-                  shadowOffset: {width: 2, height: 2},
-                  shadowOpacity: 0.5,
-                  textAlign: 'center'
-                }}
-                value={0}
-                text='Cerrar'
-                onSelect={value => console.log(`Selected number: ${value}`)}
-              />
-            </MenuOptions>
-          </Menu>
-        </MenuProvider>
-      </View>
+        <Text style={{fontWeight: 'bold', color: 'white'}}>RECARGAR TARJETAS</Text>
+      </TouchableOpacity>
     </View>
   )
 }
-const optionsStyles = {
-  optionsContainer: {
-    paddingHorizontal: 5,
-    position: 'absolute',
-    bottom: 25,
-    right: 5,
-    backgroundColor: 'rgba(0, 0, 0, 0)',
-    height: '100%'
-  },
-  optionWrapper: {
-    marginVertical: 5,
-    marginRight: 5,
-    padding: 10,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    shadowColor: "black",
-    shadowOffset: {width: 2, height: 2},
-    shadowOpacity: 0.5,
-    textAlign: 'center'
-  }
-};
 
-const triggerStyles = {
-  triggerText: {
-    fontWeight: 'bold',
-    color: 'white'
-  },
-  triggerWrapper: {
-      margin: 5,
-      padding: 10,
-      borderRadius: 10,
-      position: "absolute",
-      backgroundColor: "blue",
-      bottom: 5,
-      right: 5,
-      shadowColor: "black",
-      shadowOffset: {width: 2, height: 2},
-      shadowOpacity: 0.5
-  }
-};
-
-module.exports = Giftcards;
+module.exports = Prepagos;

@@ -22,6 +22,9 @@ const PrPremiumCard = require('./src/components/prPremiumScreen');
 const PrepaidCard   = require('./src/components/prepaidScreen');
 const GcPremiumCard = require('./src/components/gcPremiumScreen');
 const Gift_Card     = require('./src/components/giftcardScreen');
+const LocalRec      = require('./src/components/recargaLocal');
+const PremiumRec    = require('./src/components/recargaPremium');
+const ReportePago   = require('./src/components/reporte');
 
 const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
@@ -39,6 +42,7 @@ export default class CashFlag extends Component {
       oCupones: [],
       oPrepagos: [],
       oGiftcards: [],
+      oComercios: [],
       socio: '',
       email: '',
       token: ''
@@ -125,6 +129,7 @@ export default class CashFlag extends Component {
         oCupones: responseData.cupones,
         oPrepagos: responseData.prepagos,
         oGiftcards: responseData.giftcards,
+        oComercios: responseData.comercios,
         socio: responseData.socio,
         email: u,
         token: t
@@ -237,6 +242,30 @@ export default class CashFlag extends Component {
           title: 'Tarjeta Prepagada'
         }}
       />
+      <StackPrepagos.Screen
+        key="scrRecLocal"
+        name="recLocal"
+        component={LocalRec}
+        options={{
+          title: 'Recarga tarjeta (Paso 1)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrRecPremium"
+        name="recPremium"
+        component={PremiumRec}
+        options={{
+          title: 'Recarga tarjeta (Paso 1)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrReporte"
+        name="reporte"
+        component={ReportePago}
+        options={{
+          title: 'Recarga tarjeta (Paso 2)'
+        }}
+      />
     </StackPrepagos.Navigator>
   )
 
@@ -295,6 +324,7 @@ export default class CashFlag extends Component {
       cupones={this.state.oCupones}
       email={this.state.email}
       token={this.state.token}
+      comercios={this.state.oComercios}
     />
   )
 
@@ -303,6 +333,9 @@ export default class CashFlag extends Component {
       navigation={navigation} 
       prepagos={this.state.oPrepagos}
       socio={this.state.socio}
+      email={this.state.email}
+      token={this.state.token}
+      comercios={this.state.oComercios}
     />
   )
 
@@ -311,6 +344,9 @@ export default class CashFlag extends Component {
       navigation={navigation} 
       giftcards={this.state.oGiftcards}
       socio={this.state.socio}
+      email={this.state.email}
+      token={this.state.token}
+      comercios={this.state.oComercios}
     />
   )
 

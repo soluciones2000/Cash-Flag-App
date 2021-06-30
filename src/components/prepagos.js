@@ -4,7 +4,17 @@ import {
   Text, 
   TouchableOpacity, 
   FlatList, 
-  Image } from 'react-native';
+  Image, 
+  Alert,
+  StyleSheet } from 'react-native';
+import {
+  Menu,
+  MenuProvider,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+  renderers
+} from 'react-native-popup-menu';
 
 const styles = require('./styles');
 
@@ -13,6 +23,10 @@ const Prepagos = (params) => {
   const socio = params.socio;
   const [data, setData] = useState(params.prepagos);
   const [isRender, setIsrender] = useState(false);
+  const email = params.email
+  const token = params.token
+  const comercios = params.comercios
+
 
   const actualizasaldo = (saldo,index) => {
     let xaPrepagos = data;
@@ -147,8 +161,122 @@ const Prepagos = (params) => {
           </View>
         )}
       />
+      <View 
+        style={{
+          flex: 1,
+          height: '27%',
+          width: '45%',
+          alignSelf: 'flex-end',
+          bottom: 0,
+          position: 'absolute'
+        }}
+      >
+        <MenuProvider style={{flexDirection: 'column-reverse'}}>
+          <Menu
+            renderer={renderers.SlideInMenu}
+          >
+            <MenuTrigger
+              customStyles={{
+                TriggerTouchableComponent: TouchableOpacity,
+                triggerText: {
+                  fontWeight: 'bold',
+                  color: 'white'
+                },
+                triggerWrapper: {
+                    margin: 5,
+                    padding: 10,
+                    borderRadius: 10,
+                    backgroundColor: "blue",
+                    bottom: 5,
+                    right: 5,
+                    shadowColor: "black",
+                    shadowOffset: {width: 2, height: 2},
+                    shadowOpacity: 0.5
+                }
+              }}
+              text='Recargar Tarjetas'
+            />
+            <MenuOptions customStyles={optionsStyles}>
+              <MenuOption
+                value={1}
+                text='Tarjeta Local'
+                onSelect={value => navigation.navigate('recLocal', {
+                  email: email,
+                  token: token,
+                  comercios: comercios
+                })}
+              />
+              <MenuOption
+                value={2}
+                text='Tarjeta Premium'
+                onSelect={value => navigation.navigate('recPremium', {
+                  email: email,
+                  token: token
+                })}
+              />
+              <MenuOption
+                style={{
+                  marginVertical: 5,
+                  marginRight: 5,
+                  padding: 10,
+                  backgroundColor: 'white',
+                  borderRadius: 10,
+                  shadowColor: "black",
+                  shadowOffset: {width: 2, height: 2},
+                  shadowOpacity: 0.5,
+                  textAlign: 'center'
+                }}
+                value={0}
+                text='Cerrar'
+                onSelect={value => console.log(`Selected number: ${value}`)}
+              />
+            </MenuOptions>
+          </Menu>
+        </MenuProvider>
+      </View>
     </View>
   )
 }
+
+const optionsStyles = {
+  optionsContainer: {
+    paddingHorizontal: 5,
+    position: 'absolute',
+    bottom: 25,
+    right: 5,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    height: '100%'
+  },
+  optionWrapper: {
+    marginVertical: 5,
+    marginRight: 5,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: {width: 2, height: 2},
+    shadowOpacity: 0.5,
+    textAlign: 'center'
+  }
+};
+
+const triggerStyles = {
+  triggerText: {
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  triggerWrapper: {
+      margin: 5,
+      padding: 10,
+      borderRadius: 10,
+      position: "absolute",
+      backgroundColor: "blue",
+      bottom: 5,
+      right: 5,
+      shadowColor: "black",
+      shadowOffset: {width: 2, height: 2},
+      shadowOpacity: 0.5
+  }
+};
 
 module.exports = Prepagos;
