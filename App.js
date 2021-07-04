@@ -137,6 +137,17 @@ export default class CashFlag extends Component {
     });
   }
 
+  async actuaListaPrepagos(u,t) {
+    console.log('entró2');
+    await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
+    .then((response) => response.json())
+    .then((responseData) => {
+      console.log('fetch');
+      console.log(responseData.prepagos);
+      return responseData.prepagos
+    });
+  }
+
   tabPrincipal = () => {
     return (
     <TabPrincipal.Navigator
@@ -336,6 +347,7 @@ export default class CashFlag extends Component {
       email={this.state.email}
       token={this.state.token}
       comercios={this.state.oComercios}
+      actDatos={this.actuaListaPrepagos}
     />
   )
 

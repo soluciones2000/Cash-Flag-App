@@ -21,6 +21,7 @@ const Reporte = (params) => {
   const email = params.route.params.email;
   const token = params.route.params.token;
   const comercio = params.route.params.comercio;
+  const comercios = params.route.params.comercios;
   const divisa = params.route.params.divisa;
   const monto = params.route.params.monto;
   const premium = params.route.params.premium;
@@ -117,6 +118,8 @@ const Reporte = (params) => {
                   responseData.mensaje,
                   mensaje
                 );
+                setOrigen('');
+                setReferencia('');
               } else {
                 Alert.alert(
                   "Ups, algo salió mal",

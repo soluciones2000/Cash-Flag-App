@@ -16,23 +16,37 @@ import {
   renderers
 } from 'react-native-popup-menu';
 
+const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
+
 const styles = require('./styles');
+
 
 const Prepagos = (params) => {
   const navigation = params.navigation;
   const socio = params.socio;
   const [data, setData] = useState(params.prepagos);
   const [isRender, setIsrender] = useState(false);
-  const email = params.email
-  const token = params.token
-  const comercios = params.comercios
-
+  const [refreshing, setRefreshing] = useState(false);
+  const email = params.email;
+  const token = params.token;
+  const comercios = params.comercios;
+  const actDatos = params.actDatos;
 
   const actualizasaldo = (saldo,index) => {
     let xaPrepagos = data;
     xaPrepagos[index].saldo = saldo;
     setData(xaPrepagos);
     setIsrender(!isRender)
+  };
+
+  const listRefresh = async () => {
+    setRefreshing(true);
+    await fetch(PRODUCTS_URL+'email='+email+'&token='+token)
+    .then((response) => response.json())
+    .then((responseData) => {
+      setData(responseData.prepagos);
+      setRefreshing(false);
+    });
   };
 
   return (
@@ -127,6 +141,8 @@ const Prepagos = (params) => {
             </TouchableOpacity>
           </View>
         )}
+        refreshing = {refreshing}
+        onRefresh = { listRefresh }
         keyExtractor={(item) => item.tarjeta}
         extraData={data}
         ItemSeparatorComponent={() => (

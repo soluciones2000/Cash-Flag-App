@@ -133,12 +133,12 @@ const Cupones = (params) => {
       />
       <TouchableOpacity 
         style={styles.btnContainer}
-        onPress={() => 
+        onPress={() => { 
           Alert.alert(
-            "Aviso",
-            "Se hizo clic"
-          )
-        }
+            "Ups, algo salió mal",
+            "Esta opción está temporalmente deshabilitada"
+          );              
+        }}
       >
         <Text style={{fontWeight: 'bold', color: 'white'}}>GENERAR CUPON</Text>
       </TouchableOpacity>

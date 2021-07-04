@@ -194,12 +194,24 @@ const Giftcards = (params) => {
               <MenuOption
                 value={1}
                 text='Tarjeta Local'
-                onSelect={value => console.log(`Selected number: ${value}`)}
+                onSelect={value => {
+                  console.log(`Selected number: ${value}`)
+                  Alert.alert(
+                    "Ups, algo salió mal",
+                    "Esta opción está temporalmente deshabilitada"
+                  );              
+                }}
               />
               <MenuOption
                 value={2}
                 text='Tarjeta Premium'
-                onSelect={value => console.log(`Selected number: ${value}`)}
+                onSelect={value => {
+                  console.log(`Selected number: ${value}`)
+                  Alert.alert(
+                    "Ups, algo salió mal",
+                    "Esta opción está temporalmente deshabilitada"
+                  );              
+                }}
               />
               <MenuOption
                 style={{

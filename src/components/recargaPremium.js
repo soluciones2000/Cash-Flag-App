@@ -2,17 +2,56 @@
 
 import React, {useState} from 'react';
 import {
-   StyleSheet, 
-   View,
-   Image,
-   Text,
-   TextInput,
-   TouchableOpacity,
-   Alert,
-   Modal,
-   Dimensions
+  StyleSheet, 
+  View,
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  Modal,
+  Dimensions
 } from 'react-native';
 import { Picker} from '@react-native-picker/picker';
+
+const Aviso = (param) => {
+  if(param.moneda=='bs') {
+    return (
+      <Text allowFontScaling={false} style={styles.parrafoSmall}>
+        Instrucciones para pagar en Bs.:{"\n"}{"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          Transferencia Banco Mercantil
+        </Text>{"\n"}
+        RIF: J-40242441-8{"\n"}
+        Cuenta: 0105 0755 3217 5502 6986{"\n"}
+        A nombre de: SGC Consultores C.A.{"\n"}
+        {"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          Pago movil:
+        </Text>{"\n"}
+        Debe ingresar en la opción pago en linea{"\n"}
+      </Text>  
+    ) 
+  } else {
+    return (
+      <Text allowFontScaling={false} style={styles.parrafoSmall}>
+        Instrucciones para pagar en USD:{"\n"}{"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          ZELLE:
+        </Text>{"\n"}
+        Debe ingresar en la opción pago en linea{"\n"}
+        Seleccionar pagar con Net24-7{"\n"}
+        Al solicitar forma de pago seleccione Zelle{"\n"}
+        Seguir las instrucciones{"\n"}
+        {"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          UPHOLD:
+        </Text>{"\n"}
+        Enviar fondos a: sgcvzla@gmail.com{"\n"}
+      </Text>
+    )
+  }
+}
 
 const RecargaPremium = (params) => {
   const navigation = params.navigation;
@@ -21,6 +60,7 @@ const RecargaPremium = (params) => {
   const [txtComercio] = useState(3);
   const [txtMoneda, settxtMoneda] = useState('bs');
   const [txtMonto, settxtMonto] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -35,7 +75,6 @@ const RecargaPremium = (params) => {
       </Text>
       <View style={styles.pickerinput}>
         <Picker
-          style={styles.pickerinputdetalle}
           selectedValue={txtMoneda}
           onValueChange={(itemValue, itemIndex) => { 
             settxtMoneda(itemValue);
@@ -67,6 +106,18 @@ const RecargaPremium = (params) => {
         maxLength={20}
         placeholder='0.00'
       />
+      <Text
+        allowFontScaling={false}
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+          textAlign: "center",
+          marginVertical: 10
+        }}
+      >
+        Este producto tiene un costo para el usuario del 3% sobre el monto de la transacción
+      </Text>
+
       <View style={{
         flexDirection: "row",
         wdith: '100%',
@@ -144,62 +195,164 @@ const RecargaPremium = (params) => {
           </Text>
         </TouchableOpacity>
       </View>
-        <TouchableOpacity 
+      <TouchableOpacity 
+        style={{
+          height: 40,
+          width: 135,
+          backgroundColor: 'blue',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginRight: 5,
+          borderRadius: 10
+        }}
+        onPress={() => {
+          settxtMoneda('bs');
+          settxtMonto(null);
+        }}
+      >
+        <Text
+          allowFontScaling={false}
           style={{
-            height: 40,
-            width: 135,
-            backgroundColor: 'blue',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginRight: 5,
-            borderRadius: 10
-          }}
-          onPress={() => {
-            settxtMoneda('bs');
-            settxtMonto(null);
+            color:"white",
+            fontSize: 16
           }}
         >
-          <Text
-            allowFontScaling={false}
-            style={{
-              color:"white",
-              fontSize: 16
-            }}
-          >
-            Limpiar
-          </Text>
-        </TouchableOpacity>
+          Limpiar
+        </Text>
+      </TouchableOpacity>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalViewAviso}>
+            <Text
+              allowFontScaling={false} 
+              style={styles.text}
+            >
+              <Text style={{fontWeight: 'bold'}}>
+                Antes de continuar debes realizar el pago
+              </Text>
+            </Text>
+            <Aviso moneda={txtMoneda}/>
+            <View style={{
+              flexDirection: "row",
+              wdith: '100%',
+              marginBottom: 10
+            }}>
+              <TouchableOpacity 
+                style={{
+                  height: 30,
+                  width: 120,
+                  marginTop: 10,
+                  backgroundColor: 'blue',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: 5,
+                  borderRadius: 10
+                }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                  navigation.navigate('reporte',{
+                    email: email,
+                    token: token,
+                    comercio: txtComercio,
+                    divisa: txtMoneda,
+                    monto: txtMonto,
+                    premium: ""
+                  })
+                }}
+              >
+                <Text 
+                  allowFontScaling={false} 
+                  style={{ color:"white", fontSize: 16 }}
+                >
+                  Continuar
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={{
+                  height: 30,
+                  width: 120,
+                  marginTop: 10,
+                  backgroundColor: 'blue',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginLeft: 5,
+                  borderRadius: 10
+                }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text 
+                  allowFontScaling={false} 
+                  style={{ color:"white", fontSize: 16 }}
+                >
+                  Cerrar
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
-   )
+  )
 }
 
 const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imagepeq: {
+    width: 214,
+    height: 120
+  },
+  text: {
+    fontSize: 20,
+    textAlign: "center"
+  },
+  parrafoSmall: {
+    fontSize: 15,
+    textAlign: "justify"
+  },
+  pickerinput: {
+    height: 40,
+    width: 250,
+    marginTop: 5,
+    marginBottom: 15,
+    borderRadius: 10,
+    backgroundColor: 'lightgray',
+    justifyContent: 'center'
+  },
+  modalViewAviso: {
+    marginTop: 225,
+    marginHorizontal: 5,
+    marginBottom: 5,
+    backgroundColor: "white",
+    borderColor: "black",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderRadius: 10,
+    paddingTop: 15,
+    paddingHorizontal: 15,
+    paddingBottom: 10,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
     },
-    imagepeq: {
-     width: 214,
-     height: 120
-   },
-   text: {
-     fontSize: 20,
-     textAlign: "center"
-   },
-   pickerinput: {
-      height: 40,
-      width: 250,
-      marginTop: 5,
-      marginBottom: 15,
-      borderRadius: 10,
-      backgroundColor: 'lightgray',
-      justifyContent: 'center'
-   },
-   pickerinputdetalle: {
-      border: 'none'
-   }
+    shadowOpacity: 0.25,
+    elevation: 5
+  }
 });
 
 module.exports = RecargaPremium;
