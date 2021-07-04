@@ -120,6 +120,7 @@ const Reporte = (params) => {
                 );
                 setOrigen('');
                 setReferencia('');
+                navigation.popToTop();
               } else {
                 Alert.alert(
                   "Ups, algo salió mal",
