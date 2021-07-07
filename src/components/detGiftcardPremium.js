@@ -205,7 +205,6 @@ const DetGiftcardPremium = (params) => {
           borderRadius: 10
         }}
         onPress={() => {
-          settxtComercio(0);
           settxtMoneda('bs');
           settxtMonto(null);
         }}
