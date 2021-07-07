@@ -7,6 +7,8 @@ import {
   Image,
   Alert } from 'react-native';
 
+const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
+  
 const styles = require('./styles');
 
 const Cupones = (params) => {
@@ -15,12 +17,25 @@ const Cupones = (params) => {
   const token = params.token;
   const [data, setData] = useState(params.cupones);
   const [isAct, setAct] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const comercios = params.comercios;
+  const actDatos = params.actDatos;
 
   const actualizalista = (index) => {
     let xaCupones = data;
     xaCupones.splice(index,1);
     setData(xaCupones);
     setAct(!isAct);
+  };
+
+  const listRefresh = async () => {
+    setRefreshing(true);
+    await fetch(PRODUCTS_URL+'email='+email+'&token='+token)
+    .then((response) => response.json())
+    .then((responseData) => {
+      setData(responseData.cupones);
+      setRefreshing(false);
+    });
   };
 
   const renderItem = ({item, index}) => {    
@@ -97,6 +112,8 @@ const Cupones = (params) => {
       <FlatList style={{width: '100%'}}
         data={data}
         renderItem={renderItem}
+        refreshing = {refreshing}
+        onRefresh = {listRefresh}
         keyExtractor={item => item.cuponlargo}
         extraData={isAct}
         ItemSeparatorComponent={() => (
@@ -133,12 +150,22 @@ const Cupones = (params) => {
       />
       <TouchableOpacity 
         style={styles.btnContainer}
+        onPress={() => {
+          navigation.navigate('newCupon', {
+            email: email,
+            token: token,
+            comercios: comercios,
+            actlista: listRefresh
+          });
+        }}
+        /*        
         onPress={() => { 
           Alert.alert(
             "Ups, algo salió mal",
             "Esta opción está temporalmente deshabilitada"
           );              
         }}
+        */
       >
         <Text style={{fontWeight: 'bold', color: 'white'}}>GENERAR CUPON</Text>
       </TouchableOpacity>

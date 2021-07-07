@@ -18,6 +18,7 @@ const Cupones        = require('./src/components/cupones');
 const Prepagos       = require('./src/components/prepagos');
 const Giftcards      = require('./src/components/giftcards');
 const DetalleCupon   = require('./src/components/detalleCupon');
+const NewCupon       = require('./src/components/newCupon');
 const PrPremiumCard  = require('./src/components/prPremiumScreen');
 const PrepaidCard    = require('./src/components/prepaidScreen');
 const GcPremiumCard  = require('./src/components/gcPremiumScreen');
@@ -234,6 +235,14 @@ export default class CashFlag extends Component {
         }}
       />
       <StackCupones.Screen
+        key="newCupon"
+        name="newCupon"
+        component={NewCupon}
+        options={{
+          title: 'Reclamar Recompensa'
+        }}
+      />
+      <StackCupones.Screen
         key="detCupon"
         name="Cupon"
         component={DetalleCupon}
@@ -324,7 +333,7 @@ export default class CashFlag extends Component {
           title: 'Tarjeta de regalo'
         }}
       />
-      <StackPrepagos.Screen
+      <StackGiftcards.Screen
         key="scrBuyGiftcard"
         name="buyGiftcard"
         component={BuyGiftcard}
@@ -332,7 +341,7 @@ export default class CashFlag extends Component {
           title: 'Comprar Giftcard (Paso 1)'
         }}
       />
-      <StackPrepagos.Screen
+      <StackGiftcards.Screen
         key="scrDetGiftcardLocal"
         name="detGiftcardLocal"
         component={LocalGiftDet}
@@ -340,7 +349,7 @@ export default class CashFlag extends Component {
           title: 'Comprar Giftcard (Paso 2)'
         }}
       />
-      <StackPrepagos.Screen
+      <StackGiftcards.Screen
         key="scrDetGiftcardPremium"
         name="detGiftcardPremium"
         component={PremiumGiftDet}
@@ -348,7 +357,7 @@ export default class CashFlag extends Component {
           title: 'Comprar Giftcard (Paso 2)'
         }}
       />
-      <StackPrepagos.Screen
+      <StackGiftcards.Screen
         key="scrRepGiftcard"
         name="repGiftcard"
         component={GiftcardRep}
@@ -385,6 +394,7 @@ export default class CashFlag extends Component {
       email={this.state.email}
       token={this.state.token}
       comercios={this.state.oComercios}
+      actDatos={this.actuaListaCupones}
     />
   )
 
