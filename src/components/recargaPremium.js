@@ -29,7 +29,10 @@ const Aviso = (param) => {
         <Text style={{textDecorationLine: 'underline'}}>
           Pago movil:
         </Text>{"\n"}
-        Debe ingresar en la opción pago en linea{"\n"}
+        Debe ingresar en la opción pago en linea{"\n"}{"\n"}
+        <Text style={{fontWeight: 'bold', color: 'red'}}>
+          Ten en cuenta que los reportes de pago pueden tardar hasta 24 horas hábiles en confirmarse.
+        </Text>
       </Text>  
     ) 
   } else {
@@ -47,7 +50,10 @@ const Aviso = (param) => {
         <Text style={{textDecorationLine: 'underline'}}>
           UPHOLD:
         </Text>{"\n"}
-        Enviar fondos a: sgcvzla@gmail.com{"\n"}
+        Enviar fondos a: sgcvzla@gmail.com{"\n"}{"\n"}
+        <Text style={{fontWeight: 'bold', color: 'red'}}>
+          Ten en cuenta que los reportes de pago pueden tardar hasta 24 horas hábiles en confirmarse.
+        </Text>
       </Text>
     )
   }

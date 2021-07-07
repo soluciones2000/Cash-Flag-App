@@ -11,20 +11,24 @@ const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
 
 const styles = require('./src/components/styles');
 
-const Login         = require('./src/components/loginScreen');
-const NewUser       = require('./src/components/newUserScreen');
-const ResetPwd      = require('./src/components/resetPwdScreen');
-const Cupones       = require('./src/components/cupones');
-const Prepagos      = require('./src/components/prepagos');
-const Giftcards     = require('./src/components/giftcards');
-const DetalleCupon  = require('./src/components/detalleCupon');
-const PrPremiumCard = require('./src/components/prPremiumScreen');
-const PrepaidCard   = require('./src/components/prepaidScreen');
-const GcPremiumCard = require('./src/components/gcPremiumScreen');
-const Gift_Card     = require('./src/components/giftcardScreen');
-const LocalRec      = require('./src/components/recargaLocal');
-const PremiumRec    = require('./src/components/recargaPremium');
-const ReportePago   = require('./src/components/reporte');
+const Login          = require('./src/components/loginScreen');
+const NewUser        = require('./src/components/newUserScreen');
+const ResetPwd       = require('./src/components/resetPwdScreen');
+const Cupones        = require('./src/components/cupones');
+const Prepagos       = require('./src/components/prepagos');
+const Giftcards      = require('./src/components/giftcards');
+const DetalleCupon   = require('./src/components/detalleCupon');
+const PrPremiumCard  = require('./src/components/prPremiumScreen');
+const PrepaidCard    = require('./src/components/prepaidScreen');
+const GcPremiumCard  = require('./src/components/gcPremiumScreen');
+const Gift_Card      = require('./src/components/giftcardScreen');
+// const LocalRec      = require('./src/components/recargaLocal');
+// const PremiumRec    = require('./src/components/recargaPremium');
+// const ReportePago   = require('./src/components/reporte');
+const BuyGiftcard    = require('./src/components/buyGiftcard');
+const LocalGiftDet   = require('./src/components/detGiftcardLocal');
+const PremiumGiftDet = require('./src/components/detGiftcardPremium');
+const GiftcardRep    = require('./src/components/repGiftcard');
 
 const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
@@ -137,14 +141,27 @@ export default class CashFlag extends Component {
     });
   }
 
-  async actuaListaPrepagos(u,t) {
-    console.log('entró2');
+  async actuaListaCupones(u,t) {
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
     .then((response) => response.json())
     .then((responseData) => {
-      console.log('fetch');
-      console.log(responseData.prepagos);
+      return responseData.cupones
+    });
+  }
+
+  async actuaListaPrepagos(u,t) {
+    await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
+    .then((response) => response.json())
+    .then((responseData) => {
       return responseData.prepagos
+    });
+  }
+
+  async actuaListaGiftcards(u,t) {
+    await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
+    .then((response) => response.json())
+    .then((responseData) => {
+      return responseData.giftcards
     });
   }
 
@@ -307,6 +324,38 @@ export default class CashFlag extends Component {
           title: 'Tarjeta de regalo'
         }}
       />
+      <StackPrepagos.Screen
+        key="scrBuyGiftcard"
+        name="buyGiftcard"
+        component={BuyGiftcard}
+        options={{
+          title: 'Comprar Giftcard (Paso 1)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrDetGiftcardLocal"
+        name="detGiftcardLocal"
+        component={LocalGiftDet}
+        options={{
+          title: 'Comprar Giftcard (Paso 2)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrDetGiftcardPremium"
+        name="detGiftcardPremium"
+        component={PremiumGiftDet}
+        options={{
+          title: 'Comprar Giftcard (Paso 2)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrRepGiftcard"
+        name="repGiftcard"
+        component={GiftcardRep}
+        options={{
+          title: 'Comprar Giftcard (Paso 3)'
+        }}
+      />
     </StackGiftcards.Navigator>
   )
 
@@ -359,6 +408,7 @@ export default class CashFlag extends Component {
       email={this.state.email}
       token={this.state.token}
       comercios={this.state.oComercios}
+      actDatos={this.actuaListaGiftcards}
     />
   )
 

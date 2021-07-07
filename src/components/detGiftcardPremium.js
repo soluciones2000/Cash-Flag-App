@@ -59,12 +59,17 @@ const Aviso = (param) => {
   }
 }
 
-const RecargaLocal = (params) => {
+const DetGiftcardPremium = (params) => {
   const navigation = params.navigation;
   const email = params.route.params.email;
   const token = params.route.params.token;
-  const comercios = params.route.params.comercios
-  const [txtComercio, settxtComercio] = useState(0);
+  const nombres = params.route.params.nombres;
+  const apellidos = params.route.params.apellidos;
+  const telefono = params.route.params.telefono;
+  const correo = params.route.params.correo;
+  const mensaje = params.route.params.mensaje;
+
+  const [txtComercio] = useState(3);
   const [txtMoneda, settxtMoneda] = useState('bs');
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
@@ -75,26 +80,6 @@ const RecargaLocal = (params) => {
         <Image style={styles.imagepeq}
           source={{uri: 'https://app.cash-flag.com/img/logoclub.png'}}
         />
-      </View>
-      <Text allowFontScaling={false} style={styles.text}>
-        Comercio
-      </Text>
-      <View style={styles.pickerinput}>
-        <Picker
-          style={styles.pickerinputdetalle}
-          selectedValue={txtComercio}
-          onValueChange={(itemValue) => {
-            settxtComercio(itemValue);
-          }}
-          prompt={'Seleccione comercio'}
-        >
-          <Picker.Item label='Seleccione' value={0} />
-          {
-            comercios.map( (c) => (
-              <Picker.Item label={c.nombrecomercio} value={c.idcomercio} />
-            ))
-          }
-        </Picker>
       </View>
 
       <Text allowFontScaling={false} style={styles.text}>
@@ -272,13 +257,18 @@ const RecargaLocal = (params) => {
                 }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                  navigation.navigate('reporte',{
+                  navigation.navigate('repGiftcard',{
                     email: email,
                     token: token,
                     comercio: txtComercio,
                     divisa: txtMoneda,
                     monto: txtMonto,
-                    premium: ""
+                    premium: "1",
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    telefono: telefono,
+                    correo: correo,
+                    mensaje: mensaje
                   })
                 }}
               >
@@ -370,4 +360,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = RecargaLocal;
+module.exports = DetGiftcardPremium;

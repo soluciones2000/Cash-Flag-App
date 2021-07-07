@@ -15,6 +15,8 @@ import {
     MenuTrigger,
     renderers
   } from 'react-native-popup-menu';
+
+const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
   
 const styles = require('./styles');
 
@@ -23,12 +25,27 @@ const Giftcards = (params) => {
   const socio = params.socio;
   const [data, setData] = useState(params.giftcards);
   const [isRender, setIsrender] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const email = params.email;
+  const token = params.token;
+  const comercios = params.comercios;
+  const actDatos = params.actDatos;
 
   const actualizasaldo = (saldo,index) => {
     let xaPrepagos = data;
     xaPrepagos[index].saldo = saldo;
     setData(xaPrepagos);
     setIsrender(!isRender)
+  };
+
+  const listRefresh = async () => {
+    setRefreshing(true);
+    await fetch(PRODUCTS_URL+'email='+email+'&token='+token)
+    .then((response) => response.json())
+    .then((responseData) => {
+      setData(responseData.giftcards);
+      setRefreshing(false);
+    });
   };
 
   return (
@@ -122,6 +139,8 @@ const Giftcards = (params) => {
             </TouchableOpacity>
           </View>
         )}
+        refreshing = {refreshing}
+        onRefresh = { listRefresh }
         keyExtractor={item => item.tarjeta}
         ItemSeparatorComponent={() => (
           <View
@@ -194,6 +213,13 @@ const Giftcards = (params) => {
               <MenuOption
                 value={1}
                 text='Tarjeta Local'
+                onSelect={value => navigation.navigate('buyGiftcard', {
+                  email: email,
+                  token: token,
+                  comercios: comercios,
+                  premium: ''
+                })}
+                /*
                 onSelect={value => {
                   console.log(`Selected number: ${value}`)
                   Alert.alert(
@@ -201,10 +227,18 @@ const Giftcards = (params) => {
                     "Esta opción está temporalmente deshabilitada"
                   );              
                 }}
+                */
               />
               <MenuOption
                 value={2}
                 text='Tarjeta Premium'
+                onSelect={value => navigation.navigate('buyGiftcard', {
+                  email: email,
+                  token: token,
+                  comercios: comercios,
+                  premium: '1'
+                })}
+                /*
                 onSelect={value => {
                   console.log(`Selected number: ${value}`)
                   Alert.alert(
@@ -212,6 +246,7 @@ const Giftcards = (params) => {
                     "Esta opción está temporalmente deshabilitada"
                   );              
                 }}
+                */
               />
               <MenuOption
                 style={{

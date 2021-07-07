@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import { Picker} from '@react-native-picker/picker';
 
-const REPORTE_URL = "https://app.cash-flag.com/apis/v1/socios/prepago?";
+const REPORTE_URL = "https://app.cash-flag.com/apis/v1/socios/giftcard?";
 
-const Reporte = (params) => {
+const RepGiftcard = (params) => {
   const navigation = params.navigation;
   const email = params.route.params.email;
   const token = params.route.params.token;
@@ -24,6 +24,11 @@ const Reporte = (params) => {
   const divisa = params.route.params.divisa;
   const monto = params.route.params.monto;
   const premium = params.route.params.premium;
+  const nombres = params.route.params.nombres;
+  const apellidos = params.route.params.apellidos;
+  const telefono = params.route.params.telefono;
+  const correo = params.route.params.correo;
+  const mensaje = params.route.params.mensaje;
 
   const [origen, setOrigen] = useState('');
   const [referencia, setReferencia] = useState('');
@@ -90,16 +95,22 @@ const Reporte = (params) => {
           }}
           onPress={() => {
             let datos = new FormData();
-            datos.append("email",      email);
-            datos.append("token",      token);
-            datos.append("idcomercio", comercio);
-            datos.append("moneda",     divisa);
-            datos.append("monto",      monto);
-            datos.append("premium",    premium);
-            datos.append("tipopago",   'transferencia');
-            datos.append("menu",       'socio');
-            datos.append("origen",     origen);
-            datos.append("referencia", referencia);
+            datos.append("emailsocio",   email);
+            datos.append("token",        token);
+            datos.append("idcomercio",   comercio);
+            datos.append("nombres",      nombres);
+            datos.append("apellidos",    apellidos);
+            datos.append("telefono",     telefono);
+            datos.append("email",        correo);
+            datos.append("txtemail",     mensaje);
+            datos.append("moneda",       divisa);
+            datos.append("monto",        monto);
+            datos.append("premium",      premium);
+            datos.append("tipopago",     'transferencia');
+            datos.append("menu",         'socio');
+            datos.append("origen",       origen);
+            datos.append("referencia",   referencia);
+            datos.append("cardcashflag", '');
 
             fetch(REPORTE_URL, {
               method: 'POST',
@@ -186,4 +197,4 @@ const styles = StyleSheet.create({
    }
 });
 
-module.exports = Reporte;
+module.exports = RepGiftcard;
