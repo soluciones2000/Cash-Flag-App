@@ -30,7 +30,7 @@ const BuyGiftcard    = require('./src/components/buyGiftcard');
 const LocalGiftDet   = require('./src/components/detGiftcardLocal');
 const PremiumGiftDet = require('./src/components/detGiftcardPremium');
 const GiftcardRep    = require('./src/components/repGiftcard');
-const PagoEnLinea    = require('./src/components/pagoEnLinea');
+// const PagoEnLinea    = require('./src/components/pagoEnLinea');
 
 const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
@@ -304,14 +304,14 @@ export default class CashFlag extends Component {
           title: 'Recarga tarjeta (Paso 2)'
         }}
       />
-      <StackPrepagos.Screen
+      {/* <StackPrepagos.Screen
         key="scrPagoEnLinea"
         name="pagoEnLinea"
         component={PagoEnLinea}
         options={{
           title: 'Recarga tarjeta (Paso 2)'
         }}
-      />
+      /> */}
     </StackPrepagos.Navigator>
   )
 
