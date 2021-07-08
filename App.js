@@ -23,13 +23,14 @@ const PrPremiumCard  = require('./src/components/prPremiumScreen');
 const PrepaidCard    = require('./src/components/prepaidScreen');
 const GcPremiumCard  = require('./src/components/gcPremiumScreen');
 const Gift_Card      = require('./src/components/giftcardScreen');
-// const LocalRec      = require('./src/components/recargaLocal');
-// const PremiumRec    = require('./src/components/recargaPremium');
-// const ReportePago   = require('./src/components/reporte');
+const LocalRec       = require('./src/components/recargaLocal');
+const PremiumRec     = require('./src/components/recargaPremium');
+const ReportePago    = require('./src/components/reporte');
 const BuyGiftcard    = require('./src/components/buyGiftcard');
 const LocalGiftDet   = require('./src/components/detGiftcardLocal');
 const PremiumGiftDet = require('./src/components/detGiftcardPremium');
 const GiftcardRep    = require('./src/components/repGiftcard');
+const PagoEnLinea    = require('./src/components/pagoEnLinea');
 
 const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
@@ -299,6 +300,14 @@ export default class CashFlag extends Component {
         key="scrReporte"
         name="reporte"
         component={ReportePago}
+        options={{
+          title: 'Recarga tarjeta (Paso 2)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrPagoEnLinea"
+        name="pagoEnLinea"
+        component={PagoEnLinea}
         options={{
           title: 'Recarga tarjeta (Paso 2)'
         }}
