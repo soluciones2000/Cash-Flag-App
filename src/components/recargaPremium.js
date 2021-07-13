@@ -13,7 +13,8 @@ import {
   Dimensions
 } from 'react-native';
 import { Picker} from '@react-native-picker/picker';
-
+import RadioButtonRN from 'radio-buttons-react-native';
+ 
 const Aviso = (param) => {
   if(param.moneda=='bs') {
     return (
@@ -59,6 +60,52 @@ const Aviso = (param) => {
   }
 }
 
+const datos = [
+  {label: 'T. de Crédito (nacional o internac.)', value: 'tdc' },
+  {label: 'T. de Débito (sólo Bco. Mercantil)', value: 'tdd' },
+  {label: 'Pago movil C2P', value: 'c2p' }
+];
+let valor = 1;
+
+const PagoEnLinea = (param) => {
+  if(param.moneda=='bs') {
+    return (
+      <RadioButtonRN
+        style={{ width: '90%', marginVertical: 5 }}
+        data={datos}
+        initial={1}
+        selectedBtn={(e) => {
+          valor = e.value;
+        }}
+        circleSize={11}
+        textStyle={{fontSize: 15}}
+        box={false}
+      />
+    )
+  } else {
+    return (
+      <Text allowFontScaling={false} style={styles.parrafoSmall}>
+        Instrucciones para pagar en USD:{"\n"}{"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          ZELLE:
+        </Text>{"\n"}
+        Debe ingresar en la opción pago en linea{"\n"}
+        Seleccionar pagar con Net24-7{"\n"}
+        Al solicitar forma de pago seleccione Zelle{"\n"}
+        Seguir las instrucciones{"\n"}
+        {"\n"}
+        <Text style={{textDecorationLine: 'underline'}}>
+          UPHOLD:
+        </Text>{"\n"}
+        Enviar fondos a: sgcvzla@gmail.com{"\n"}{"\n"}
+        <Text style={{fontWeight: 'bold', color: 'red'}}>
+          Ten en cuenta que los reportes de pago pueden tardar hasta 24 horas hábiles en confirmarse.
+        </Text>
+      </Text>
+    )
+  }
+}
+
 const RecargaPremium = (params) => {
   const navigation = params.navigation;
   const email = params.route.params.email;
@@ -67,6 +114,7 @@ const RecargaPremium = (params) => {
   const [txtMoneda, settxtMoneda] = useState('bs');
   const [txtMonto, settxtMonto] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -140,10 +188,14 @@ const RecargaPremium = (params) => {
             borderRadius: 10
           }}
           onPress={() => {
-            Alert.alert(
-              "Ups, algo salió mal",
-              "Esta opción está temporalmente deshabilitada"
-            );
+            if(txtMoneda=='bs') {
+              setModalVisible2(!modalVisible2);
+            } else {
+              Alert.alert(
+                "Ups, algo salió mal",
+                "Esta opción está temporalmente deshabilitada"
+              );
+            }
           }}
         >
           <Text
@@ -179,14 +231,7 @@ const RecargaPremium = (params) => {
                 break;
               }
             } else {
-              navigation.navigate('reporte',{
-                email: email,
-                token: token,
-                comercio: txtComercio,
-                divisa: txtMoneda,
-                monto: txtMonto,
-                premium: "1"
-              })
+              setModalVisible(!modalVisible);
             }
           }}
         >
@@ -269,7 +314,7 @@ const RecargaPremium = (params) => {
                     comercio: txtComercio,
                     divisa: txtMoneda,
                     monto: txtMonto,
-                    premium: ""
+                    premium: "1"
                   })
                 }}
               >
@@ -293,6 +338,113 @@ const RecargaPremium = (params) => {
                 }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
+                }}
+              >
+                <Text 
+                  allowFontScaling={false} 
+                  style={{ color:"white", fontSize: 16 }}
+                >
+                  Cerrar
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          setModalVisible2(!modalVisible2);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalViewAviso}>
+            <Text
+              allowFontScaling={false} 
+              style={styles.text}
+            >
+              <Text style={{fontWeight: 'bold'}}>
+                Selecciona tu modalidad preferida para el pago
+              </Text>
+            </Text>
+            <PagoEnLinea moneda={txtMoneda}/>
+            <View style={{
+              flexDirection: "row",
+              wdith: '100%',
+              marginBottom: 10
+            }}>
+              <TouchableOpacity 
+                style={{
+                  height: 30,
+                  width: 120,
+                  marginTop: 10,
+                  backgroundColor: 'blue',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginRight: 5,
+                  borderRadius: 10
+                }}
+                onPress={() => {
+                  setModalVisible2(!modalVisible2);
+                  switch (valor) {
+                    case 'tdc':
+                      navigation.navigate('pasarelaPagoBsTdc',{
+                        email: email,
+                        token: token,
+                        comercio: txtComercio,
+                        divisa: txtMoneda,
+                        monto: txtMonto,
+                        premium: "1",
+                        tipopago: valor
+                      })
+                    break;
+                    case 'tdd':
+                      navigation.navigate('pasarelaPagoBsTdd',{
+                        email: email,
+                        token: token,
+                        comercio: txtComercio,
+                        divisa: txtMoneda,
+                        monto: txtMonto,
+                        premium: "1",
+                        tipopago: valor
+                      })
+                    break;
+                    case 'c2p':
+                      navigation.navigate('pasarelaPagoBsC2p',{
+                        email: email,
+                        token: token,
+                        comercio: txtComercio,
+                        divisa: txtMoneda,
+                        monto: txtMonto,
+                        premium: "1",
+                        tipopago: valor
+                      })
+                    break;
+                  }
+                }}
+              >
+                <Text 
+                  allowFontScaling={false} 
+                  style={{ color:"white", fontSize: 16 }}
+                >
+                  Continuar
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={{
+                  height: 30,
+                  width: 120,
+                  marginTop: 10,
+                  backgroundColor: 'blue',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginLeft: 5,
+                  borderRadius: 10
+                }}
+                onPress={() => {
+                  setModalVisible2(!modalVisible2);
                 }}
               >
                 <Text 

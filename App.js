@@ -11,26 +11,28 @@ const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
 
 const styles = require('./src/components/styles');
 
-const Login          = require('./src/components/loginScreen');
-const NewUser        = require('./src/components/newUserScreen');
-const ResetPwd       = require('./src/components/resetPwdScreen');
-const Cupones        = require('./src/components/cupones');
-const Prepagos       = require('./src/components/prepagos');
-const Giftcards      = require('./src/components/giftcards');
-const DetalleCupon   = require('./src/components/detalleCupon');
-const NewCupon       = require('./src/components/newCupon');
-const PrPremiumCard  = require('./src/components/prPremiumScreen');
-const PrepaidCard    = require('./src/components/prepaidScreen');
-const GcPremiumCard  = require('./src/components/gcPremiumScreen');
-const Gift_Card      = require('./src/components/giftcardScreen');
-const LocalRec       = require('./src/components/recargaLocal');
-const PremiumRec     = require('./src/components/recargaPremium');
-const ReportePago    = require('./src/components/reporte');
-const BuyGiftcard    = require('./src/components/buyGiftcard');
-const LocalGiftDet   = require('./src/components/detGiftcardLocal');
-const PremiumGiftDet = require('./src/components/detGiftcardPremium');
-const GiftcardRep    = require('./src/components/repGiftcard');
-// const PagoEnLinea    = require('./src/components/pagoEnLinea');
+const Login             = require('./src/components/loginScreen');
+const NewUser           = require('./src/components/newUserScreen');
+const ResetPwd          = require('./src/components/resetPwdScreen');
+const Cupones           = require('./src/components/cupones');
+const Prepagos          = require('./src/components/prepagos');
+const Giftcards         = require('./src/components/giftcards');
+const DetalleCupon      = require('./src/components/detalleCupon');
+const NewCupon          = require('./src/components/newCupon');
+const PrPremiumCard     = require('./src/components/prPremiumScreen');
+const PrepaidCard       = require('./src/components/prepaidScreen');
+const GcPremiumCard     = require('./src/components/gcPremiumScreen');
+const Gift_Card         = require('./src/components/giftcardScreen');
+const LocalRec          = require('./src/components/recargaLocal');
+const PremiumRec        = require('./src/components/recargaPremium');
+const ReportePago       = require('./src/components/reporte');
+const PasarelaPagoBsTdc = require('./src/components/pasarelaPagoBsTdc');
+const PasarelaPagoBsTdd = require('./src/components/pasarelaPagoBsTdd');
+const PasarelaPagoBsC2p = require('./src/components/pasarelaPagoBsC2p');
+const BuyGiftcard       = require('./src/components/buyGiftcard');
+const LocalGiftDet      = require('./src/components/detGiftcardLocal');
+const PremiumGiftDet    = require('./src/components/detGiftcardPremium');
+const GiftcardRep       = require('./src/components/repGiftcard');
 
 const StackLogin = createStackNavigator();
 const StackCupones = createStackNavigator();
@@ -304,14 +306,30 @@ export default class CashFlag extends Component {
           title: 'Recarga tarjeta (Paso 2)'
         }}
       />
-      {/* <StackPrepagos.Screen
-        key="scrPagoEnLinea"
-        name="pagoEnLinea"
-        component={PagoEnLinea}
+      <StackPrepagos.Screen
+        key="scrPasarelaPagoBsTdc"
+        name="pasarelaPagoBsTdc"
+        component={PasarelaPagoBsTdc}
         options={{
           title: 'Recarga tarjeta (Paso 2)'
         }}
-      /> */}
+      />
+      <StackPrepagos.Screen
+        key="scrPasarelaPagoBsTdd"
+        name="pasarelaPagoBsTdd"
+        component={PasarelaPagoBsTdd}
+        options={{
+          title: 'Recarga tarjeta (Paso 2)'
+        }}
+      />
+      <StackPrepagos.Screen
+        key="scrPasarelaPagoBsC2p"
+        name="pasarelaPagoBsC2p"
+        component={PasarelaPagoBsC2p}
+        options={{
+          title: 'Recarga tarjeta (Paso 2)'
+        }}
+      />
     </StackPrepagos.Navigator>
   )
 
