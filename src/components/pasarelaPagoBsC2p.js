@@ -21,7 +21,9 @@ import * as Location from 'expo-location';
 import Constants from 'expo-constants';
 
 const TARJETA_URL = "https://app.cash-flag.com/apis/pasarela/pagoc2p.php?";
-const REPORTE_URL = "https://app.cash-flag.com/apis/v1/socios/prepago?";
+const PREPAGO_URL  = "https://app.cash-flag.com/apis/v1/socios/prepago?";
+const GIFTCARD_URL = "https://app.cash-flag.com/apis/v1/socios/giftcard?";
+let REPORTE_URL = "";
 
 const d = new Date();
 let y = d.getFullYear();
@@ -42,6 +44,13 @@ const PasarelaPagoBsC2p = (params) => {
   const premium = params.route.params.premium;
   const tipopago = params.route.params.tipopago;
   const actLista = params.route.params.actlista;
+  const instrumento = params.route.params.instrumento;
+  
+  const nombres   = (instrumento=='giftcard') ? params.route.params.nombres : "";
+  const apellidos = (instrumento=='giftcard') ? params.route.params.apellidos : "";
+  const telefono  = (instrumento=='giftcard') ? params.route.params.telefono : "";
+  const correo    = (instrumento=='giftcard') ? params.route.params.correo : "";
+  const mensaje   = (instrumento=='giftcard') ? params.route.params.mensaje : "";
 
   const [banco, setBanco] = useState('0000');
   const [phone, setPhone] = useState(null);
@@ -98,16 +107,37 @@ const PasarelaPagoBsC2p = (params) => {
 
   const procesaPago = (arg) => {
     let datos = new FormData();
-    datos.append("email",      arg.email);
-    datos.append("token",      arg.token);
-    datos.append("idcomercio", arg.comercio);
-    datos.append("moneda",     arg.divisa);
-    datos.append("monto",      arg.monto);
-    datos.append("premium",    arg.premium);
-    datos.append("tipopago",   'tarjeta');
-    datos.append("menu",       'socio');
-    datos.append("origen",     arg.origen);
-    datos.append("referencia", arg.referencia);
+    if(instrumento=='prepago') {
+      datos.append("email",      arg.email);
+      datos.append("token",      arg.token);
+      datos.append("idcomercio", arg.comercio);
+      datos.append("moneda",     arg.divisa);
+      datos.append("monto",      arg.monto);
+      datos.append("premium",    arg.premium);
+      datos.append("tipopago",   'tarjeta');
+      datos.append("menu",       'socio');
+      datos.append("origen",     arg.origen);
+      datos.append("referencia", arg.referencia);
+      REPORTE_URL = PREPAGO_URL;
+    } else {
+      datos.append("emailsocio",   arg.email);
+      datos.append("token",        arg.token);
+      datos.append("idcomercio",   arg.comercio);
+      datos.append("nombres",      arg.nombres);
+      datos.append("apellidos",    arg.apellidos);
+      datos.append("telefono",     arg.telefono);
+      datos.append("email",        arg.correo);
+      datos.append("txtemail",     arg.mensaje);
+      datos.append("moneda",       arg.divisa);
+      datos.append("monto",        arg.monto);
+      datos.append("premium",      arg.premium);
+      datos.append("tipopago",     'tarjeta');
+      datos.append("menu",         'socio');
+      datos.append("origen",       arg.origen);
+      datos.append("referencia",   arg.referencia);
+      datos.append("cardcashflag", '');
+      REPORTE_URL = GIFTCARD_URL;
+    }
 
     fetch(REPORTE_URL, {
       method: 'POST',
@@ -306,6 +336,11 @@ const PasarelaPagoBsC2p = (params) => {
                   email: email,
                   token: token,
                   comercio: comercio,
+                  nombres: nombres,
+                  apellidos: apellidos,
+                  telefono: telefono,
+                  correo: correo,
+                  mensaje: mensaje,
                   divisa: divisa,
                   monto: monto,
                   premium: premium,

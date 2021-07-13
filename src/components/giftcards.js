@@ -217,7 +217,8 @@ const Giftcards = (params) => {
                   email: email,
                   token: token,
                   comercios: comercios,
-                  premium: ''
+                  premium: '',
+                  actlista: listRefresh
                 })}
                 /*
                 onSelect={value => {
@@ -236,7 +237,8 @@ const Giftcards = (params) => {
                   email: email,
                   token: token,
                   comercios: comercios,
-                  premium: '1'
+                  premium: '1',
+                  actlista: listRefresh
                 })}
                 /*
                 onSelect={value => {

@@ -399,7 +399,8 @@ const RecargaPremium = (params) => {
                         monto: txtMonto,
                         premium: "1",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                     case 'tdd':
@@ -411,7 +412,8 @@ const RecargaPremium = (params) => {
                         monto: txtMonto,
                         premium: "1",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                     case 'c2p':
@@ -423,7 +425,8 @@ const RecargaPremium = (params) => {
                         monto: txtMonto,
                         premium: "1",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                   }

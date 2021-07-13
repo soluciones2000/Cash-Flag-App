@@ -415,7 +415,8 @@ const RecargaLocal = (params) => {
                         monto: txtMonto,
                         premium: "",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                     case 'tdd':
@@ -427,7 +428,8 @@ const RecargaLocal = (params) => {
                         monto: txtMonto,
                         premium: "",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                     case 'c2p':
@@ -439,7 +441,8 @@ const RecargaLocal = (params) => {
                         monto: txtMonto,
                         premium: "",
                         tipopago: valor,
-                        actlista: actLista
+                        actlista: actLista,
+                        instrumento: 'prepago'
                       })
                     break;
                   }

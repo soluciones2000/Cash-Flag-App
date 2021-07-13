@@ -18,6 +18,7 @@ const BuyGiftcard = (params) => {
   const token = params.route.params.token;
   const comercios = params.route.params.comercios;
   const premium = params.route.params.premium;
+  const actLista = params.route.params.actlista;
   const [txtNombres, settxtNombres] = useState('');
   const [txtApellidos, settxtApellidos] = useState('');
   const [txtTelefono, settxtTelefono] = useState('');
@@ -38,7 +39,8 @@ const BuyGiftcard = (params) => {
           apellidos: txtApellidos,
           telefono: txtTelefono,
           correo: txtEmail,
-          mensaje: txtMsg
+          mensaje: txtMsg,
+          actlista: actLista
         })
       } else {
         navigation.navigate('detGiftcardPremium',{
@@ -49,7 +51,8 @@ const BuyGiftcard = (params) => {
           apellidos: txtApellidos,
           telefono: txtTelefono,
           correo: txtEmail,
-          mensaje: txtMsg
+          mensaje: txtMsg,
+          actlista: actLista
         })
       }
     } else {
