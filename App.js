@@ -342,7 +342,6 @@ export default class CashFlag extends Component {
         options={{
           title: 'Tarjetas de regalo'
         }}
-
       />
       <StackGiftcards.Screen
         key="detGiftcard"
@@ -388,6 +387,30 @@ export default class CashFlag extends Component {
         key="scrRepGiftcard"
         name="repGiftcard"
         component={GiftcardRep}
+        options={{
+          title: 'Comprar Giftcard (Paso 3)'
+        }}
+      />
+      <StackGiftcards.Screen
+        key="scrPasarelaPagoBsTdc"
+        name="pasarelaPagoBsTdc"
+        component={PasarelaPagoBsTdc}
+        options={{
+          title: 'Comprar Giftcard (Paso 3)'
+        }}
+      />
+      <StackGiftcards.Screen
+        key="scrPasarelaPagoBsTdd"
+        name="pasarelaPagoBsTdd"
+        component={PasarelaPagoBsTdd}
+        options={{
+          title: 'Comprar Giftcard (Paso 3)'
+        }}
+      />
+      <StackGiftcards.Screen
+        key="scrPasarelaPagoBsC2p"
+        name="pasarelaPagoBsC2p"
+        component={PasarelaPagoBsC2p}
         options={{
           title: 'Comprar Giftcard (Paso 3)'
         }}
