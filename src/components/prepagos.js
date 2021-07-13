@@ -219,7 +219,8 @@ const Prepagos = (params) => {
                 onSelect={value => navigation.navigate('recLocal', {
                   email: email,
                   token: token,
-                  comercios: comercios
+                  comercios: comercios,
+                  actlista: listRefresh
                 })}
               />
               <MenuOption
@@ -227,7 +228,8 @@ const Prepagos = (params) => {
                 text='Tarjeta Premium'
                 onSelect={value => navigation.navigate('recPremium', {
                   email: email,
-                  token: token
+                  token: token,
+                  actlista: listRefresh
                 })}
               />
               <MenuOption

@@ -111,6 +111,7 @@ const RecargaLocal = (params) => {
   const email = params.route.params.email;
   const token = params.route.params.token;
   const comercios = params.route.params.comercios
+  const actLista = params.route.params.actlista;
   const [txtComercio, settxtComercio] = useState(0);
   const [txtMoneda, settxtMoneda] = useState('bs');
   const [txtMonto, settxtMonto] = useState(null);
@@ -413,7 +414,8 @@ const RecargaLocal = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                     case 'tdd':
@@ -424,7 +426,8 @@ const RecargaLocal = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                     case 'c2p':
@@ -435,7 +438,8 @@ const RecargaLocal = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                   }

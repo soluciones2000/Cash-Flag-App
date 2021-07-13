@@ -110,6 +110,7 @@ const RecargaPremium = (params) => {
   const navigation = params.navigation;
   const email = params.route.params.email;
   const token = params.route.params.token;
+  const actLista = params.route.params.actlista;
   const [txtComercio] = useState(3);
   const [txtMoneda, settxtMoneda] = useState('bs');
   const [txtMonto, settxtMonto] = useState(null);
@@ -397,7 +398,8 @@ const RecargaPremium = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "1",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                     case 'tdd':
@@ -408,7 +410,8 @@ const RecargaPremium = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "1",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                     case 'c2p':
@@ -419,7 +422,8 @@ const RecargaPremium = (params) => {
                         divisa: txtMoneda,
                         monto: txtMonto,
                         premium: "1",
-                        tipopago: valor
+                        tipopago: valor,
+                        actlista: actLista
                       })
                     break;
                   }

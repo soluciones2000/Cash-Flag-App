@@ -27,8 +27,8 @@ let y = d.getFullYear();
 let x = d.getMonth()+1;
 let m = (x<10) ? "0"+x : x ;
 
-let latitude="";
-let longitude="";
+let latitude=0;
+let longitude=0;
 let browserAgent="";
 
 const PasarelaPagoBsTdc = (params) => {
@@ -40,6 +40,7 @@ const PasarelaPagoBsTdc = (params) => {
   const monto = params.route.params.monto;
   const premium = params.route.params.premium;
   const tipopago = params.route.params.tipopago;
+  const actLista = params.route.params.actlista;
 
   const [card, setCard] = useState(null);
   const [vencimiento, setVencimiento] = useState(m+'/'+y);
@@ -125,6 +126,7 @@ const PasarelaPagoBsTdc = (params) => {
         setVencimiento(m+'/'+y);
         setCvv(null);
         setCedula(null);
+        actLista();
         navigation.popToTop();
       } else {
         Alert.alert(
@@ -282,7 +284,7 @@ const PasarelaPagoBsTdc = (params) => {
             .then((response) => response.json())
             .then((responseData) => {
               console.log('mensaje',responseData.mensaje);
-              console.log('reponse',responseData.response);
+              console.log('response',responseData.response);
               console.log('err',responseData.err);
 
               if(responseData.exito=="SI") {

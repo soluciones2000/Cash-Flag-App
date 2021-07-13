@@ -29,7 +29,7 @@ let x = d.getMonth()+1;
 let m = (x<10) ? "0"+x : x ;
 
 let latitude=0;
-let longitude=0;
+let longitude=0
 let browserAgent="";
 
 const PasarelaPagoBsC2p = (params) => {
@@ -41,6 +41,7 @@ const PasarelaPagoBsC2p = (params) => {
   const monto = params.route.params.monto;
   const premium = params.route.params.premium;
   const tipopago = params.route.params.tipopago;
+  const actLista = params.route.params.actlista;
 
   const [banco, setBanco] = useState('0000');
   const [phone, setPhone] = useState(null);
@@ -82,16 +83,12 @@ const PasarelaPagoBsC2p = (params) => {
       );
     }
 
-    let { coords } = await Location.getCurrentPositionAsync({});
-    console.log('coords',coords);
-    console.log('despues');
+    let { coords } = await Location.getCurrentPositionAsync();
 
     if (coords) {
       latitude = coords.latitude;
       longitude = coords.longitude;
     }
-    console.log('latitude',latitude);
-    console.log('longitude',longitude);
   };
 
   const GetWebViewUserAgent = async () => {
@@ -130,6 +127,7 @@ const PasarelaPagoBsC2p = (params) => {
         setPhone(null);
         setCedula(null);
         setClave(null);
+        actLista();
         navigation.popToTop();
       } else {
         Alert.alert(
@@ -277,12 +275,12 @@ const PasarelaPagoBsC2p = (params) => {
             borderRadius: 10
           }}
           onPress={() => {
-            console.log('entró');
             let datos = new FormData();
             datos.append("codigobanco",    banco);
             datos.append("telefonoorigen", phone);
             datos.append("cedulac2p",      cedula);
             datos.append("monto",          monto);
+            datos.append("clavedecompra",  clave);
             datos.append("browser",        browserAgent);
             datos.append("mobile",         "true");
             datos.append("manufacturer",   Device.manufacturer);
@@ -291,17 +289,16 @@ const PasarelaPagoBsC2p = (params) => {
             datos.append("latitude",       latitude);
             datos.append("longitude",      longitude);
 
-            console.log(datos);
-
             fetch(TARJETA_URL, {
               method: 'POST',
               body: datos
             })
             .then((response) => response.json())
             .then((responseData) => {
-              console.log('mensaje',responseData.mensaje);
-              console.log('reponse',responseData.response);
-              console.log('err',responseData.err);
+              console.log(responseData);
+              // console.log('mensaje',responseData.mensaje);
+              // console.log('reponse',responseData.response);
+              // console.log('err',responseData.err);
 
               if(responseData.exito=="SI") {
                 let referencia = responseData.referencia;
