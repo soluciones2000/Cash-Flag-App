@@ -39,7 +39,12 @@ const LoginScreen = (params) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalViewTransfCupon}>
-            <Text allowFontScaling={false} style={styles.text}>
+            <Text
+              allowFontScaling={false}
+              style={{
+                fontSize: 20,
+                textAlign: "center"
+              }}>
                 Introduce tu email
             </Text>
             <TextInput style={styles.textinput}
@@ -95,7 +100,7 @@ const LoginScreen = (params) => {
       </Modal>
       <View style={{alignItems: "center"}}>
         <Image style={styles.imagepeq}
-          source={{uri: 'https://app.cash-flag.com/img/logoclub.png'}}
+          source={{uri: 'https://app.cash-flag.com/img/logo_gold.png'}}
         />
       </View>
       <Text allowFontScaling={false} style={styles.text}>
@@ -135,7 +140,7 @@ const LoginScreen = (params) => {
           setModalVisible(!modalVisible);
         }}
       >
-        <Text allowFontScaling={false} style={{margin: 10}}>
+        <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
           Olvidaste tu Password
         </Text>
       </TouchableOpacity>
@@ -144,7 +149,7 @@ const LoginScreen = (params) => {
           newUser()
         }}
       >
-        <Text allowFontScaling={false} style={{margin: 10}}>
+        <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
           Si eres usuario nuevo ingresa aquí
         </Text>
       </TouchableOpacity>
@@ -156,7 +161,8 @@ const LoginScreen = (params) => {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#fff',
+      // backgroundColor: '#fff',
+      backgroundColor: 'rgba(3,44,98,1)',
       alignItems: 'center',
       justifyContent: 'center',
     },  
@@ -186,11 +192,14 @@ const styles = StyleSheet.create({
     },
     imagepeq: {
      width: 214,
-     height: 120
+     height: 100,
+     marginBottom: 10,
+     resizeMode: 'stretch'
    },
    text: {
      fontSize: 20,
-     textAlign: "center"
+     textAlign: "center",
+     color: "white"
    },
    textinput: {
       height: 40,

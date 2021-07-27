@@ -7,7 +7,7 @@ import {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'rgba(3,44,98,1)',
       alignItems: 'center',
       justifyContent: 'center',
     },  
@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
    },
    text: {
      fontSize: 20,
-     textAlign: "center"
+     textAlign: "center",
+     color: "white"
    },
    textinput: {
       height: 40,

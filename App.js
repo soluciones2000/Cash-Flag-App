@@ -173,10 +173,10 @@ export default class CashFlag extends Component {
     return (
     <TabPrincipal.Navigator
       tabBarOptions={{
-        activeTintColor: "white",
-        activeBackgroundColor: "black",
-        inactiveTintColor: "blue",
-        inactiveBackgroundColor: "white"
+        activeTintColor: "rgba(1,43,103,1)",
+        activeBackgroundColor: "lightgray",
+        inactiveTintColor: "white",
+        inactiveBackgroundColor: "lightgray"
       }}
     >
       <TabPrincipal.Screen
@@ -234,7 +234,14 @@ export default class CashFlag extends Component {
         name="Cupones"
         component={this.scrCupones}
         options={{
-          title: 'Recompensas'
+          title: 'Recompensas',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackCupones.Screen
@@ -242,7 +249,14 @@ export default class CashFlag extends Component {
         name="newCupon"
         component={NewCupon}
         options={{
-          title: 'Reclamar Recompensa'
+          title: 'Reclamar Recompensa',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackCupones.Screen
@@ -250,7 +264,14 @@ export default class CashFlag extends Component {
         name="Cupon"
         component={DetalleCupon}
         options={{
-          title: 'Cupón de Recompensa'
+          title: 'Cupon de Recompensa',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
     </StackCupones.Navigator>
@@ -263,7 +284,14 @@ export default class CashFlag extends Component {
         name="Prepagos"
         component={this.scrPrepagos}
         options={{
-          title: 'Tarjetas prepagadas'
+          title: 'Tarjetas prepagadas',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -271,7 +299,14 @@ export default class CashFlag extends Component {
         name="Prepaids"
         component={PrepaidCard}
         options={{
-          title: 'Tarjeta Prepagada'
+          title: 'Tarjeta Prepagada',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -279,7 +314,14 @@ export default class CashFlag extends Component {
         name="PrPremium"
         component={PrPremiumCard}
         options={{
-          title: 'Tarjeta Prepagada'
+          title: 'Tarjeta Prepagada',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -287,7 +329,14 @@ export default class CashFlag extends Component {
         name="recLocal"
         component={LocalRec}
         options={{
-          title: 'Recarga tarjeta (Paso 1)'
+          title: 'Recarga tarjeta (Paso 1)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -295,7 +344,14 @@ export default class CashFlag extends Component {
         name="recPremium"
         component={PremiumRec}
         options={{
-          title: 'Recarga tarjeta (Paso 1)'
+          title: 'Recarga tarjeta (Paso 1)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -303,7 +359,14 @@ export default class CashFlag extends Component {
         name="reporte"
         component={ReportePago}
         options={{
-          title: 'Recarga tarjeta (Paso 2)'
+          title: 'Recarga tarjeta (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -311,7 +374,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsTdc"
         component={PasarelaPagoBsTdc}
         options={{
-          title: 'Recarga tarjeta (Paso 2)'
+          title: 'Recarga tarjeta (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -319,7 +389,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsTdd"
         component={PasarelaPagoBsTdd}
         options={{
-          title: 'Recarga tarjeta (Paso 2)'
+          title: 'Recarga tarjeta (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackPrepagos.Screen
@@ -327,7 +404,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsC2p"
         component={PasarelaPagoBsC2p}
         options={{
-          title: 'Recarga tarjeta (Paso 2)'
+          title: 'Recarga tarjeta (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
     </StackPrepagos.Navigator>
@@ -340,7 +424,14 @@ export default class CashFlag extends Component {
         name="Giftcards"
         component={this.scrGiftcards}
         options={{
-          title: 'Tarjetas de regalo'
+          title: 'Tarjetas de regalo',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -348,7 +439,14 @@ export default class CashFlag extends Component {
         name="Gift_Card"
         component={Gift_Card}
         options={{
-          title: 'Tarjeta de regalo'
+          title: 'Tarjeta de regalo',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -356,7 +454,14 @@ export default class CashFlag extends Component {
         name="GcPremium"
         component={GcPremiumCard}
         options={{
-          title: 'Tarjeta de regalo'
+          title: 'Tarjeta de regalo',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -364,7 +469,14 @@ export default class CashFlag extends Component {
         name="buyGiftcard"
         component={BuyGiftcard}
         options={{
-          title: 'Comprar Giftcard (Paso 1)'
+          title: 'Comprar Giftcard (Paso 1)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -372,7 +484,14 @@ export default class CashFlag extends Component {
         name="detGiftcardLocal"
         component={LocalGiftDet}
         options={{
-          title: 'Comprar Giftcard (Paso 2)'
+          title: 'Comprar Giftcard (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -380,7 +499,14 @@ export default class CashFlag extends Component {
         name="detGiftcardPremium"
         component={PremiumGiftDet}
         options={{
-          title: 'Comprar Giftcard (Paso 2)'
+          title: 'Comprar Giftcard (Paso 2)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -388,7 +514,14 @@ export default class CashFlag extends Component {
         name="repGiftcard"
         component={GiftcardRep}
         options={{
-          title: 'Comprar Giftcard (Paso 3)'
+          title: 'Comprar Giftcard (Paso 3)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -396,7 +529,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsTdc"
         component={PasarelaPagoBsTdc}
         options={{
-          title: 'Comprar Giftcard (Paso 3)'
+          title: 'Comprar Giftcard (Paso 3)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -404,7 +544,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsTdd"
         component={PasarelaPagoBsTdd}
         options={{
-          title: 'Comprar Giftcard (Paso 3)'
+          title: 'Comprar Giftcard (Paso 3)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
       <StackGiftcards.Screen
@@ -412,7 +559,14 @@ export default class CashFlag extends Component {
         name="pasarelaPagoBsC2p"
         component={PasarelaPagoBsC2p}
         options={{
-          title: 'Comprar Giftcard (Paso 3)'
+          title: 'Comprar Giftcard (Paso 3)',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          }
         }}
       />
     </StackGiftcards.Navigator>

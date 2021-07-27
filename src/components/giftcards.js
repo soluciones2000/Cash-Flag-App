@@ -54,7 +54,7 @@ const Giftcards = (params) => {
         data={data}
         renderItem={({ item, index }) => (          
           <View style={{
-              backgroundColor: 'lightblue',
+              // backgroundColor: '#ffd700',
               height: 90,
               paddingTop: 5,
               paddingBottom: 5
@@ -145,7 +145,7 @@ const Giftcards = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -153,7 +153,7 @@ const Giftcards = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -161,7 +161,7 @@ const Giftcards = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -212,7 +212,6 @@ const Giftcards = (params) => {
             <MenuOptions customStyles={optionsStyles}>
               <MenuOption
                 value={1}
-                text='Tarjeta Local'
                 onSelect={value => navigation.navigate('buyGiftcard', {
                   email: email,
                   token: token,
@@ -220,19 +219,16 @@ const Giftcards = (params) => {
                   premium: '',
                   actlista: listRefresh
                 })}
-                /*
-                onSelect={value => {
-                  console.log(`Selected number: ${value}`)
-                  Alert.alert(
-                    "Ups, algo salió mal",
-                    "Esta opción está temporalmente deshabilitada"
-                  );              
-                }}
-                */
-              />
+              >
+                <Text style={{
+                    color: 'white',
+                    fontWeight: 'bold'
+                }}>
+                  Tarjeta Local
+                </Text>
+              </MenuOption>
               <MenuOption
                 value={2}
-                text='Tarjeta Premium'
                 onSelect={value => navigation.navigate('buyGiftcard', {
                   email: email,
                   token: token,
@@ -240,22 +236,20 @@ const Giftcards = (params) => {
                   premium: '1',
                   actlista: listRefresh
                 })}
-                /*
-                onSelect={value => {
-                  console.log(`Selected number: ${value}`)
-                  Alert.alert(
-                    "Ups, algo salió mal",
-                    "Esta opción está temporalmente deshabilitada"
-                  );              
-                }}
-                */
-              />
+              >
+                <Text style={{
+                    color: 'white',
+                    fontWeight: 'bold'
+                }}>
+                  Tarjeta Premium
+                </Text>
+              </MenuOption>
               <MenuOption
                 style={{
                   marginVertical: 5,
                   marginRight: 5,
                   padding: 10,
-                  backgroundColor: 'white',
+                  backgroundColor: 'red',
                   borderRadius: 10,
                   shadowColor: "black",
                   shadowOffset: {width: 2, height: 2},
@@ -263,9 +257,15 @@ const Giftcards = (params) => {
                   textAlign: 'center'
                 }}
                 value={0}
-                text='Cerrar'
                 onSelect={value => console.log(`Selected number: ${value}`)}
-              />
+              >
+                <Text style={{
+                    color: 'white',
+                    fontWeight: 'bold'
+                }}>
+                  Cerrar
+                </Text>
+              </MenuOption>
             </MenuOptions>
           </Menu>
         </MenuProvider>
@@ -286,7 +286,7 @@ const optionsStyles = {
     marginVertical: 5,
     marginRight: 5,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     borderRadius: 10,
     shadowColor: "black",
     shadowOffset: {width: 2, height: 2},

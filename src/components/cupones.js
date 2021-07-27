@@ -41,7 +41,7 @@ const Cupones = (params) => {
   const renderItem = ({item, index}) => {    
     return (
     <View style={{
-        backgroundColor: 'lightblue',
+        // backgroundColor: 'lightgray',
         height: 90,
         paddingTop: 5,
         paddingBottom: 5
@@ -119,7 +119,7 @@ const Cupones = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -127,7 +127,7 @@ const Cupones = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -135,7 +135,7 @@ const Cupones = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -158,16 +158,8 @@ const Cupones = (params) => {
             actlista: listRefresh
           });
         }}
-        /*        
-        onPress={() => { 
-          Alert.alert(
-            "Ups, algo salió mal",
-            "Esta opción está temporalmente deshabilitada"
-          );              
-        }}
-        */
       >
-        <Text style={{fontWeight: 'bold', color: 'white'}}>GENERAR CUPON</Text>
+        <Text style={{fontWeight: 'bold', color: 'white'}}>Generar Cupón</Text>
       </TouchableOpacity>
     </View>
   )

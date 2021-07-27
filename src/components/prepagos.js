@@ -55,7 +55,7 @@ const Prepagos = (params) => {
         data={data}
         renderItem={({ item, index }) => (  
           <View style={{
-              backgroundColor: 'lightblue',
+              // backgroundColor: 'rgba(19,121,187,255)',
               height: 90,
               paddingTop: 5,
               paddingBottom: 5
@@ -148,7 +148,7 @@ const Prepagos = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -156,7 +156,7 @@ const Prepagos = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -164,7 +164,7 @@ const Prepagos = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'black',
+              backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -215,39 +215,58 @@ const Prepagos = (params) => {
             <MenuOptions customStyles={optionsStyles}>
               <MenuOption
                 value={1}
-                text='Tarjeta Local'
                 onSelect={value => navigation.navigate('recLocal', {
                   email: email,
                   token: token,
                   comercios: comercios,
                   actlista: listRefresh
                 })}
-              />
+              >
+                <Text style={{
+                  color: 'white',
+                  fontWeight: 'bold'
+                }}>
+                  Tarjeta Local
+                </Text>
+              </MenuOption>
               <MenuOption
                 value={2}
-                text='Tarjeta Premium'
                 onSelect={value => navigation.navigate('recPremium', {
                   email: email,
                   token: token,
                   actlista: listRefresh
                 })}
-              />
+              >
+                <Text style={{
+                    color: 'white',
+                    fontWeight: 'bold'
+                }}>
+                  Tarjeta Premium
+                </Text>
+              </MenuOption>
               <MenuOption
                 style={{
                   marginVertical: 5,
                   marginRight: 5,
                   padding: 10,
-                  backgroundColor: 'white',
+                  backgroundColor: 'red',
                   borderRadius: 10,
                   shadowColor: "black",
                   shadowOffset: {width: 2, height: 2},
                   shadowOpacity: 0.5,
-                  textAlign: 'center'
+                  textAlign: 'center',
+                  color: 'white'
                 }}
                 value={0}
-                text='Cerrar'
                 onSelect={value => console.log(`Selected number: ${value}`)}
-              />
+              >
+                <Text style={{
+                  color: 'white',
+                  fontWeight: 'bold'
+                }}>
+                  Cerrar
+                </Text>
+              </MenuOption>
             </MenuOptions>
           </Menu>
         </MenuProvider>
@@ -269,7 +288,7 @@ const optionsStyles = {
     marginVertical: 5,
     marginRight: 5,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: 'red',
     borderRadius: 10,
     shadowColor: "black",
     shadowOffset: {width: 2, height: 2},
