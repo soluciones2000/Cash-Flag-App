@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 const USER_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
 const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
+const IMG_URL = "https://app.cash-flag.com/apis/v1/comercios/imgs";
 
 const styles = require('./src/components/styles');
 
@@ -53,12 +54,18 @@ export default class CashFlag extends Component {
       oComercios: [],
       socio: '',
       email: '',
-      token: ''
+      token: '',
+      aImgs: []
     };
+  }
+
+  componentDidMount() {
+    this.fetchImg()
   }
 
   txtEmail = '';
   txtPregunta = '';
+  // aImgs = [];
 
   actualizastate = (parametros) => {
     this.fetchUser(parametros.txtUser,parametros.txtPass);
@@ -112,6 +119,14 @@ export default class CashFlag extends Component {
     });
   };
 
+  async fetchImg() {
+    await fetch(IMG_URL)
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({ aImgs: responseData.imgs});
+    });
+  }
+
   async fetchUser(u,p) {
     if(this.state.isLogged==false) {
       await fetch(USER_URL+"email="+u+"&password="+p)
@@ -125,7 +140,7 @@ export default class CashFlag extends Component {
       })         
     }
   }
- 
+
   async fetchData(u,t) {
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
     .then((response) => response.json())
@@ -585,9 +600,12 @@ export default class CashFlag extends Component {
       token: ''
     });
     return (
-    <Login 
-      datos={this.actualizastate}
-    />
+      <Login 
+        datos={this.actualizastate}
+        resetPwd={this.resetPwd}
+        newUser={this.newUser}
+        imgs={this.state.aImgs}
+      />
     )
   }
 
@@ -662,6 +680,7 @@ export default class CashFlag extends Component {
                 datos={this.actualizastate}
                 resetPwd={this.resetPwd}
                 newUser={this.newUser}
+                imgs={this.state.aImgs}
               />
             </View>
           );
