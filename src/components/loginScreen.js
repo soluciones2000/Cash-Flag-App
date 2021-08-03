@@ -28,7 +28,14 @@ const LoginScreen = (params) => {
   const [txtUser, settxtUser] = useState('');
   const [txtPass, settxtPass] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
   const [txtEmail, settxtEmail] = useState('')
+
+  const enviar = () => {
+    setModalVisible2(!modalVisible2);
+    actualizastate({txtUser,txtPass});    
+    setModalVisible2(!modalVisible2);
+  };
   
   const renderItem = ({item}) => {
     return (
@@ -124,8 +131,19 @@ const LoginScreen = (params) => {
           </View>
         </View>
       </Modal>
+      <Modal
+        transparent={true}
+        visible={modalVisible2}
+        onRequestClose={() => {
+          setModalVisible2(!modalVisible2);
+        }}
+      >
+        <View style={{flex: 1, backgroundColor: "rgba(0,0,0,0.5)", justifyContent: "center"}}>
+          <ActivityIndicator size="large" color="white" />
+        </View>
+      </Modal>
       <View style={styles.container2}>
-        <View style={{alignItems: "center", marginTop: 30}}>
+        <View style={{alignItems: "center", marginTop: 50}}>
           <Image style={styles.imagepeq}
             source={{uri: 'https://app.cash-flag.com/img/logo_gold.png'}}
           />
@@ -154,7 +172,8 @@ const LoginScreen = (params) => {
         <TouchableOpacity 
           style={styles.boton}
           onPress={() => {
-            actualizastate({txtUser,txtPass})
+            // actualizastate({txtUser,txtPass})
+            enviar(txtUser,txtPass);
           }}
         >
           <Text allowFontScaling={false} style={styles.textoboton}>
