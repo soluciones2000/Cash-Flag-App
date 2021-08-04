@@ -12,7 +12,6 @@ import {
    Modal,
    Dimensions
 } from 'react-native';
-import { Picker} from '@react-native-picker/picker';
 
 const REPORTE_URL = "https://app.cash-flag.com/apis/v1/socios/prepago?";
 
@@ -75,8 +74,9 @@ const Reporte = (params) => {
       />
       <View style={{
         flexDirection: "row",
-        wdith: '100%',
-        marginBottom: 20
+        width: '100%',
+        marginBottom: 20,
+        justifyContent: 'center'
       }}>
         <TouchableOpacity 
           style={{

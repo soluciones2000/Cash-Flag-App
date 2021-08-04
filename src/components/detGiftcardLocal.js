@@ -15,6 +15,19 @@ import {
 import { Picker} from '@react-native-picker/picker';
 import RadioButtonRN from 'radio-buttons-react-native';
 
+const datos = [
+  {label: 'T. de Crédito (nacional o internac.)', value: 'tdc' },
+  {label: 'T. de Débito (sólo Bco. Mercantil)', value: 'tdd' },
+  {label: 'Pago movil C2P', value: 'c2p' }
+];
+let valor = 1;
+
+const datos2 = [
+  {label: 'Zelle',  value: 'zelle' },
+  {label: 'UPHOLD', value: 'uphold' },
+];
+let valor2 = 1;
+
 const Aviso = (param) => {
   if(param.moneda=='bs') {
     return (
@@ -38,34 +51,46 @@ const Aviso = (param) => {
     ) 
   } else {
     return (
-      <Text allowFontScaling={false} style={styles.parrafoSmall}>
-        Instrucciones para pagar en USD:{"\n"}{"\n"}
-        <Text style={{textDecorationLine: 'underline'}}>
-          ZELLE:
-        </Text>{"\n"}
-        Debe ingresar en la opción pago en linea{"\n"}
-        Seleccionar pagar con Net24-7{"\n"}
-        Al solicitar forma de pago seleccione Zelle{"\n"}
-        Seguir las instrucciones{"\n"}
-        {"\n"}
-        <Text style={{textDecorationLine: 'underline'}}>
-          UPHOLD:
-        </Text>{"\n"}
-        Enviar fondos a: sgcvzla@gmail.com{"\n"}{"\n"}
-        <Text style={{fontWeight: 'bold', color: 'red'}}>
-          Ten en cuenta que los reportes de pago pueden tardar hasta 24 horas hábiles en confirmarse.
+      <View>
+        <Text allowFontScaling={false} style={styles.parrafoSmall}>
+          {"\n"}Instrucciones para pagar en USD:{"\n"}{"\n"}
+          <Text style={{textDecorationLine: 'underline'}}>
+            ZELLE:
+          </Text>{"\n"}
+          Enviar fondos a: vivo@zelle247.com{"\n"}
+          <Text style={{fontWeight: 'bold'}}>
+            Esta transacción se confirmará en linea al reportar el pago.
+          </Text>
+          {"\n"}{"\n"}
+          <Text style={{textDecorationLine: 'underline'}}>
+            UPHOLD:
+          </Text>{"\n"}
+          Enviar fondos a: sgcvzla@gmail.com{"\n"}
+          <Text style={{fontWeight: 'bold'}}>
+            Esta transacción puede tardar hasta 24 horas hábiles en confirmarse.
+          </Text>
+          {"\n"}
         </Text>
-      </Text>
+        <View>
+          <Text style={{textDecorationLine: 'underline'}}>
+            Seleciona tu medio de pago:
+          </Text>
+          <RadioButtonRN
+            style={{ width: '90%', marginBottom: 10 }}
+            data={datos2}
+            initial={1}
+            selectedBtn={(e) => {
+              valor2 = e.value;
+            }}
+            circleSize={11}
+            textStyle={{fontSize: 15}}
+            box={false}
+          />
+        </View>
+      </View>
     )
   }
 }
-
-const datos = [
-  {label: 'T. de Crédito (nacional o internac.)', value: 'tdc' },
-  {label: 'T. de Débito (sólo Bco. Mercantil)', value: 'tdd' },
-  {label: 'Pago movil C2P', value: 'c2p' }
-];
-let valor = 1;
 
 const PagoEnLinea = (param) => {
   if(param.moneda=='bs') {
@@ -84,24 +109,40 @@ const PagoEnLinea = (param) => {
     )
   } else {
     return (
-      <Text allowFontScaling={false} style={styles.parrafoSmall}>
-        Instrucciones para pagar en USD:{"\n"}{"\n"}
-        <Text style={{textDecorationLine: 'underline'}}>
-          ZELLE:
-        </Text>{"\n"}
-        Debe ingresar en la opción pago en linea{"\n"}
-        Seleccionar pagar con Net24-7{"\n"}
-        Al solicitar forma de pago seleccione Zelle{"\n"}
-        Seguir las instrucciones{"\n"}
-        {"\n"}
-        <Text style={{textDecorationLine: 'underline'}}>
-          UPHOLD:
-        </Text>{"\n"}
-        Enviar fondos a: sgcvzla@gmail.com{"\n"}{"\n"}
-        <Text style={{fontWeight: 'bold', color: 'red'}}>
-          Ten en cuenta que los reportes de pago pueden tardar hasta 24 horas hábiles en confirmarse.
+      <View>
+        <Text allowFontScaling={false} style={styles.parrafoSmall}>
+          {"\n"}Instrucciones para pagar en USD:{"\n"}{"\n"}
+          <Text style={{textDecorationLine: 'underline'}}>
+            ZELLE:
+          </Text>{"\n"}
+          Enviar fondos a: vivo@zelle247.com{"\n"}
+          <Text style={{fontWeight: 'bold'}}>
+            Esta transacción se confirmará en linea al reportar el pago.
+          </Text>
+          {"\n"}{"\n"}
+          <Text style={{textDecorationLine: 'underline'}}>
+            UPHOLD:
+          </Text>{"\n"}
+          Enviar fondos a: sgcvzla@gmail.com{"\n"}
+          <Text style={{fontWeight: 'bold'}}>
+            Esta transacción puede tardar hasta 24 horas hábiles en confirmarse.
+          </Text>
+          {"\n"}
         </Text>
-      </Text>
+        <View style={{ backgroundColor: 'yellow' }}>
+          <RadioButtonRN
+            style={{ width: '90%', marginVertical: 5 }}
+            data={datos2}
+            initial={1}
+            selectedBtn={(e) => {
+              valor = e.value;
+            }}
+            circleSize={11}
+            textStyle={{fontSize: 15}}
+            box={false}
+          />
+        </View>
+      </View>
     )
   }
 }
@@ -331,19 +372,52 @@ const DetGiftcardLocal = (params) => {
                 }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                  navigation.navigate('repGiftcard',{
-                    email: email,
-                    token: token,
-                    comercio: txtComercio,
-                    divisa: txtMoneda,
-                    monto: txtMonto,
-                    premium: "",
-                    nombres: nombres,
-                    apellidos: apellidos,
-                    telefono: telefono,
-                    correo: correo,
-                    mensaje: mensaje
-                  })
+                  if (txtMoneda=='bs') {
+                    navigation.navigate('repGiftcard',{
+                      email: email,
+                      token: token,
+                      comercio: txtComercio,
+                      divisa: txtMoneda,
+                      monto: txtMonto,
+                      premium: "",
+                      nombres: nombres,
+                      apellidos: apellidos,
+                      telefono: telefono,
+                      correo: correo,
+                      mensaje: mensaje
+                    })
+                    } else {
+                    if (valor2=='zelle') {
+                      navigation.navigate('repZelleGiftcard',{
+                        email: email,
+                        token: token,
+                        comercio: txtComercio,
+                        divisa: txtMoneda,
+                        monto: txtMonto,
+                        premium: "",
+                        nombres: nombres,
+                        apellidos: apellidos,
+                        telefono: telefono,
+                        correo: correo,
+                        mensaje: mensaje,
+                        actlista: actLista
+                      })
+                    } else {
+                      navigation.navigate('repGiftcard',{
+                        email: email,
+                        token: token,
+                        comercio: txtComercio,
+                        divisa: txtMoneda,
+                        monto: txtMonto,
+                        premium: "",
+                        nombres: nombres,
+                        apellidos: apellidos,
+                        telefono: telefono,
+                        correo: correo,
+                        mensaje: mensaje
+                      })
+                    }
+                  }
                 }}
               >
                 <Text 
