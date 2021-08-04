@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   Alert,
   Modal,
-  Dimensions
+  ActivityIndicator
 } from 'react-native';
 import { Picker} from '@react-native-picker/picker';
 import RadioButtonRN from 'radio-buttons-react-native';
@@ -227,10 +227,21 @@ const DetGiftcardPremium = (params) => {
             if(txtMoneda=='bs') {
               setModalVisible2(!modalVisible2);
             } else {
-              Alert.alert(
-                "Ups, algo salió mal",
-                "Esta opción está temporalmente deshabilitada"
-              );
+              navigation.navigate('pasarelaPagoDolarTdc',{
+                email: email,
+                token: token,
+                comercio: txtComercio,
+                divisa: txtMoneda,
+                monto: txtMonto,
+                premium: "1",
+                nombres: nombres,
+                apellidos: apellidos,
+                telefono: telefono,
+                correo: correo,
+                mensaje: mensaje,
+                actlista: actLista,
+                instrumento: 'giftcard'
+              });
             }
           }}
         >
