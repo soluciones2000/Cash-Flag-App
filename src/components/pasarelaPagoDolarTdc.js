@@ -102,7 +102,7 @@ const PasarelaPagoDolarTdc = (params) => {
                premium: premium,
                tipopago: tipopago,
                menu: 'socio',
-               origen: 'net247',
+               origen: 'vivo',
                referencia: referencia
             });
          } else {

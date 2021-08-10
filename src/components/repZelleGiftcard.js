@@ -181,7 +181,7 @@ const RepZelleGiftcard = (params) => {
                   borderRadius: 10
                }}
                onPress={() => {
-                  setOrigen('');
+                  // setOrigen('');
                   setReferencia('');
                }}
             >
