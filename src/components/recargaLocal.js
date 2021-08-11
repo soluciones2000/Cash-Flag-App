@@ -223,6 +223,18 @@ const RecargaLocal = (params) => {
         maxLength={20}
         placeholder='0.00'
       />
+      <Text
+        allowFontScaling={false}
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+          textAlign: "center",
+          marginVertical: 10
+        }}
+      >
+        Este producto tiene un costo para el usuario del 5% sobre el monto de la transacción cuando se realiza en dólares.
+      </Text>
+
       <View style={{
         flexDirection: "row",
         wdith: '100%',

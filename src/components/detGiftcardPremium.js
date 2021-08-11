@@ -208,6 +208,18 @@ const DetGiftcardPremium = (params) => {
         maxLength={20}
         placeholder='0.00'
       />
+      <Text
+        allowFontScaling={false}
+        style={{
+          fontSize: 15,
+          fontWeight: 'bold',
+          textAlign: "center",
+          marginVertical: 10
+        }}
+      >
+        Este producto tiene un costo para el usuario del 8% sobre el monto de la transacción cuando se realiza en dólares, si se realiza en Bs. el costo será de 3%.
+      </Text>
+
       <View style={{
         flexDirection: "row",
         wdith: '100%',

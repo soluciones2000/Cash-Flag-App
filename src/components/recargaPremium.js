@@ -59,7 +59,7 @@ const Aviso = (param) => {
           </Text>{"\n"}
           Enviar fondos a: vivo@zelle247.com{"\n"}
           <Text style={{fontWeight: 'bold'}}>
-            Esta transacción se confirmará en linea al reportar el pago.
+            Esta transacción se confirmará en linea al reportar el pago. 
           </Text>
           {"\n"}{"\n"}
           <Text style={{textDecorationLine: 'underline'}}>
@@ -211,7 +211,7 @@ const RecargaPremium = (params) => {
           marginVertical: 10
         }}
       >
-        Este producto tiene un costo para el usuario del 3% sobre el monto de la transacción
+        Este producto tiene un costo para el usuario del 8% sobre el monto de la transacción cuando se realiza en dólares, si se realiza en Bs. el costo será de 3%.
       </Text>
 
       <View style={{
