@@ -258,24 +258,44 @@ const DetGiftcardLocal = (params) => {
             borderRadius: 10
           }}
           onPress={() => {
-            if(txtMoneda=='bs') {
-              setModalVisible2(!modalVisible2);
+            let xVar = 0;
+            if(txtMonto==0 || txtMonto==null) { xVar = 2 }
+            if(xVar>0) {
+              switch(xVar) {
+                case 2:
+                  Alert.alert(
+                    "Éxito",
+                    "Debes indicar un monto"
+                  );              
+                break;
+              }
             } else {
-              navigation.navigate('pasarelaPagoDolarTdc',{
-                email: email,
-                token: token,
-                comercio: txtComercio,
-                divisa: txtMoneda,
-                monto: txtMonto,
-                premium: "",
-                nombres: nombres,
-                apellidos: apellidos,
-                telefono: telefono,
-                correo: correo,
-                mensaje: mensaje,
-                actlista: actLista,
-                instrumento: 'giftcard'
-              });
+              if(txtMoneda=='bs') {
+                setModalVisible2(!modalVisible2);
+              } else {
+                if (txtMonto>=10) {                
+                  navigation.navigate('pasarelaPagoDolarTdc',{
+                    email: email,
+                    token: token,
+                    comercio: txtComercio,
+                    divisa: txtMoneda,
+                    monto: txtMonto,
+                    premium: "",
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    telefono: telefono,
+                    correo: correo,
+                    mensaje: mensaje,
+                    actlista: actLista,
+                    instrumento: 'giftcard'
+                  });
+                } else {
+                  Alert.alert(
+                    "Ups, algo salió mal",
+                    "El monto de esta operación no puede ser menor a 10 USD"
+                  );              
+                }
+              }
             }
           }}
         >
@@ -319,7 +339,18 @@ const DetGiftcardLocal = (params) => {
                 break;
               }
             } else {
-              setModalVisible(!modalVisible);
+              if(txtMoneda=='bs') {
+                setModalVisible(!modalVisible);
+              } else {
+                if (txtMonto>=10) {
+                  setModalVisible(!modalVisible);
+                } else {
+                  Alert.alert(
+                    "Ups, algo salió mal",
+                    "El monto de esta operación no puede ser menor a 10 USD"
+                  );              
+                }
+              }
             }
           }}
         >

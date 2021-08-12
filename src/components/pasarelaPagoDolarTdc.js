@@ -382,6 +382,8 @@ const PasarelaPagoDolarTdc = (params) => {
                      })
                      .then((response) => response.json())
                      .then((responseData) => {
+                        console.log('GET_TOKEN_URL');
+                        console.log(responseData);
                         if(responseData.exito=="SI") {
                            procesatarjeta(monto,card,vencimiento,cvv,name,address,address2,zip);
                         } else {
@@ -471,7 +473,7 @@ const PasarelaPagoDolarTdc = (params) => {
                            let datos = new FormData();
                            datos.append("card",        card);
                            datos.append("vencimiento", vencimiento);
-                           datos.append("address",     address.trim()+address2.trim());
+                           datos.append("address",     address.trim()+" "+address2.trim());
                            datos.append("zip",         zip);
                            datos.append("cvv",         cvv);
 
