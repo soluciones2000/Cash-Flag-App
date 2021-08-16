@@ -172,7 +172,7 @@ const Prepagos = (params) => {
         ListEmptyComponent={() => (
           <View style={styles.container}>
             <Text style={styles.text}>
-              No tienes tarjetas prepagadas, puedes recargar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
+              No tienes tarjetas de compras, puedes recargar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
             </Text>
           </View>
         )}

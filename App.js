@@ -302,7 +302,7 @@ export default class CashFlag extends Component {
         name="Prepagos"
         component={this.scrPrepagos}
         options={{
-          title: 'Tarjetas prepagadas',
+          title: 'Tarjetas de compras',
           headerStyle: {
             backgroundColor: 'rgba(3,44,98,1)'
           },
@@ -317,7 +317,7 @@ export default class CashFlag extends Component {
         name="Prepaids"
         component={PrepaidCard}
         options={{
-          title: 'Tarjeta Prepagada',
+          title: 'Tarjeta de Compras',
           headerStyle: {
             backgroundColor: 'rgba(3,44,98,1)'
           },
@@ -332,7 +332,7 @@ export default class CashFlag extends Component {
         name="PrPremium"
         component={PrPremiumCard}
         options={{
-          title: 'Tarjeta Prepagada',
+          title: 'Tarjeta de Compras',
           headerStyle: {
             backgroundColor: 'rgba(3,44,98,1)'
           },

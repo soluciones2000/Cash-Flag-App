@@ -143,7 +143,7 @@ const Cupones = (params) => {
         ListEmptyComponent={() => (
           <View style={styles.container}>
             <Text style={styles.text}>
-              No tienes cupones para canjear, puedes obtener recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilzando alguna de nuestras tarjetas prepagadas o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
+              No tienes cupones para canjear, puedes obtener recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilizando alguna de nuestras tarjetas de compras o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
             </Text>
           </View>
         )}

@@ -10,9 +10,9 @@ import {
   TextInput,
   Modal,
   Alert,
-  Linking
+  ImageBackground
 } from 'react-native';
-import { LinearGradient } from "expo-linear-gradient";
+// import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from '@expo/vector-icons';
 import QRCode from 'react-native-qrcode-svg';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -43,13 +43,14 @@ const GcPremiumCard = (params) => {
   const moneda = params.route.params.moneda;
   const simbolo = params.route.params.simbolo;
 
-  const code_qr = 'https://app.cash-flag.com/card/premium.png';
+  const code_qr = require('../../assets/img/premium.png');
   const dibujomoneda = params.route.params.dibujomoneda;
-  const icongft = 'https://app.cash-flag.com/img/gift-solid.png';
+  const icongft = require('../../assets/img/gift-solid.png');
 
-  const fondocard  = 'rgba(218,165,32,0.625)';
   const colortext  = 'black';
   const colorborde = 'black';
+
+  const image = require('../../assets/img/card-bg-golden.png');
 
   useEffect(() => {
     (async () => {
@@ -191,7 +192,7 @@ const GcPremiumCard = (params) => {
         </View>
       </Modal>
 
-      <LinearGradient
+      {/* <LinearGradient
         // Button Linear Gradient
         colors={['#C09E70', 'white', '#C09E70']}
         style={{
@@ -206,7 +207,31 @@ const GcPremiumCard = (params) => {
           flexDirection: 'column',
           justifyContent: "space-between"
         }}
-      >
+      > */}
+      <View style={{
+        width: 310,
+        height: 195,
+        marginHorizontal: 'auto',
+        marginTop: '10%',
+        borderRadius: 13,
+        flexDirection: 'column',
+        justifyContent: "space-between",
+        backgroundColor: 'yellow',
+        borderColor: colorborde,
+        borderWidth: 2,
+        borderStyle: "solid"
+      }}>
+        <ImageBackground 
+          source={image}
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+          imageStyle={{
+            resizeMode: 'cover',
+            borderRadius: 9
+          }}
+        >
 
         <View style={{
           borderColor: colorborde,
@@ -269,7 +294,7 @@ const GcPremiumCard = (params) => {
                 height: '100%',
                 resizeMode: 'contain'
               }}
-                source={{uri: code_qr}}
+                source={code_qr}
               />
             </View>
             <View style={{
@@ -283,13 +308,15 @@ const GcPremiumCard = (params) => {
                 height: '100%',
                 resizeMode: 'contain'
               }}
-                source={{uri: icongft}}
+                source={icongft}
               />
             </View>
           </View>
         </View>
-
-      </LinearGradient>
+      
+      {/* </LinearGradient> */}
+      </ImageBackground>
+      </View>
 
       <Text allowFontScaling={false} style={{
         marginTop: 0.5,

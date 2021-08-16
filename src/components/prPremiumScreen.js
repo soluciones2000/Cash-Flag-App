@@ -9,7 +9,8 @@ import {
    Text,
    TextInput,
    Modal,
-   Alert
+   Alert,
+   ImageBackground
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -31,20 +32,21 @@ const PrPremiumCard = (params) => {
   const token = '';
 
   const imgprov = params.route.params.logo;
-  const msjtipo = 'Tarjeta prepagada';
+  const msjtipo = 'Tarjeta de Compras';
   const card = params.route.params.card;
   const numcard = params.route.params.card.substr(0,4)+'-'+params.route.params.card.substr(4,4)+'-'+params.route.params.card.substr(8,4)+'-'+params.route.params.card.substr(12,4);
   const nombres = params.route.params.nombre;
   const validez = "Valida hasta: "+params.route.params.validez;
   const simbolo = params.route.params.simbolo;
 
-  const code_qr      = 'https://app.cash-flag.com/card/premium.png';
+  const code_qr      = require('../../assets/img/premium.png');
   const dibujomoneda = params.route.params.dibujomoneda;
-  const icongft      = 'https://app.cash-flag.com/card/monedas.png';
+  const icongft      = require('../../assets/img/monedas.png');
 
-  const fondocard  = 'black';
   const colortext  = 'white';
   const colorborde = 'white';
+
+  const image = require('../../assets/img/card-bg-black.png');
 
   useEffect(() => {
     (async () => {
@@ -193,11 +195,22 @@ const PrPremiumCard = (params) => {
         borderRadius: 13,
         flexDirection: 'column',
         justifyContent: "space-between",
-        backgroundColor: fondocard,
+        backgroundColor: 'yellow',
         borderColor: colorborde,
         borderWidth: 2,
         borderStyle: "solid"
       }}>
+        <ImageBackground 
+          source={image}
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+          imageStyle={{
+            resizeMode: 'cover',
+            borderRadius: 9
+          }}
+        >
         <View style={{
           borderColor: colorborde,
           borderWidth: 2,
@@ -262,7 +275,7 @@ const PrPremiumCard = (params) => {
                 height: '100%',
                 resizeMode: 'contain'
               }}
-                source={{uri: code_qr}}
+                source={code_qr}
               />
             </View>
             <View style={{
@@ -276,11 +289,12 @@ const PrPremiumCard = (params) => {
                 height: '100%',
                 resizeMode: 'contain'
               }}
-                source={{uri: icongft}}
+                source={icongft}
               />
             </View>
           </View>
         </View>
+        </ImageBackground>
       </View>
       <Text allowFontScaling={false} style={{
         marginTop: 0.5,

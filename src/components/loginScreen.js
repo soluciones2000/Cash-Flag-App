@@ -145,7 +145,7 @@ const LoginScreen = (params) => {
       <View style={styles.container2}>
         <View style={{alignItems: "center", marginTop: 50}}>
           <Image style={styles.imagepeq}
-            source={{uri: 'https://app.cash-flag.com/img/logo_gold.png'}}
+            source={require('../../assets/img/logoclubd.png')}
           />
         </View>
         <Text allowFontScaling={false} style={styles.text}>
