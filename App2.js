@@ -273,7 +273,7 @@ export default class CashFlag extends Component {
         name="Prepagos"
         component={this.scrPrepagos}
         options={{
-          title: 'Tarjetas prepagadas'
+          title: 'Tarjetas de Compras'
         }}
       />
       <StackPrepagos.Screen
@@ -281,7 +281,7 @@ export default class CashFlag extends Component {
         name="Prepaids"
         component={PrepaidCard}
         options={{
-          title: 'Tarjeta Prepagada'
+          title: 'Tarjeta de Compras'
         }}
       />
       <StackPrepagos.Screen
@@ -289,7 +289,7 @@ export default class CashFlag extends Component {
         name="PrPremium"
         component={PrPremiumCard}
         options={{
-          title: 'Tarjeta Prepagada'
+          title: 'Tarjeta de Compras'
         }}
       />
       <StackPrepagos.Screen
