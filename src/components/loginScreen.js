@@ -39,7 +39,6 @@ const LoginScreen = (params) => {
   };
   
   const renderItem = ({item}) => {
-    console.log(item);
     return (
       <View style={{
         alignItems: 'center',
