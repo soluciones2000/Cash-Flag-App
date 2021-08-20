@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Alert,
   Modal,
+  ScrollView,
   Dimensions,
   ActivityIndicator
 } from 'react-native';
@@ -38,6 +39,7 @@ const LoginScreen = (params) => {
   };
   
   const renderItem = ({item}) => {
+    console.log(item);
     return (
       <View style={{
         alignItems: 'center',
@@ -54,14 +56,93 @@ const LoginScreen = (params) => {
           source={{uri: item.url }}
         />
         <Text style={{ textAlign: "center" }}>{item.nombre}</Text>
-        <Text style={{ textAlign: "center" }}>{item.descripcion}</Text>
-        <Text style={{ textAlign: "center" }}>{item.direccion}</Text>
+        <Text style={{ textAlign: "center" }}>{item.descripcion_corta}</Text>
+        <Text style={{ textAlign: "center" }}>{item.direccion_corta}</Text>
       </View>
     );
   };
 
   return (
     <View style={styles.container}>
+      <View style={styles.container2}>
+        <View style={{alignItems: "center", marginTop: 50}}>
+          <Image style={styles.imagepeq}
+            source={require('../../assets/img/logoclubd.png')}
+          />
+        </View>
+        <Text allowFontScaling={false} style={styles.text}>
+          Usuario
+        </Text>
+        <TextInput style={styles.textinput}
+          onChangeText={settxtUser}
+          value={txtUser}
+          editable={true}
+          maxLength={50}
+          placeholder='Correo electrónico'
+        />
+          <Text allowFontScaling={false} style={styles.text}>
+            Password
+          </Text>
+        <TextInput style={styles.textinput}
+          onChangeText={settxtPass}
+          value={txtPass}
+          editable={true}
+          maxLength={50}
+          secureTextEntry={ true}
+          placeholder='****'
+        />
+        <TouchableOpacity 
+          style={styles.boton}
+          onPress={() => {
+            // actualizastate({txtUser,txtPass})
+            enviar(txtUser,txtPass);
+          }}
+        >
+          <Text allowFontScaling={false} style={styles.textoboton}>
+            Acceder
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={{marginTop: 20}}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
+            Olvidaste tu Password
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => {
+            newUser()
+          }}
+        >
+          <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
+            Si eres usuario nuevo ingresa aquí
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.container3}>
+        <Text style={{
+          fontSize: 20,
+          textAlign: "center",
+          color: "rgba(195,150,58,255)",
+          marginBottom: 10
+        }}>
+          Conoce nuestros comercios aliados
+        </Text>
+        <Carousel
+          layout={"default"}
+          data={images}
+          sliderWidth={ancho}
+          itemWidth={ancho2}
+          renderItem={renderItem}
+          loop={true}
+          autoplay={true}
+          enableMomentum={true}
+          lockScrollWhileSnapping={false}
+        />
+      </View>
       <Modal
         animationType="slide"
         transparent={true}
@@ -142,85 +223,6 @@ const LoginScreen = (params) => {
           <ActivityIndicator size="large" color="white" />
         </View>
       </Modal>
-      <View style={styles.container2}>
-        <View style={{alignItems: "center", marginTop: 50}}>
-          <Image style={styles.imagepeq}
-            source={require('../../assets/img/logoclubd.png')}
-          />
-        </View>
-        <Text allowFontScaling={false} style={styles.text}>
-          Usuario
-        </Text>
-        <TextInput style={styles.textinput}
-          onChangeText={settxtUser}
-          value={txtUser}
-          editable={true}
-          maxLength={50}
-          placeholder='Correo electrónico'
-        />
-          <Text allowFontScaling={false} style={styles.text}>
-            Password
-          </Text>
-        <TextInput style={styles.textinput}
-          onChangeText={settxtPass}
-          value={txtPass}
-          editable={true}
-          maxLength={50}
-          secureTextEntry={ true}
-          placeholder='****'
-        />
-        <TouchableOpacity 
-          style={styles.boton}
-          onPress={() => {
-            // actualizastate({txtUser,txtPass})
-            enviar(txtUser,txtPass);
-          }}
-        >
-          <Text allowFontScaling={false} style={styles.textoboton}>
-            Acceder
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={{marginTop: 20}}
-          onPress={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
-            Olvidaste tu Password
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => {
-            newUser()
-          }}
-        >
-          <Text allowFontScaling={false} style={{margin: 10, color: 'white'}}>
-            Si eres usuario nuevo ingresa aquí
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={{
-        fontSize: 20,
-        textAlign: "center",
-        color: "rgba(195,150,58,255)",
-        marginBottom: 10
-      }}>
-        Conoce nuestros comercios aliados
-      </Text>
-      <View style={styles.container3}>
-        <Carousel
-          layout={"default"}
-          data={images}
-          sliderWidth={ancho}
-          itemWidth={ancho2}
-          renderItem={renderItem}
-          loop={true}
-          autoplay={true}
-          enableMomentum={true}
-          lockScrollWhileSnapping={false}
-        />
-      </View>
     </View>
   )
 }
@@ -234,7 +236,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },  
   container2: {
-    flex: 2,
+    flex: 2.7,
     backgroundColor: 'rgba(3,44,98,1)',
     alignItems: 'center',
     justifyContent: 'center',

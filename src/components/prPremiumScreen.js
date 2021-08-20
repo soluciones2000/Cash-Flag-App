@@ -195,7 +195,6 @@ const PrPremiumCard = (params) => {
         borderRadius: 13,
         flexDirection: 'column',
         justifyContent: "space-between",
-        backgroundColor: 'yellow',
         borderColor: colorborde,
         borderWidth: 2,
         borderStyle: "solid"

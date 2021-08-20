@@ -709,6 +709,7 @@ export default class CashFlag extends Component {
 
   render() {
     if(this.state.isLogged) {
+      // Tab principal
       return (
         <NavigationContainer>
           <this.tabPrincipal/>
@@ -716,6 +717,7 @@ export default class CashFlag extends Component {
       );
     } else {
       if(this.state.newUser) {
+        // Usuario nuevo
         return (
           <View style={styles.container}>
             <NewUser 
@@ -726,6 +728,7 @@ export default class CashFlag extends Component {
         );
       } else {
         if(this.state.resetPwd) {
+          // Resetar Password
           return (
             <View style={styles.container}>
               <ResetPwd 
@@ -738,6 +741,7 @@ export default class CashFlag extends Component {
           );
         } else {
           return (
+            // Pantalla inicial
             <View style={styles.container}>
               <Login 
                 datos={this.actualizastate}

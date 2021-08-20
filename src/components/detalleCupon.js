@@ -23,134 +23,202 @@ const Detallecupon = (params) => {
   const token = params.route.params.token;
   const [txtEmail, settxtEmail] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
+  console.log(params.route.params);
 
-   const logoproveedor = params.route.params.logoproveedor;
-   const idproveedor = params.route.params.idproveedor;
-   const cuponlargo = params.route.params.cuponlargo;
-   const barcode       = params.route.params.barcode;
-   const qrcode        = params.route.params.qrcode;
-   return (
-      <ScrollView style={{ 
-        flex: 1, 
-        justifyContent: "center", 
-        alignItems: 'center'
-      }}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
+  const logoproveedor = params.route.params.logoproveedor;
+  const idproveedor   = params.route.params.idproveedor;
+  const cuponlargo    = params.route.params.cuponlargo;
+  const premio        = params.route.params.premio;
+  const vencimiento   = params.route.params.vencimiento;
+  const proveedor     = params.route.params.proveedor;
+  const barcode       = params.route.params.barcode;
+  const qrcode        = params.route.params.qrcode;
+  return (
+    <View style={{ 
+      flex: 1, 
+      justifyContent: "center", 
+      alignItems: 'center'
+    }}>
+      <View style={{ 
+        justifyContent: "flex-start", 
+        alignItems: 'center',
+        borderColor: 'black',
+        borderWidth: 2,
+        borderStyle: "dashed",
+        // backgroundColor: 'yellow',
+        width: '80%',
+        borderRadius: 1,
+        shadowColor: "black",
+        shadowOffset: {width: 2, height: 2},
+        shadowOpacity: 0.5
+        }}>
+        <View style={{width: '100%', backgroundColor: 'orange'}}>
+          <View 
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              width: '100%',
+              height: 140,
+              marginVertical: 5
+          }}>
+            <Image
+              style={{width: 140, height: 140, resizeMode: 'contain'}}
+              source={{uri: logoproveedor}}
+            />
+            <Text 
+              allowFontScaling={false} 
+              style={{
+                fontSize: 30, 
+                color: 'white',
+                width: 160, 
+                height: 140, 
+                fontWeight: 'bold', 
+                justifyContent: "center", 
+                alignItems: 'center',
+                textAlignVertical: 'center',
+                textAlign: 'center'
+              }}
+            >
+              {premio}
+            </Text>
+          </View>
+        </View>
+        <View style={{
+          width: '100%',
+          justifyContent: "center", 
+          alignItems: 'center',
+          marginVertical: 5
+        }}>
+          <Image
+            style={{width: '100%', height: 50}}
+            source={{uri: barcode}}
+          />
+        </View>
+        <View style={{margintVertical: 5}}>
+          <Text allowFontScaling={false} style={{fontSize: 20, fontWeight: 'bold'}}>
+            {cuponlargo}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            width: '100%',
+            marginVertical: 5
           }}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalViewTransfCupon}>
+          <Text 
+            allowFontScaling={false} 
+            style={{
+              fontSize: 15, 
+              color: 'black',
+              width: 160, 
+              fontWeight: 'bold', 
+              justifyContent: "center", 
+              alignItems: 'center',
+              textAlignVertical: 'center',
+              textAlign: 'center'
+            }}
+          >
+            {proveedor}{'\n'}{'\n'}
+            Fecha de vencimiento:{'\n'}{vencimiento}
+          </Text>
+          <Image
+            style={{
+              height: 120,
+              width: 120,
+              resizeMode: 'contain',
+              borderColor: 'black',
+              borderWidth: 1
+            }}
+            source={{uri: qrcode}}
+          />
+        </View>
+      </View>
+      <View style={{marginTop: 40}}>
+        <TouchableOpacity 
+          style={styles.boton}
+          onPress={() => {
+            setModalVisible(!modalVisible);
+        }}>
+          <Text allowFontScaling={false} style={styles.textoboton}>
+            Transferir a otro socio
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalViewTransfCupon}>
             <Text style={styles.text}>
-                E-mail del destinatario
+              E-mail del destinatario
             </Text>
             <TextInput style={styles.textinput}
-                onChangeText={settxtEmail}
-                value={txtEmail}
-                editable={true}
-                maxLength={50}
-                placeholder='Correo electrónico'
+              onChangeText={settxtEmail}
+              value={txtEmail}
+              editable={true}
+              maxLength={50}
+              placeholder='Correo electrónico'
             />
-              <TouchableOpacity 
-                style={{
-                  height: 30,
-                  width: 135,
-                  marginTop: 10,
-                  backgroundColor: 'blue',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 10
-                }}
-                onPress={() => {
-                  let datos = new FormData();
-                  datos.append("emailsocio",   email);
-                  datos.append("token",        token);
-                  datos.append("emaildestino", txtEmail);
-                  datos.append("cuponlargo",   cuponlargo);
+            <TouchableOpacity 
+              style={{
+                height: 30,
+                width: 135,
+                marginTop: 10,
+                backgroundColor: 'blue',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 10
+              }}
+              onPress={() => {
+                let datos = new FormData();
+                datos.append("emailsocio",   email);
+                datos.append("token",        token);
+                datos.append("emaildestino", txtEmail);
+                datos.append("cuponlargo",   cuponlargo);
 
-                  fetch(TRANSF_URL, {
-                    method: 'POST',
-                    body: datos
-                  })
-                  .then((response) => response.json())
-                  .then((responseData) => {
-                    if(responseData.exito=="SI") {
-                      Alert.alert(
-                        "Éxito",
-                        responseData.mensaje
-                      );
-                      settxtEmail('');
-                      actualizalista(indice);
-                      params.navigation.navigate('Cupones');
-                    } else {
-                      Alert.alert(
-                        "Ups, algo salió mal",
-                        responseData.mensaje
-                      );
-                    }
-                  });
-                  setModalVisible(!modalVisible);
+                fetch(TRANSF_URL, {
+                  method: 'POST',
+                  body: datos
+                })
+                .then((response) => response.json())
+                .then((responseData) => {
+                  if(responseData.exito=="SI") {
+                    Alert.alert(
+                      "Éxito",
+                      responseData.mensaje
+                    );
+                    settxtEmail('');
+                    actualizalista(indice);
+                    params.navigation.navigate('Cupones');
+                  } else {
+                    Alert.alert(
+                      "Ups, algo salió mal",
+                      responseData.mensaje
+                    );
                   }
-                }
-              >
-                <Text style={{
-                  color:"white",
-                  fontSize: 16
-                }}>
-                  Enviar
-                </Text>
-              </TouchableOpacity>
-            </View>
+                });
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <Text style={{
+                color:"white",
+                fontSize: 16
+              }}>
+                Enviar
+              </Text>
+            </TouchableOpacity>
           </View>
-        </Modal>
-        <View style={{ 
-            flex: 1, 
-            justifyContent: "flex-start", 
-            alignItems: 'center'
-         }}
-         >
-            <View>
-               <Image
-                  style={{width: 140, height: 140, resizeMode: 'contain'}}
-                  source={{uri: logoproveedor}}
-               />
-            </View>
-            <View style={{marginTop: 5}}>
-               <Image
-                  style={{width: 325, height: 50}}
-                  source={{uri: barcode}}
-               />
-            </View>
-            <View style={{margintTop: 5, marginBottom: 30}}>
-               <Text allowFontScaling={false} style={{fontSize: 20, fontWeight: 'bold'}}>
-                  {cuponlargo}
-               </Text>
-            </View>
-            <View style={{margintTop: 40}}>
-               <Image
-                  style={{height: 250, width: 250, resizeMode: 'contain', borderColor: 'black', borderWidth: 1}}
-                  source={{uri: qrcode}}
-               />
-            </View>
-            <View style={{margintTop: 50}}>
-               <TouchableOpacity 
-                  style={styles.boton}
-                  onPress={() => {
-                    setModalVisible(!modalVisible);
-                  }}
-               >
-                  <Text allowFontScaling={false} style={styles.textoboton}>
-                     Transferir a otro socio
-                  </Text>
-               </TouchableOpacity>
-            </View>
-         </View>
-      </ScrollView>
-   )
+        </View>
+      </Modal>
+    </View>
+  )
 }
 
 module.exports = Detallecupon;
