@@ -18,6 +18,7 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 const styles = require('./styles');
 
 const PrPremiumCard = (params) => {
+  console.log(params);
   const actualizasaldo = params.route.params.actsaldo;
   const indice = params.route.params.indice;
   const [txtMonto, settxtMonto] = useState(null);

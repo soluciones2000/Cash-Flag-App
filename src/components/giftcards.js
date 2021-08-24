@@ -6,7 +6,9 @@ import {
   FlatList, 
   Image,
   Alert, 
-  StyleSheet } from 'react-native';
+  StyleSheet,
+  ImageBackground
+} from 'react-native';
 import {
     Menu,
     MenuProvider,
@@ -20,16 +22,241 @@ const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
   
 const styles = require('./styles');
 
+const msjtipo = 'Tarjeta de Regalo';
+const colortext  = 'black';
+const colorborde = 'black';
+const image = require('../../assets/img/card-bg-golden.png');
+const icongft = require('../../assets/img/gift-solid.png');
+
+const PremiumCard = (args) => {
+  let numcard = args.tarjeta.substr(0,4)+' '+args.tarjeta.substr(4,4)+' '+args.tarjeta.substr(8,4)+' '+args.tarjeta.substr(12,4);
+
+  return (
+      <View style={{
+        width: 310,
+        height: 195,
+        marginHorizontal: 'auto',
+        marginTop: '10%',
+        borderRadius: 13,
+        flexDirection: 'column',
+        justifyContent: "space-between",
+        borderColor: colorborde,
+        borderWidth: 2,
+        borderStyle: "solid"
+      }}>
+        <ImageBackground 
+          source={image}
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+          imageStyle={{
+            resizeMode: 'cover',
+            borderRadius: 9
+          }}
+        >
+        <View style={{
+          borderColor: colorborde,
+          borderWidth: 2,
+          borderStyle: "solid",
+          margin: 5,
+          borderRadius: 9,
+          height: '94%'
+        }}>
+          <View style={{
+            width: '30%',
+            height: '30%',
+            top: 5,
+            left: 5
+          }}>
+            <Image style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'contain'
+            }}
+              source={{uri: args.logotarjeta}}
+            />
+          </View>
+          <View style={{
+            alignItems: "flex-end",
+            marginRight: 7.5,
+            top: -10            
+          }}>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{msjtipo}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontWeight: 'bold', fontSize: 16}}>{numcard}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{args.socio}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 10}}>{args.validez}</Text>
+          </View>
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: "space-between",
+            marginTop: '-3%',
+            height: '40%'
+          }}>
+            <View style={{
+              width: '30%',
+              height: '90%',
+              marginBottom: '5%',
+              marginLeft: '3%',
+              alignItems: 'center'
+            }}>
+              <Text allowFontScaling={false} style={{ fontSize: 40, fontWeight: "bold" }}>
+                {args.simbolo}
+              </Text>
+            </View>
+            <View style={{
+              width: '20%',
+              height: '50%',
+              top: -105,
+              left: 90
+            }}>
+              <Image style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain'
+              }}
+                source={args.code_qr}
+              />
+            </View>
+            <View style={{
+              width: '15%',
+              height: '100%',
+              marginRight: '5%',
+              marginBottom: '2%'
+            }}>
+              <Image style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain'
+              }}
+                source={icongft}
+              />
+            </View>
+          </View>
+        </View>
+        </ImageBackground>
+      </View>
+  )
+}
+
+const LocalCard = (args) => {
+  let numcard = args.tarjeta.substr(0,4)+' '+args.tarjeta.substr(4,4)+' '+args.tarjeta.substr(8,4)+' '+args.tarjeta.substr(12,4);
+
+  return (
+      <View style={{
+        width: 310,
+        height: 195,
+        marginHorizontal: 'auto',
+        marginTop: '10%',
+        borderRadius: 13,
+        flexDirection: 'column',
+        justifyContent: "space-between",
+        borderColor: colorborde,
+        borderWidth: 2,
+        borderStyle: "solid"
+      }}>
+        <ImageBackground 
+          source={image}
+          style={{
+            width: '100%',
+            height: '100%'
+          }}
+          imageStyle={{
+            resizeMode: 'cover',
+            borderRadius: 9
+          }}
+        >
+        <View style={{
+          borderColor: colorborde,
+          borderWidth: 2,
+          borderStyle: "solid",
+          margin: 5,
+          borderRadius: 9,
+          height: '94%'
+        }}>
+          <View style={{
+            width: '30%',
+            height: '30%',
+            top: 5,
+            left: 5
+          }}>
+            <Image style={{
+              width: '100%',
+              height: '100%',
+              resizeMode: 'contain'
+            }}
+              source={{uri: args.logotarjeta}}
+            />
+          </View>
+          <View style={{
+            alignItems: "flex-end",
+            marginRight: 7.5,
+            top: -10            
+          }}>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{msjtipo}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontWeight: 'bold', fontSize: 16}}>{numcard}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 13}}>{args.socio}</Text>
+            <Text allowFontScaling={false} style={{color: colortext, fontSize: 10}}>{args.validez}</Text>
+          </View>
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: "space-between",
+            marginTop: '-3%',
+            height: '40%'
+          }}>
+            <View style={{
+              width: '28%',
+              height: 15,
+              bottom: -35,
+              marginBottom: '2%',
+              marginLeft: '2%'
+            }}>
+              <Image style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain'
+              }}
+                source={args.code_qr}
+              />
+            </View>
+            <View style={{
+              width: '15%',
+              height: '100%',
+              marginRight: '5%',
+              marginBottom: '2%'
+            }}>
+              <Image style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'contain'
+              }}
+                source={icongft}
+              />
+            </View>
+          </View>
+        </View>
+        </ImageBackground>
+      </View>
+  )
+}
+
 const Giftcards = (params) => {
   const navigation = params.navigation;
   const socio = params.socio;
   const [data, setData] = useState(params.giftcards);
   const [isRender, setIsrender] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [dspBoton, setDspboton] = useState('flex');
+
   const email = params.email;
   const token = params.token;
   const comercios = params.comercios;
   const actDatos = params.actDatos;
+  
+  const code_qr = require('../../assets/img/blanco_hori.png');
+  const xDibPrm = require('../../assets/img/premium.png');
 
   const actualizasaldo = (saldo,index) => {
     let xaPrepagos = data;
@@ -48,104 +275,96 @@ const Giftcards = (params) => {
     });
   };
 
+  const renderItem = ({item, index}) => {   
+    if (item.premium) {
+      return (
+        <View style={{
+          // backgroundColor: 'rgba(19,121,187,255)',
+          height: 130,
+          // paddingVertical: 5,
+          alignItems: 'center'  
+        }}>
+          <TouchableOpacity
+            onPress={() => {
+                // this.saldoant = item.saldo;
+                navigation.navigate('GcPremium', {
+                  logo: item.logotarjeta,
+                  idproveedor: item.idproveedor,
+                  card: item.tarjeta,
+                  nombre: socio,
+                  validez: item.validez,
+                  saldo: item.saldo,
+                  moneda: item.moneda,
+                  simbolo: item.simbolo,
+                  dibujomoneda: item.dibujomoneda,
+                  actsaldo: actualizasaldo,
+                  indice: index
+                })
+              }
+            }
+          >
+            <PremiumCard 
+              tarjeta= {item.tarjeta}
+              logotarjeta= {item.logotarjeta}
+              socio= {socio}
+              validez= {item.validez}
+              dibujomoneda= {item.dibujomoneda}
+              code_qr= {xDibPrm}
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={{
+          // backgroundColor: 'rgba(19,121,187,255)',
+          height: 130,
+          // paddingVertical: 5,
+          alignItems: 'center'  
+        }}>
+          <TouchableOpacity
+            onPress={() => {
+                // this.saldoant = item.saldo;
+                navigation.navigate('Gift_Card', {
+                  logo: item.logotarjeta,
+                  idproveedor: item.idproveedor,
+                  card: item.tarjeta,
+                  nombre: socio,
+                  validez: item.validez,
+                  saldo: item.saldo,
+                  moneda: item.moneda,
+                  simbolo: item.simbolo,
+                  actsaldo: actualizasaldo,
+                  indice: index
+                })
+              }
+            }
+          >
+            <LocalCard 
+              tarjeta= {item.tarjeta}
+              logotarjeta= {item.logotarjeta}
+              socio= {socio}
+              validez= {item.validez}
+              code_qr= {code_qr}
+            />
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  }
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <FlatList style={{width: '100%'}}
         data={data}
-        renderItem={({ item, index }) => (          
-          <View style={{
-              // backgroundColor: '#ffd700',
-              height: 90,
-              paddingTop: 5,
-              paddingBottom: 5
-            }}
-          >
-            <TouchableOpacity 
-              onPress={() => {
-                if(item.premium) {
-                  navigation.navigate('GcPremium', {
-                    logo: item.logotarjeta,
-                    idproveedor: item.idproveedor,
-                    card: item.tarjeta,
-                    nombre: socio,
-                    validez: item.validez,
-                    saldo: item.saldo,
-                    moneda: item.moneda,
-                    simbolo: item.simbolo,
-                    dibujomoneda: item.dibujomoneda,
-                    actsaldo: actualizasaldo,
-                    indice: index
-                  })
-                } else {
-                  navigation.navigate('Gift_Card', {
-                    logo: item.logotarjeta,
-                    idproveedor: item.idproveedor,
-                    card: item.tarjeta,
-                    nombre: socio,
-                    validez: item.validez,
-                    saldo: item.saldo,
-                    moneda: item.moneda,
-                    simbolo: item.simbolo,
-                    actsaldo: actualizasaldo,
-                    indice: index
-                  })
-                }
-              }}
-            >
-              <View style={{flexDirection: 'row', height: '100%'}}>
-                <View style={{
-                  width: '25%', 
-                  paddingHorizontal: 5,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}>
-                  <Image 
-                    style={{width: '100%', height: '100%', resizeMode: 'contain'}}
-                    source={{uri: item.logoproveedor}}
-                  />
-                </View>
-                <View style={{
-                  paddingLeft: 5,
-                  width: '75%',
-                  justifyContent: 'center',
-                  textAlign: 'left'
-                }}>
-                  <View style={{flexDirection: "row"}}>
-                    <Text allowFontScaling={false}>Tarjeta:</Text>
-                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
-                      {item.tarjeta.substr(0,4)+'-'+item.tarjeta.substr(4,4)+'-'+item.tarjeta.substr(8,4)+'-'+item.tarjeta.substr(12,4)}
-                    </Text>
-                  </View>
-                  <View style={{flexDirection: "row"}}>
-                    <Text allowFontScaling={false}>Tipo:</Text> 
-                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
-                      {item.premium==1 ? 'PREMIUM' : 'Local'}
-                    </Text>
-                  </View>
-                  <View style={{flexDirection: "row"}}>
-                    <Text allowFontScaling={false}>Comercio:</Text>
-                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold', color: 'red' }}>
-                      {item.premium==1 ? 'Todos' : item.nombre}
-                    </Text>
-                  </View>
-                  <View style={{flexDirection: "row"}}>
-                    <Text allowFontScaling={false}>Saldo:</Text>
-                    <Text allowFontScaling={false} style={{ marginLeft: 5, fontWeight: 'bold' }}>
-                      {item.saldo} {item.simbolo}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </TouchableOpacity>
-          </View>
-        )}
+        renderItem={renderItem}
         refreshing = {refreshing}
         onRefresh = { listRefresh }
         keyExtractor={item => item.tarjeta}
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -153,7 +372,7 @@ const Giftcards = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -161,7 +380,7 @@ const Giftcards = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -208,6 +427,8 @@ const Giftcards = (params) => {
                 }
               }}
               text='Comprar Tarjetas'
+              onPress={() => setDspboton('none')}
+              display={dspBoton}
             />
             <MenuOptions customStyles={optionsStyles}>
               <MenuOption
@@ -257,7 +478,7 @@ const Giftcards = (params) => {
                   textAlign: 'center'
                 }}
                 value={0}
-                onSelect={value => console.log(`Selected number: ${value}`)}
+                onSelect={value => setDspboton('flex')}
               >
                 <Text style={{
                     color: 'white',
@@ -277,7 +498,7 @@ const optionsStyles = {
   optionsContainer: {
     paddingHorizontal: 5,
     position: 'absolute',
-    bottom: 25,
+    bottom: 5,
     right: 5,
     backgroundColor: 'rgba(0, 0, 0, 0)',
     height: '100%'

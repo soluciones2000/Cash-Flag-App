@@ -51,8 +51,8 @@ const Detallecupon = (params) => {
         shadowColor: "black",
         shadowOffset: {width: 2, height: 2},
         shadowOpacity: 0.5
-        }}>
-        <View style={{width: '100%', backgroundColor: 'orange'}}>
+      }}>
+        <View style={{width: '100%', backgroundColor: 'rgba(195,150,58,255)'}}>
           <View 
             style={{
               flexDirection: 'row',

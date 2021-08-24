@@ -38,13 +38,13 @@ const Cupones = (params) => {
     });
   };
 
-  const renderItem = ({item, index}) => {    
+  const renderItem = ({item, index}) => {  
     return (
     <View style={{
         // backgroundColor: 'lightgray',
-        height: 90,
-        paddingTop: 5,
-        paddingBottom: 5
+        height: 160,
+        paddingVertical: 10,
+        alignItems: 'center'
       }
     }>
       <TouchableOpacity 
@@ -65,6 +65,71 @@ const Cupones = (params) => {
           })
         }
       >
+        <View style={{ 
+          justifyContent: "flex-start", 
+          alignItems: 'center',
+          borderColor: 'black',
+          borderWidth: 2,
+          borderStyle: "dashed",
+          // backgroundColor: 'yellow',
+          width: '80%',
+          borderRadius: 1,
+          shadowColor: "black",
+          shadowOffset: {width: 2, height: 2},
+          shadowOpacity: 0.5
+        }}>
+          <View style={{width: '100%', backgroundColor: 'rgba(195,150,58,255)'}}>
+            <View 
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                width: '100%',
+                height: 80,
+                marginVertical: 5
+            }}>
+              <Image
+                style={{width: 80, height: 80, resizeMode: 'contain'}}
+                source={{uri: item.logoproveedor}}
+              />
+              <Text 
+                allowFontScaling={false} 
+                style={{
+                  fontSize: 17, 
+                  color: 'white',
+                  width: 160, 
+                  height: 80, 
+                  fontWeight: 'bold', 
+                  justifyContent: "center", 
+                  alignItems: 'center',
+                  textAlignVertical: 'center',
+                  textAlign: 'center'
+                }}
+              >
+                {item.premio}
+              </Text>
+            </View>
+          </View>
+          <View
+          >
+            <Text 
+              allowFontScaling={false} 
+              style={{
+                fontSize: 17, 
+                // width: 160, 
+                height: 50, 
+                color: 'black',
+                fontWeight: 'bold', 
+                justifyContent: "center", 
+                alignItems: 'center',
+                textAlignVertical: 'center',
+                textAlign: 'center'
+              }}
+            >
+              Valido hasta el: {item.fechavencimiento}
+            </Text>
+          </View>
+        </View>
+        {/* 
         <View style={{flexDirection: 'row', height: '100%'}}>
           <View style={{
             width: '25%', 
@@ -105,6 +170,7 @@ const Cupones = (params) => {
             </View>
           </View>
         </View>
+        */}
       </TouchableOpacity>
     </View>
     )
@@ -122,7 +188,7 @@ const Cupones = (params) => {
         ItemSeparatorComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -130,7 +196,7 @@ const Cupones = (params) => {
         ListHeaderComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -138,7 +204,7 @@ const Cupones = (params) => {
         ListFooterComponent={() => (
           <View
             style={{
-              backgroundColor: 'gray',
+              // backgroundColor: 'gray',
               height: 1,
             }}
           />
@@ -162,7 +228,7 @@ const Cupones = (params) => {
           });
         }}
       >
-        <Text style={{fontWeight: 'bold', color: 'white'}}>Generar Cupón</Text>
+        <Text style={{fontWeight: 'bold', color: 'white'}}>Reclamar recompensa</Text>
       </TouchableOpacity>
     </View>
   )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,6 +15,8 @@ const styles = require('./src/components/styles');
 const Login                = require('./src/components/loginScreen');
 const NewUser              = require('./src/components/newUserScreen');
 const ResetPwd             = require('./src/components/resetPwdScreen');
+const Dashboard            = require('./src/components/dashboardScreen');
+const QrScreen             = require('./src/components/dashboardQrScreen');
 const Cupones              = require('./src/components/cupones');
 const Prepagos             = require('./src/components/prepagos');
 const Giftcards            = require('./src/components/giftcards');
@@ -38,7 +40,7 @@ const PremiumGiftDet       = require('./src/components/detGiftcardPremium');
 const GiftcardRep          = require('./src/components/repGiftcard');
 const GiftcardRepZelle     = require('./src/components/repZelleGiftcard');
 
-// const StackLogin = createStackNavigator();
+const StackDashboard = createStackNavigator();
 const StackCupones = createStackNavigator();
 const StackPrepagos = createStackNavigator();
 const StackGiftcards = createStackNavigator();
@@ -58,7 +60,17 @@ export default class CashFlag extends Component {
       socio: '',
       email: '',
       token: '',
-      aImgs: []
+      aImgs: [],
+      idsocio : 0,
+      card: '',
+      nombre: '',
+      validez: '',
+      numcupones: 0,
+      numprepusd: 0,
+      numprepbs: 0,
+      numgiftusd: 0,
+      numgiftbs: 0,
+
     };
   }
 
@@ -148,6 +160,7 @@ export default class CashFlag extends Component {
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
     .then((response) => response.json())
     .then((responseData) => {
+      console.log(responseData);
       this.setState({
         isLogged: true,
         newUser: false,
@@ -158,8 +171,17 @@ export default class CashFlag extends Component {
         oComercios: responseData.comercios,
         socio: responseData.socio,
         email: u,
-        token: t
-      });
+        token: t,
+        idsocio: responseData.idsocio,
+        card: responseData.card,
+        nombre: responseData.socio,
+        validez: responseData.afiliacion,
+        numcupones: responseData.numcupones,
+        numprepusd: responseData.numprepusd,
+        numprepbs: responseData.numprepbs,
+        numgiftusd: responseData.numgiftusd,
+        numgiftbs: responseData.numgiftbs
+        });
     });
   }
 
@@ -198,14 +220,27 @@ export default class CashFlag extends Component {
       }}
     >
       <TabPrincipal.Screen
+        key="dashboard"
+        name="Dashboard"
+        children={this.stackDashboard}
+        options={{
+          title: 'Dashboard',
+          tabBarIcon: ({ color, size}) => (
+            <Ionicons name='home' size={size} color={color}/>
+          ),
+          tabBarLabelStyle: { fontSize: 25}
+        }}
+      />
+      <TabPrincipal.Screen
         key="cupones"
         name="Cupones"
         children={this.stackCupones}
         options={{
-          title: 'Cupones',
+          title: 'Recompensas',
           tabBarIcon: ({ color, size}) => (
             <Ionicons name='receipt' size={size} color={color}/>
-          )
+          ),
+          tabBarLabelStyle: { fontSize: 25}
         }}
       />
       <TabPrincipal.Screen
@@ -213,10 +248,11 @@ export default class CashFlag extends Component {
         name="Prepagos"
         component={this.stackPrepagos}
         options={{
-          title: 'Prepagos',
+          title: 'Tarj. de compras',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='logo-usd' size={size} color={color}/>
-          )
+          ),
+          tabBarLabelStyle: { fontSize: 25}
         }}
       />
       <TabPrincipal.Screen
@@ -227,7 +263,8 @@ export default class CashFlag extends Component {
           title: 'Giftcards',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='gift' size={size} color={color}/>
-          )
+          ),
+          tabBarLabelStyle: { fontSize: 25}
         }}
       />
       <TabPrincipal.Screen
@@ -239,11 +276,48 @@ export default class CashFlag extends Component {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='log-out' size={size} color={color}/>
           ),
-          tabBarVisible: false
+          tabBarLabelStyle: { fontSize: 25}
+          // ,
+          // tabBarVisible: false
         }}
       />
     </TabPrincipal.Navigator>
   )}
+
+  stackDashboard = ({navigation}) => (
+    <StackDashboard.Navigator>
+      <StackDashboard.Screen
+        key="dashboard"
+        name="Dashboard"
+        component={this.scrDashboard}
+        options={{
+          title: 'Dashboard',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold'
+          }
+        }}
+      />
+      <StackDashboard.Screen
+        key="qrscreen"
+        name="QrScreen"
+        component={QrScreen}
+        options={{
+          title: 'Tarjeta de Identificación',
+          headerStyle: {
+            backgroundColor: 'rgba(3,44,98,1)'
+          },
+          headerTintColor: 'rgba(195,150,58,255)',
+          headerTitleStyle: {
+            fontWeight: 'bold'
+          }
+        }}
+      />
+    </StackDashboard.Navigator>
+  )
 
   stackCupones = ({navigation}) => (
     <StackCupones.Navigator>
@@ -672,6 +746,21 @@ export default class CashFlag extends Component {
     )
   }
 
+  scrDashboard = ({navigation}) => (
+    <Dashboard 
+      navigation={navigation} 
+      card={this.state.card}
+      idsocio={this.state.idsocio}
+      nombre={this.state.nombre}
+      validez={this.state.validez}
+      numcupones={this.state.numcupones}
+      numprepusd={this.state.numprepusd}
+      numprepbs={this.state.numprepbs}
+      numgiftusd={this.state.numgiftusd}
+      numgiftbs={this.state.numgiftbs}
+    />
+  )
+
   scrCupones = ({navigation}) => (
     <Cupones 
       navigation={navigation} 
@@ -756,3 +845,12 @@ export default class CashFlag extends Component {
     }
   }
 }
+
+
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
