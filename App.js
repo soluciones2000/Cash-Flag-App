@@ -1,9 +1,35 @@
+import { registerRootComponent } from 'expo';
 import React, { Component } from 'react';
 import { View, Alert, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import io from "socket.io-client";
+
+// import { Notifications } from 'expo';
+// import * as Permissions from 'expo-permissions';
+
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
+
+// const getToken = async () => {
+//   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+
+//   if (status !== "granted") {
+//     return;
+//   }
+
+//   const token = Notificactions.getExpoPushTokenAsync();
+//   console.log(token);
+
+//   return token;
+// };
 
 const USER_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
@@ -69,14 +95,27 @@ export default class CashFlag extends Component {
       numprepusd: 0,
       numprepbs: 0,
       numgiftusd: 0,
-      numgiftbs: 0,
-
+      numgiftbs: 0
     };
   }
-
+  // ,
+  //     tokenPush: ''
+  
   componentDidMount() {
-    this.fetchImg()
+    this.fetchImg();
+    // let tkn = getToken();
+    // this.setState({
+    //   tokenPush: tkn
+    // });
+    
+    this.socket = io('https://ws-cashflag.herokuapp.com/');
+    this.socket.on('actlista', msg => console.log("actlista", msg));
   }
+      // datos = JSON.parse(msg);
+      // console.log("actlista", msg);
+      // if (msg=='prepago') {        
+      // } else {
+      // }
 
   txtEmail = '';
   txtPregunta = '';
@@ -160,7 +199,6 @@ export default class CashFlag extends Component {
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
     .then((response) => response.json())
     .then((responseData) => {
-      console.log(responseData);
       this.setState({
         isLogged: true,
         newUser: false,
@@ -854,3 +892,5 @@ const styles2 = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+registerRootComponent(CashFlag);

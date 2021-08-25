@@ -13,7 +13,6 @@ import QRCode from 'react-native-qrcode-svg';
 const styles = require('./styles');
 
 const DashboardQrScreen = (params) => {
-   console.log(params);
    const navigation = params.navigation;
 
    const imgprov = require('../../assets/img/logoclubd.png');

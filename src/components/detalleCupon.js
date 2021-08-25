@@ -23,7 +23,6 @@ const Detallecupon = (params) => {
   const token = params.route.params.token;
   const [txtEmail, settxtEmail] = useState('')
   const [modalVisible, setModalVisible] = useState(false);
-  console.log(params.route.params);
 
   const logoproveedor = params.route.params.logoproveedor;
   const idproveedor   = params.route.params.idproveedor;
