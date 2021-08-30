@@ -18,7 +18,7 @@ const Dashboard = (params) => {
   const navigation = params.navigation;
 
   const imgprov = require('../../assets/img/logoclubd.png');
-  const msjtipo = 'Tarjeta de Identificación';
+  const msjtipo = 'Cliente Frecuente';
 
   const idsocio = params.idsocio;
   const numcard = params.card;

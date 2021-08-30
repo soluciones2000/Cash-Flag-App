@@ -344,7 +344,7 @@ export default class CashFlag extends Component {
         name="QrScreen"
         component={QrScreen}
         options={{
-          title: 'Tarjeta de Identificación',
+          title: 'Cliente Frecuente',
           headerStyle: {
             backgroundColor: 'rgba(3,44,98,1)'
           },
