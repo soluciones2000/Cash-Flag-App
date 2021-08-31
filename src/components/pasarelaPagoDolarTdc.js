@@ -417,7 +417,6 @@ const PasarelaPagoDolarTdc = (params) => {
                      setCard(null);
                      setVencimiento(m+'/'+y);
                      setCvv(null);
-                     setCedula(null);
                   }}
                >
                   <Text

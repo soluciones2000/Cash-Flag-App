@@ -1,23 +1,35 @@
 import { registerRootComponent } from 'expo';
 import React, { Component } from 'react';
-import { View, Alert, StyleSheet, Platform } from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import io from "socket.io-client";
 
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
+// import { Notifications } from 'expo';
 // import * as Permissions from 'expo-permissions';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
-  }),
-});
+// Notifications.setNotificationHandler({
+//   handleNotification: async () => ({
+//     shouldShowAlert: true,
+//     shouldPlaySound: false,
+//     shouldSetBadge: false,
+//   }),
+// });
+
+// const getToken = async () => {
+//   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+
+//   if (status !== "granted") {
+//     return;
+//   }
+
+//   const token = Notificactions.getExpoPushTokenAsync();
+//   console.log(token);
+
+//   return token;
+// };
 
 const USER_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
@@ -60,36 +72,6 @@ const StackPrepagos = createStackNavigator();
 const StackGiftcards = createStackNavigator();
 const TabPrincipal = createBottomTabNavigator();
 
-async function registerForPushNotificationsAsync() {
-  let token;
-  if (Constants.isDevice) {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
-    }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
-      return;
-    }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-  } else {
-    alert('Must use physical device for Push Notifications');
-  }
-
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
-    });
-  }
-
-  return token;
-}
-
 export default class CashFlag extends Component {
   constructor(props) {
     super(props);
@@ -113,28 +95,18 @@ export default class CashFlag extends Component {
       numprepusd: 0,
       numprepbs: 0,
       numgiftusd: 0,
-      numgiftbs: 0,
-      tokenPush: ''
+      numgiftbs: 0
     };
   }
-
-  getToken = async () => {
-    registerForPushNotificationsAsync().then(token => {
-      console.log('token',token);
-    });
-
-    Notifications.addNotificationReceivedListener(notification => {
-      console.log('notification',notification);
-    });
-
-    Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('response',response);
-    });
-  };
-
+  // ,
+  //     tokenPush: ''
+  
   componentDidMount() {
     this.fetchImg();
-    let tkn = this.getToken();
+    // let tkn = getToken();
+    // this.setState({
+    //   tokenPush: tkn
+    // });
     
     this.socket = io('https://ws-cashflag.herokuapp.com/');
     this.socket.on('actlista', msg => console.log("actlista", msg));
@@ -150,7 +122,7 @@ export default class CashFlag extends Component {
   // aImgs = [];
 
   actualizastate = (parametros) => {
-    this.fetchUser(parametros.txtUser,parametros.txtPass,parametros.deviceID);
+    this.fetchUser(parametros.txtUser,parametros.txtPass);
   };
 
   resetPwd = (email,pregunta) => {
@@ -209,9 +181,9 @@ export default class CashFlag extends Component {
     });
   }
 
-  async fetchUser(u,p,tp) {
+  async fetchUser(u,p) {
     if(this.state.isLogged==false) {
-      await fetch(USER_URL+"email="+u+"&password="+p+"deviceID="+tp)
+      await fetch(USER_URL+"email="+u+"&password="+p)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.exito=="SI") {
@@ -802,14 +774,12 @@ export default class CashFlag extends Component {
       email: '',
       token: ''
     });
-
     return (
       <Login 
         datos={this.actualizastate}
         resetPwd={this.resetPwd}
         newUser={this.newUser}
         imgs={this.state.aImgs}
-        deviceID=''
       />
     )
   }
@@ -905,7 +875,6 @@ export default class CashFlag extends Component {
                 resetPwd={this.resetPwd}
                 newUser={this.newUser}
                 imgs={this.state.aImgs}
-                deviceID={this.state.tokenPush}
               />
             </View>
           );
@@ -916,12 +885,12 @@ export default class CashFlag extends Component {
 }
 
 
-// const styles2 = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center'
-//   }
-// });
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
 
 registerRootComponent(CashFlag);
