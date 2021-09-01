@@ -121,6 +121,9 @@ export default class CashFlag extends Component {
   getToken = async () => {
     registerForPushNotificationsAsync().then(token => {
       console.log('token',token);
+      this.setState({
+        tokenPush: token
+      });
     });
 
     Notifications.addNotificationReceivedListener(notification => {
@@ -134,7 +137,7 @@ export default class CashFlag extends Component {
 
   componentDidMount() {
     this.fetchImg();
-    let tkn = this.getToken();
+    this.getToken();
     
     this.socket = io('https://ws-cashflag.herokuapp.com/');
     this.socket.on('actlista', msg => console.log("actlista", msg));
@@ -211,7 +214,7 @@ export default class CashFlag extends Component {
 
   async fetchUser(u,p,tp) {
     if(this.state.isLogged==false) {
-      await fetch(USER_URL+"email="+u+"&password="+p+"deviceID="+tp)
+      await fetch(USER_URL+"email="+u+"&password="+p+"&deviceID="+tp)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.exito=="SI") {
