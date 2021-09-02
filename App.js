@@ -73,7 +73,16 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
+    const devID = (await Notifications.getDevicePushTokenAsync()).data;
+    /*
+    const token = (await Notifications.getExpoPushTokenAsync({
+      experienceID: '@soluciones2000/Cash-Flag',
+      devicePushToken: devID,
+      applicationId: 'com.cashflag.app'
+    })).data;
+    */
     token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -86,7 +95,6 @@ async function registerForPushNotificationsAsync() {
       lightColor: '#FF231F7C',
     });
   }
-
   return token;
 }
 
@@ -121,10 +129,10 @@ export default class CashFlag extends Component {
   getToken = async () => {
     registerForPushNotificationsAsync().then(token => {
       console.log('token',token);
-      this.setState({
-        tokenPush: token
-      });
+      this.setState({ tokenPush: token });
     });
+
+    // registerForPushNotificationsAsync();
 
     Notifications.addNotificationReceivedListener(notification => {
       console.log('notification',notification);
@@ -213,7 +221,9 @@ export default class CashFlag extends Component {
   }
 
   async fetchUser(u,p,tp) {
+    console.log(this.state);
     if(this.state.isLogged==false) {
+      console.log("USE_URL",USER_URL+"email="+u+"&password="+p+"&deviceID="+tp);
       await fetch(USER_URL+"email="+u+"&password="+p+"&deviceID="+tp)
       .then((response) => response.json())
       .then((responseData) => {

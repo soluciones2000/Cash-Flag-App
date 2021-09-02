@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "624062963942",
+    "project_id": "cash-flag",
+    "storage_bucket": "cash-flag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624062963942:android:b335d0546262260423db27",
+        "android_client_info": {
+          "package_name": "com.cashflag.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624062963942-pdtqc56ajdjp3l25lilgns9rolnd68dt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGzNfZD_t8UDdywXOITh20Qd_2-X3LFVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624062963942-pdtqc56ajdjp3l25lilgns9rolnd68dt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
