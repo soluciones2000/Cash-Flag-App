@@ -73,8 +73,9 @@ async function registerForPushNotificationsAsync() {
       alert('Failed to get push token for push notification!');
       return;
     }
-    const devID = (await Notifications.getDevicePushTokenAsync()).data;
     /*
+    const devID = (await Notifications.getDevicePushTokenAsync()).data;
+
     const token = (await Notifications.getExpoPushTokenAsync({
       experienceID: '@soluciones2000/Cash-Flag',
       devicePushToken: devID,
@@ -161,7 +162,7 @@ export default class CashFlag extends Component {
   // aImgs = [];
 
   actualizastate = (parametros) => {
-    this.fetchUser(parametros.txtUser,parametros.txtPass,parametros.deviceID);
+    this.fetchUser(parametros.txtUser,parametros.txtPass,this.state.tokenPush);
   };
 
   resetPwd = (email,pregunta) => {
@@ -223,8 +224,8 @@ export default class CashFlag extends Component {
   async fetchUser(u,p,tp) {
     console.log(this.state);
     if(this.state.isLogged==false) {
-      console.log("USE_URL",USER_URL+"email="+u+"&password="+p+"&deviceID="+tp);
-      await fetch(USER_URL+"email="+u+"&password="+p+"&deviceID="+tp)
+      console.log("USER_URL",USER_URL+"email="+u+"&password="+p+"&deviceID="+this.state.tokenPush);
+      await fetch(USER_URL+"email="+u+"&password="+p+"&deviceID="+this.state.tokenPush)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.exito=="SI") {
@@ -822,7 +823,7 @@ export default class CashFlag extends Component {
         resetPwd={this.resetPwd}
         newUser={this.newUser}
         imgs={this.state.aImgs}
-        deviceID=''
+        deviceID={this.state.tokenPush}
       />
     )
   }
