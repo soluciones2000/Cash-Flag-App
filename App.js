@@ -162,7 +162,7 @@ export default class CashFlag extends Component {
   // aImgs = [];
 
   actualizastate = (parametros) => {
-    this.fetchUser(parametros.txtUser,parametros.txtPass,this.state.tokenPush);
+    this.fetchUser(parametros.txtUser,parametros.txtPass);
   };
 
   resetPwd = (email,pregunta) => {
@@ -221,11 +221,11 @@ export default class CashFlag extends Component {
     });
   }
 
-  async fetchUser(u,p,tp) {
+  async fetchUser(u,p) {
     console.log(this.state);
     if(this.state.isLogged==false) {
-      console.log("USER_URL",USER_URL+"email="+u+"&password="+p+"&deviceID="+this.state.tokenPush);
-      await fetch(USER_URL+"email="+u+"&password="+p+"&deviceID="+this.state.tokenPush)
+      console.log("USER_URL",USER_URL+"email="+u+"&password="+p);
+      await fetch(USER_URL+"email="+u+"&password="+p)
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.exito=="SI") {
@@ -238,7 +238,8 @@ export default class CashFlag extends Component {
   }
 
   async fetchData(u,t) {
-    await fetch(PRODUCTS_URL+'email='+u+'&token='+t)
+    console.log('PRODUCTS_URL',PRODUCTS_URL+'email='+u+'&token='+t+'&deviceID='+this.state.tokenPush);
+    await fetch(PRODUCTS_URL+'email='+u+'&token='+t+'&deviceID='+this.state.tokenPush)
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({
@@ -823,7 +824,6 @@ export default class CashFlag extends Component {
         resetPwd={this.resetPwd}
         newUser={this.newUser}
         imgs={this.state.aImgs}
-        deviceID={this.state.tokenPush}
       />
     )
   }
@@ -919,7 +919,6 @@ export default class CashFlag extends Component {
                 resetPwd={this.resetPwd}
                 newUser={this.newUser}
                 imgs={this.state.aImgs}
-                deviceID={this.state.tokenPush}
               />
             </View>
           );

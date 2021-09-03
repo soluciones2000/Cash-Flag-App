@@ -26,7 +26,6 @@ const LoginScreen = (params) => {
   const resetPwd = params.resetPwd;
   const newUser = params.newUser;
   const images = params.imgs;
-  const deviceID = params.deviceID;
   const [txtUser, settxtUser] = useState('');
   const [txtPass, settxtPass] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,7 +34,7 @@ const LoginScreen = (params) => {
 
   const enviar = () => {
     setModalVisible2(!modalVisible2);
-    actualizastate({txtUser,txtPass,deviceID});    
+    actualizastate({txtUser,txtPass});    
     setModalVisible2(!modalVisible2);
   };
   
