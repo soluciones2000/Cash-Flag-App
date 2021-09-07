@@ -21,6 +21,7 @@ Notifications.setNotificationHandler({
 
 const USER_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
+const TOKEN_URL = 'https://app.cash-flag.com/apis/v1/socios/getToken?';
 const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
 const IMG_URL = "https://app.cash-flag.com/apis/v1/comercios/imgs";
 
@@ -83,7 +84,7 @@ async function registerForPushNotificationsAsync() {
     })).data;
     */
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    console.log('getExpoPushTokenAsync()',token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -127,10 +128,26 @@ export default class CashFlag extends Component {
     };
   }
 
-  getToken = async () => {
-    registerForPushNotificationsAsync().then(token => {
+  getToken = async (u) => {
+    let tkn;
+    registerForPushNotificationsAsync()
+    .then(token => {
       console.log('token',token);
+      tkn = token;
       this.setState({ tokenPush: token });
+    })
+    .then(() => {
+      console.log('then',tkn);
+      fetch(TOKEN_URL+"email="+u+"&deviceID="+tkn)
+      .then((response) => response.json())
+      .then((responseData) => {
+        if (responseData.exito=="SI") {
+          console.log(responseData.mensaje);
+        } else {
+          console.log("Equipo no registrado");
+        }
+      })         
+  
     });
 
     // registerForPushNotificationsAsync();
@@ -142,11 +159,11 @@ export default class CashFlag extends Component {
     Notifications.addNotificationResponseReceivedListener(response => {
       console.log('response',response);
     });
+
   };
 
   componentDidMount() {
     this.fetchImg();
-    this.getToken();
     
     this.socket = io('https://ws-cashflag.herokuapp.com/');
     this.socket.on('actlista', msg => console.log("actlista", msg));
@@ -221,8 +238,8 @@ export default class CashFlag extends Component {
     });
   }
 
-  async fetchUser(u,p) {
-    console.log(this.state);
+  async fetchUser(u,p) {    
+    console.log(this.state.tokenPush);
     if(this.state.isLogged==false) {
       console.log("USER_URL",USER_URL+"email="+u+"&password="+p);
       await fetch(USER_URL+"email="+u+"&password="+p)
@@ -263,6 +280,7 @@ export default class CashFlag extends Component {
         numgiftusd: responseData.numgiftusd,
         numgiftbs: responseData.numgiftbs
         });
+        this.getToken(u);
     });
   }
 
