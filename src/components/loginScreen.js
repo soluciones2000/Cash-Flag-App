@@ -34,7 +34,7 @@ const LoginScreen = (params) => {
 
   const enviar = () => {
     setModalVisible2(!modalVisible2);
-    actualizastate({txtUser,txtPass});    
+    actualizastate({txtUser, txtPass, setModalVisible2});    
     setModalVisible2(!modalVisible2);
   };
   

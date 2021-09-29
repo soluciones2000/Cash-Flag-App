@@ -173,6 +173,7 @@ const ResetPwdScreen = (params) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',

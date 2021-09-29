@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { 
+  Linking,
   View, 
   Text, 
   TouchableOpacity, 
@@ -27,6 +28,75 @@ const colortext  = 'black';
 const colorborde = 'black';
 const image = require('../../assets/img/card-bg-golden.png');
 const icongft = require('../../assets/img/gift-solid.png');
+
+const Aviso = () => {
+  return (
+    <View style={styles2.container}>
+      <View style={{alignItems: "center", marginTop: 50}}>
+        <Image
+          style={{
+            width: 120,
+            height: 120,
+            resizeMode: 'contain'
+          }}
+          source={require('../../assets/img/ico-warning.png')}
+        />
+      </View>
+      <View style={{
+        backgroundColor: 'rgba(3,44,98,1)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 15,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 5,
+          height: 5
+        },
+        shadowOpacity: 0.5,
+        elevation: 5,
+        height: 50,
+        width: '80%',
+        marginTop: 30
+      }}>
+        <Text
+          allowFontScaling={false}
+          style={{
+            color: 'rgba(195,150,58,255)',
+            fontSize: 20
+          }}
+        >
+          No tienes tarjetas de regalo
+        </Text>
+      </View>
+      <Text allowFontScaling={false} style={styles2.parrafoSmall}>
+        Gana recompensas en nuestros comercios afiliados, adquiere tu tarjeta de regalo ingresando en:
+      </Text>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'blue',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 15,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 5,
+            height: 5
+          },
+          shadowOpacity: 0.25,
+          elevation: 5,
+          height: 50,
+          width: '80%',
+          marginTop: 30
+        }}
+        onPress={() => Linking.openURL('https://app.cash-flag.com')}
+      >
+        <Text allowFontScaling={false} style={styles.textoboton}>
+          app.cash-flag.com
+        </Text>
+      </TouchableOpacity>
+    </View>  
+  ) 
+}
 
 const PremiumCard = (args) => {
   let numcard = args.tarjeta.substr(0,4)+' '+args.tarjeta.substr(4,4)+' '+args.tarjeta.substr(8,4)+' '+args.tarjeta.substr(12,4);
@@ -386,11 +456,14 @@ const Giftcards = (params) => {
           />
         )}
         ListEmptyComponent={() => (
+          <Aviso/>
+          /*
           <View style={styles.container}>
             <Text style={styles.text}>
               No tienes tarjetas de regalo, puedes comprar una en cualquiera de los comercios afiliados o visitando https://app.cash-flag.com
             </Text>
           </View>
+          */
         )}
       />
       <View 
@@ -494,6 +567,7 @@ const Giftcards = (params) => {
     </View>
   )
 }
+
 const optionsStyles = {
   optionsContainer: {
     paddingHorizontal: 5,
@@ -534,5 +608,22 @@ const triggerStyles = {
       shadowOpacity: 0.5
   }
 };
+
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  parrafoSmall: {
+    color: 'rgba(3,44,98,1)',
+    marginTop: 30,
+    width: '90%',
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: 'bold'
+  }
+});
 
 module.exports = Giftcards;

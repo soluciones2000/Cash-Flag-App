@@ -1,15 +1,87 @@
 import React, { Component, useState, useEffect } from 'react';
 import { 
+  Linking,
+  StyleSheet, 
   View, 
   Text,
   TouchableOpacity, 
   FlatList, 
-  Image,
-  Alert } from 'react-native';
+  Image } from 'react-native';
 
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
   
 const styles = require('./styles');
+
+const Aviso = () => {
+  return (
+    <View style={styles2.container}>
+      <View style={{alignItems: "center", marginTop: 50}}>
+        <Image
+          style={{
+            width: 120,
+            height: 120,
+            resizeMode: 'contain'
+          }}
+          source={require('../../assets/img/ico-warning.png')}
+        />
+      </View>
+      <View style={{
+        backgroundColor: 'rgba(3,44,98,1)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 15,
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 5,
+          height: 5
+        },
+        shadowOpacity: 0.5,
+        elevation: 5,
+        height: 50,
+        width: '80%',
+        marginTop: 30
+      }}>
+        <Text
+          allowFontScaling={false}
+          style={{
+            color: 'rgba(195,150,58,255)',
+            fontSize: 20
+          }}
+        >
+          No tienes recompensas
+        </Text>
+      </View>
+      <Text allowFontScaling={false} style={styles2.parrafoSmall}>
+        Gana recompensas en nuestros comercios afiliados, registra tu consumo o utiliza alguna de nuestras tarjetas de compras o de regalo.
+        {"\n"}{"\n"}
+        Conoce los comercios afiliados ingresando en:
+      </Text>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'blue',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 15,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 5,
+            height: 5
+          },
+          shadowOpacity: 0.25,
+          elevation: 5,
+          height: 50,
+          width: '80%',
+          marginTop: 30
+        }}
+        onPress={() => Linking.openURL('https://app.cash-flag.com')}
+      >
+        <Text allowFontScaling={false} style={styles.textoboton}>
+          app.cash-flag.com
+        </Text>
+      </TouchableOpacity>
+    </View>  
+  ) 
+}
 
 const Cupones = (params) => {
   const navigation = params.navigation;
@@ -210,11 +282,14 @@ const Cupones = (params) => {
           />
         )}
         ListEmptyComponent={() => (
+          <Aviso/>
+          /*
           <View style={styles.container}>
             <Text style={styles.text}>
               No tienes cupones para canjear, puedes obtener recompensas consumiendo en cualquiera de los comercios afiliados y registrando tu compra o utilizando alguna de nuestras tarjetas de compras o de regalo, visita  https://app.cash-flag.com para ver los comercios afiliados
             </Text>
           </View>
+          */
         )}
       />
       <TouchableOpacity 
@@ -233,5 +308,61 @@ const Cupones = (params) => {
     </View>
   )
 }
+
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  // imagepeq: {
+  //   width: 214,
+  //   height: 120
+  // },
+  // text: {
+  //   fontSize: 20,
+  //   textAlign: "center"
+  // },
+  parrafoSmall: {
+    color: 'rgba(3,44,98,1)',
+    marginTop: 30,
+    width: '90%',
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: 'bold'
+  }
+  // ,
+  // pickerinput: {
+  //   height: 40,
+  //   width: 250,
+  //   marginTop: 5,
+  //   marginBottom: 15,
+  //   borderRadius: 10,
+  //   backgroundColor: 'lightgray',
+  //   justifyContent: 'center'
+  // },
+  // modalViewAviso: {
+  //   marginTop: 225,
+  //   marginHorizontal: 5,
+  //   marginBottom: 5,
+  //   backgroundColor: "white",
+  //   borderColor: "black",
+  //   borderWidth: 1,
+  //   borderStyle: "solid",
+  //   borderRadius: 10,
+  //   paddingTop: 15,
+  //   paddingHorizontal: 15,
+  //   paddingBottom: 10,
+  //   alignItems: "center",
+  //   shadowColor: "#000",
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 2
+  //   },
+  //   shadowOpacity: 0.25,
+  //   elevation: 5
+  // }
+});
 
 module.exports = Cupones;

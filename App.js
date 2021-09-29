@@ -22,7 +22,7 @@ Notifications.setNotificationHandler({
 const USER_URL = "https://app.cash-flag.com/apis/v1/socios/login?";
 const PRODUCTS_URL = 'https://app.cash-flag.com/apis/v1/socios/productos?';
 const TOKEN_URL = 'https://app.cash-flag.com/apis/v1/socios/getToken?';
-const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
+// const TRANSF_URL = 'https://app.cash-flag.com/apis/v1/socios/transfierecupon';
 const IMG_URL = "https://app.cash-flag.com/apis/v1/comercios/imgs";
 
 const styles = require('./src/components/styles');
@@ -84,7 +84,6 @@ async function registerForPushNotificationsAsync() {
     })).data;
     */
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log('getExpoPushTokenAsync()',token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -137,7 +136,6 @@ export default class CashFlag extends Component {
       this.setState({ tokenPush: token });
     })
     .then(() => {
-      console.log('then',tkn);
       fetch(TOKEN_URL+"email="+u+"&deviceID="+tkn)
       .then((response) => response.json())
       .then((responseData) => {
@@ -157,10 +155,15 @@ export default class CashFlag extends Component {
     });
 
     Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('response',response);
+      console.log('response',responseresponse.notification.request.content);
+      Alert.alert(
+        response.notification.request.content.title,
+        response.notification.request.content.body
+      );
     });
 
   };
+
 
   componentDidMount() {
     this.fetchImg();
@@ -179,7 +182,7 @@ export default class CashFlag extends Component {
   // aImgs = [];
 
   actualizastate = (parametros) => {
-    this.fetchUser(parametros.txtUser,parametros.txtPass);
+    this.fetchUser(parametros.txtUser,parametros.txtPass,parametros.setModalVisible2);
   };
 
   resetPwd = (email,pregunta) => {
@@ -238,10 +241,8 @@ export default class CashFlag extends Component {
     });
   }
 
-  async fetchUser(u,p) {    
-    console.log(this.state.tokenPush);
+  async fetchUser(u,p,sm) {
     if(this.state.isLogged==false) {
-      console.log("USER_URL",USER_URL+"email="+u+"&password="+p);
       await fetch(USER_URL+"email="+u+"&password="+p)
       .then((response) => response.json())
       .then((responseData) => {
@@ -249,13 +250,13 @@ export default class CashFlag extends Component {
           this.fetchData(u,responseData.token);
         } else {
           Alert.alert('Aviso', responseData.mensaje);
+          sm(false);
         }
       })         
     }
   }
 
   async fetchData(u,t) {
-    console.log('PRODUCTS_URL',PRODUCTS_URL+'email='+u+'&token='+t+'&deviceID='+this.state.tokenPush);
     await fetch(PRODUCTS_URL+'email='+u+'&token='+t+'&deviceID='+this.state.tokenPush)
     .then((response) => response.json())
     .then((responseData) => {
