@@ -283,8 +283,8 @@ const PasarelaPagoBsC2p = (params) => {
         value={clave}
         editable={true}
         secureTextEntry={ true}
-        maxLength={10}
-        placeholder='****'
+        maxLength={8}
+        placeholder='********'
       />
       </View>
       <View style={{
