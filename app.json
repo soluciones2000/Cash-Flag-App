@@ -38,6 +38,11 @@
           "icon": "./assets/notification-icon.png"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "64d2f0e9-76b7-450f-8cb1-2db73850511f"
+      }
+    }
   }
 }
